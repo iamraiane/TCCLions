@@ -1,0 +1,10 @@
+{
+  "register": "Register",
+  "registerLabel": "Register",
+  "forgotPassword": "Forgot my password",
+  "password": "Password",
+  "invalidEmailErrorMessage": "Invalid email address",
+  "requiredFieldErrorMessage": "This field is required",
+  "invalidPasswordErrorMessage": "Password must contains at least 8 characters",
+  "fullName": "Full Name"
+}

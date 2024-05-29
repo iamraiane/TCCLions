@@ -1,0 +1,7 @@
+{
+  "submit": "Submit",
+  "forgotPassword": "Forgot my password",
+  "password": "Password",
+  "invalidEmailErrorMessage": "Invalid email address",
+  "invalidPasswordErrorMessage": "Password must contains at least 8 characters"
+}

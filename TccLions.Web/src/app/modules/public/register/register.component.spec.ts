@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LoginComponent } from './login.component';
+import { RegisterComponent } from './register.component';
 import {TranslocoConfig, TranslocoTestingModule, TranslocoTestingOptions} from "@jsverse/transloco";
 
-describe('LoginComponent', () => {
-  let component: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
+describe('RegisterComponent', () => {
+  let component: RegisterComponent;
+  let fixture: ComponentFixture<RegisterComponent>;
   const translocoServicesTests: Partial<TranslocoConfig> = {
     defaultLang: 'us',
     availableLangs: ['us'],
@@ -15,11 +15,11 @@ describe('LoginComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LoginComponent, TranslocoTestingModule.forRoot(transloco)]
+      imports: [RegisterComponent, TranslocoTestingModule.forRoot(transloco)]
     })
-    .compileComponents();
+      .compileComponents();
 
-    fixture = TestBed.createComponent(LoginComponent);
+    fixture = TestBed.createComponent(RegisterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -28,27 +28,27 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should login return false when login is called with invalid email input', () => {
+  it('should register return false when register is called with invalid email input', () => {
     component.emailFormControl.setValue('email')
     component.passwordFormControl.setValue('123123')
 
-    let result = component.login()
+    let result = component.register()
     expect(result).toBeFalse();
   })
 
-  it('should login return false when login is called with invalid password input', () => {
+  it('should register return false when register is called with invalid password input', () => {
     component.emailFormControl.setValue('email@gmail.com')
     component.passwordFormControl.setValue('123123')
 
-    let result = component.login()
+    let result = component.register()
     expect(result).toBeFalse();
   })
 
-  it('should login return true when login is called with valid password inputs', () => {
+  it('should register return true when register is called with valid password inputs', () => {
     component.emailFormControl.setValue('email@gmail.com')
     component.passwordFormControl.setValue('123123123')
 
-    let result = component.login()
+    let result = component.register()
     expect(result).toBeTrue();
   })
 });

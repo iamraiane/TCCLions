@@ -1,12 +1,12 @@
-<div class="" *transloco="let t; read: 'todos'">
+<div class="" *transloco="let t; read: 'navbar'">
   <nav class="flex items-center justify-between px-12 select-none">
-    <img
-      src="assets/image/logoLions.png"
-      alt="Logo Lions International"
-      class="w-16"
-    />
-    <button class="cursor-pointer h-10 w-10" (click)="translate()">
-      <mat-icon class="text-3xl icon-custom text-white">translate</mat-icon>
-    </button>
+    <a routerLink="">
+      <img
+        src="assets/image/logoLions.png"
+        alt="Logo Lions International"
+        class="w-16"
+      />
+    </a>
+    <app-transloco-button></app-transloco-button>
   </nav>
 </div>

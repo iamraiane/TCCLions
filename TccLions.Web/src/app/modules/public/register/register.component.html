@@ -1,13 +1,23 @@
-<div class="flex items-center justify-center h-[80vh] w-full" *transloco="let t; read: 'login'">
-  <div class="bg-slate-200 w-[30em] max-[500px]:w-[20em] h-[30em] border-2 border-slate-400 rounded-lg">
+<div class="flex items-center justify-center h-[80vh] w-full" *transloco="let t; read: 'register'">
+  <div class="bg-slate-200 w-[30em] max-[500px]:w-[20em] h-[50em] border-2 border-slate-400 rounded-lg">
     <div class="w-full flex items-center justify-center">
       <mat-icon class="my-2 text-5xl custom-icon">account_circle</mat-icon>
     </div>
     <div class="login relative mt-4">
       <mat-divider class="bg-black"></mat-divider>
-      <h1 class="text-center w-[80px] absolute top-[-15px] max-[500px]:right-[35%] right-[40%] bg-slate-200">Login</h1>
+      <h1 class="text-center w-[110px] absolute top-[-15px] max-[500px]:right-[29.5%] right-[36.5%] bg-slate-200">{{t('registerLabel')}}</h1>
     </div>
     <form class="mt-16 w-full">
+      <mat-form-field class="w-full px-4 mb-4">
+        <mat-label>{{t('fullName')}}</mat-label>
+        <input matInput type="text" required class="w-full" #fullNameInput [formControl]="fullNameFormControl" [maxLength]="200">
+        <mat-error *ngIf="fullNameFormControl.hasError">{{t('requiredFieldErrorMessage')}}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="w-full px-4 mb-4">
+        <mat-label>CPF</mat-label>
+        <input matInput type="text" required class="w-full" #cpfInput placeholder="ex. 000.000.000-00" [formControl]="cpfFormControl" [maxLength]="200">
+        <mat-error *ngIf="cpfFormControl.hasError">{{t('requiredFieldErrorMessage')}}</mat-error>
+      </mat-form-field>
       <mat-form-field class="w-full px-4 mb-4">
         <mat-label>Email</mat-label>
         <input matInput type="email" required class="w-full" #emailInput [formControl]="emailFormControl" [maxLength]="100">
@@ -20,7 +30,7 @@
         <mat-error *ngIf="passwordInput.value.length && passwordFormControl.hasError">{{t('invalidPasswordErrorMessage')}}</mat-error>
       </mat-form-field>
       <div class="flex items-center justify-center mt-4 p-4">
-        <button mat-raised-button color="primary" (click)="login()">{{t('submit')}}</button>
+        <button mat-raised-button color="primary" (click)="register()">{{t('register')}}</button>
       </div>
     </form>
   </div>
