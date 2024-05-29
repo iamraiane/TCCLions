@@ -1,34 +1,77 @@
 <div class="flex items-center justify-center h-[80vh] w-full" *transloco="let t; read: 'register'">
-  <div class="bg-slate-200 w-[30em] max-[500px]:w-[20em] h-[50em] border-2 border-slate-400 rounded-lg">
+  <div class="bg-slate-200 w-[50em] max-[500px]:w-[20em] h-auto border-2 border-slate-400 rounded-lg">
     <div class="w-full flex items-center justify-center">
       <mat-icon class="my-2 text-5xl custom-icon">account_circle</mat-icon>
     </div>
     <div class="login relative mt-4">
       <mat-divider class="bg-black"></mat-divider>
-      <h1 class="text-center w-[110px] absolute top-[-15px] max-[500px]:right-[29.5%] right-[36.5%] bg-slate-200">{{t('registerLabel')}}</h1>
+      <h1 class="text-center w-[110px] absolute top-[-15px] max-[500px]:right-[29.5%] right-[41.5%] bg-slate-200">{{t('registerLabel')}}</h1>
     </div>
     <form class="mt-16 w-full">
-      <mat-form-field class="w-full px-4 mb-4">
-        <mat-label>{{t('fullName')}}</mat-label>
-        <input matInput type="text" required class="w-full" #fullNameInput [formControl]="fullNameFormControl" [maxLength]="200">
-        <mat-error *ngIf="fullNameFormControl.hasError">{{t('requiredFieldErrorMessage')}}</mat-error>
-      </mat-form-field>
-      <mat-form-field class="w-full px-4 mb-4">
-        <mat-label>CPF</mat-label>
-        <input matInput type="text" required class="w-full" #cpfInput placeholder="ex. 000.000.000-00" [formControl]="cpfFormControl" [maxLength]="200">
-        <mat-error *ngIf="cpfFormControl.hasError">{{t('requiredFieldErrorMessage')}}</mat-error>
-      </mat-form-field>
-      <mat-form-field class="w-full px-4 mb-4">
-        <mat-label>Email</mat-label>
-        <input matInput type="email" required class="w-full" #emailInput [formControl]="emailFormControl" [maxLength]="100">
-        <mat-error *ngIf="emailFormControl.hasError">{{t('invalidEmailErrorMessage')}}</mat-error>
-      </mat-form-field>
-      <mat-form-field class="w-full px-4">
-        <mat-label>{{t('password')}}</mat-label>
-        <input matInput type="password" required class="w-full" [formControl]="passwordFormControl" #passwordInput>
-        <mat-hint align="start"><button class="hover:decoration-1 hover:underline">{{t('forgotPassword')}}</button></mat-hint>
-        <mat-error *ngIf="passwordInput.value.length && passwordFormControl.hasError">{{t('invalidPasswordErrorMessage')}}</mat-error>
-      </mat-form-field>
+      <div class="flex">
+        <div class="leftside w-[50%]">
+          <mat-form-field class="w-full px-4 mb-4">
+            <mat-label>{{t('fullName')}}</mat-label>
+            <input matInput type="text" required class="w-full" #fullNameInput [formControl]="registerFormGroup.controls.fullNameFormControl" [maxLength]="200">
+            <mat-error *ngIf="registerFormGroup.controls.fullNameFormControl.hasError">{{t('requiredFieldErrorMessage')}}</mat-error>
+          </mat-form-field>
+          <mat-form-field class="w-full px-4 mb-4">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" required class="w-full" #emailInput [formControl]="registerFormGroup.controls.emailFormControl" [maxLength]="100">
+            <mat-error *ngIf="registerFormGroup.controls.emailFormControl.hasError">{{t('invalidEmailErrorMessage')}}</mat-error>
+          </mat-form-field>
+          <mat-form-field class="w-full px-4 mb-4">
+            <mat-label>{{ t('rg') }}</mat-label>
+            <input matInput type="text" required class="w-full" #rgInput [formControl]="registerFormGroup.controls.rgFormControl" [maxLength]="200">
+            <mat-error *ngIf="registerFormGroup.controls.rgFormControl.hasError">{{t('requiredFieldErrorMessage')}}</mat-error>
+          </mat-form-field>
+          <mat-form-field class="w-full px-4 mb-4">
+            <mat-label>CPF</mat-label>
+            <input matInput type="text" required class="w-full" #cpfInput placeholder="ex. 000.000.000-00" [formControl]="registerFormGroup.controls.cpfFormControl" [maxLength]="200">
+            <mat-error *ngIf="registerFormGroup.controls.cpfFormControl.hasError">{{t('requiredFieldErrorMessage')}}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="w-full px-4">
+            <mat-label>{{t('password')}}</mat-label>
+            <input matInput type="password" required class="w-full" [formControl]="registerFormGroup.controls.passwordFormControl" #passwordInput>
+            <mat-error *ngIf="passwordInput.value.length && registerFormGroup.controls.passwordFormControl.hasError">{{t('invalidPasswordErrorMessage')}}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="rightside w-[50%]">
+          <div class="flex">
+            <mat-form-field class="w-[10.5em] px-2 mb-4">
+              <mat-label>{{t('city')}}</mat-label>
+              <input matInput type="text" required class="w-full" #fullNameInput [formControl]="registerFormGroup.controls.cityFormControl" [maxLength]="200">
+              <mat-error *ngIf="registerFormGroup.controls.cityFormControl.hasError">{{t('requiredFieldErrorMessage')}}</mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-[8em] mb-4">
+              <mat-label>{{t('state')}}</mat-label>
+              <input matInput type="text" required class="w-full" #fullNameInput [formControl]="registerFormGroup.controls.stateFormControl" [maxLength]="200">
+              <mat-error *ngIf="registerFormGroup.controls.stateFormControl.hasError">{{t('requiredFieldErrorMessage')}}</mat-error>
+            </mat-form-field>
+          </div>
+          <mat-form-field class="w-full px-4 mb-4">
+            <mat-label>CEP</mat-label>
+            <input matInput type="text" required class="w-full" #rgInput [formControl]="registerFormGroup.controls.cepFormControl" [maxLength]="200">
+            <mat-error *ngIf="registerFormGroup.controls.cepFormControl.hasError">{{t('requiredFieldErrorMessage')}}</mat-error>
+          </mat-form-field>
+          <mat-form-field class="w-full px-4 mb-4">
+            <mat-label>{{ t('maritalStatus') }}</mat-label>
+            <mat-select required class="w-full" [formControl]="registerFormGroup.controls.maritalStatusFormControl">
+              <mat-option value="notMarried">{{ t('maritalStatusOptions.notMarried') }}</mat-option>
+              <mat-option value="married">{{ t('maritalStatusOptions.married') }}</mat-option>
+              <mat-option value="divorced">{{ t('maritalStatusOptions.divorced') }}</mat-option>
+              <mat-option value="widowed">{{ t('maritalStatusOptions.widowed') }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="registerFormGroup.controls.maritalStatusFormControl.hasError">{{t('requiredFieldErrorMessage')}}</mat-error>
+          </mat-form-field>
+          <mat-form-field class="w-full px-4 mb-4">
+            <mat-label>{{ t('job') }}</mat-label>
+            <input matInput type="email" required class="w-full" #emailInput [formControl]="registerFormGroup.controls.jobFormControl" [maxLength]="100">
+            <mat-error *ngIf="registerFormGroup.controls.jobFormControl.hasError">{{t('invalidEmailErrorMessage')}}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
       <div class="flex items-center justify-center mt-4 p-4">
         <button mat-raised-button color="primary" (click)="register()">{{t('register')}}</button>
       </div>

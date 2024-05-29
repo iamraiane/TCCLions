@@ -6,5 +6,16 @@
   "invalidEmailErrorMessage": "Invalid email address",
   "requiredFieldErrorMessage": "This field is required",
   "invalidPasswordErrorMessage": "Password must contains at least 8 characters",
-  "fullName": "Full Name"
+  "fullName": "Full Name",
+  "rg": "ID",
+  "maritalStatus": "Marital Status",
+  "job": "Job",
+  "city": "City",
+  "state": "State",
+  "maritalStatusOptions": {
+    "married": "Married",
+    "divorced": "Divorced",
+    "widowed": "Widowed",
+    "notMarried": "Not Married"
+  }
 }
