@@ -9,12 +9,12 @@ import { provideTransloco } from '@jsverse/transloco';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideAnimationsAsync(), provideHttpClient(), provideTransloco({
-        config: {
-          availableLangs: ['en', 'pt'],
-          defaultLang: 'pt',
-          reRenderOnLangChange: true,
-          prodMode: !isDevMode(),
-        },
-        loader: TranslocoHttpLoader
-      })]
+    config: {
+      availableLangs: ['en', 'pt'],
+      defaultLang: 'pt',
+      reRenderOnLangChange: true,
+      prodMode: !isDevMode(),
+    },
+    loader: TranslocoHttpLoader
+  })]
 };
