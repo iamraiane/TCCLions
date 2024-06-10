@@ -6,5 +6,16 @@
   "invalidEmailErrorMessage": "Insira um email válido",
   "requiredFieldErrorMessage": "Este campo é obrigatório",
   "invalidPasswordErrorMessage": "A senha deve conter no mínimo 8 caracteres",
-  "fullName": "Nome Completo"
+  "fullName": "Nome Completo",
+  "rg": "RG",
+  "maritalStatus": "Estado Civil",
+  "job": "Profissão",
+  "city": "Cidade",
+  "state": "Estado",
+  "maritalStatusOptions": {
+    "married": "Casado(a)",
+    "divorced": "Divorciado(a)",
+    "widowed": "Viuvo(a)",
+    "notMarried": "Solteiro(a)"
+  }
 }

@@ -1,0 +1,30 @@
+<div *transloco="let t; read: 'navigation'">
+  <nav class="flex items-center justify-between px-8 select-none">
+    <a routerLink="">
+      <img
+        src="assets/image/logoLions.png"
+        alt="Logo Lions International"
+        class="w-20"
+      />
+    </a>
+    <div class="flex gap-10 px-8 w-full">
+      <app-navbartext
+        [topText]="t('events')"
+        [bottomText]="t('realizedEvents')"
+        [route]="'events'"
+      ></app-navbartext>
+      <app-navbartext
+        [topText]="t('help')"
+        [bottomText]="t('services')"
+        [route]="'help'"
+      ></app-navbartext>
+      <app-navbartext
+        [topText]="t('whoWeAre')"
+        [bottomText]="t('ourStory')"
+        [route]="'about'"
+      ></app-navbartext>
+    </div>
+    <app-user-menu></app-user-menu>
+    <app-transloco-button></app-transloco-button>
+  </nav>
+</div>

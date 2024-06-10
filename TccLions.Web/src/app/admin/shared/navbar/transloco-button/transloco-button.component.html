@@ -1,16 +1,24 @@
-<div *transloco="let t; read: 'translocoButton'">
-  <button mat-ripple [matMenuTriggerFor]="menu" class="h-12 rounded-xl w-16 mr-2 px-2">
+<div>
+  <button
+    mat-ripple
+    [matMenuTriggerFor]="menu"
+    class="h-12 rounded-xl w-16 mr-2 px-2"
+  >
     <ng-container *ngIf="getActiveLanguage() === 'pt'">
       <img
         ngSrc="../../../../../assets/image/languages/brazil.png"
         alt="Brazil Flag"
-        height="512" width="512"/>
+        height="512"
+        width="512"
+      />
     </ng-container>
     <ng-container *ngIf="getActiveLanguage() === 'en'">
       <img
         ngSrc="../../../../../assets/image/languages/united-states.png"
         alt="USA Flag"
-        height="512" width="512"/>
+        height="512"
+        width="512"
+      />
     </ng-container>
   </button>
   <mat-menu #menu="matMenu">

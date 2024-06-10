@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -22,7 +22,7 @@ import { CommonModule } from '@angular/common';
   ]
 })
 export class LoginComponent {
-  emailFormControl = new FormControl('', [Validators.required, Validators.email, Validators.minLength(0)])
+  emailFormControl = new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(100)])
   passwordFormControl = new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(100)])
 
   login(): boolean{
