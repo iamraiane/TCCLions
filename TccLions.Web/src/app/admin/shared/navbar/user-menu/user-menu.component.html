@@ -1,0 +1,17 @@
+<button
+  mat-icon-button
+  [matMenuTriggerFor]="menu"
+  class="rounded-full h-9 text-4xl mx-12"
+>
+  <mat-icon class="userIcon" [inline]="true">account_circle</mat-icon>
+</button>
+<mat-menu #menu>
+  <button mat-menu-item (click)="redirectToLogin()">
+    <mat-icon>login</mat-icon>
+    <span>Login</span>
+  </button>
+  <button mat-menu-item *ngIf="isAdmin" (click)="redirectToAdminPage()">
+    <mat-icon>admin_panel_settings</mat-icon>
+    <span>Admin</span>
+  </button>
+</mat-menu>

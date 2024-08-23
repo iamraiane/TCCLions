@@ -1,0 +1,16 @@
+nav {
+  background-color: #ffcb2f;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 12vh;
+}
+
+.icon-custom {
+  width: 30px;
+  height: 30px;
+}
+
+.navbarText,
+.iconArrowDown {
+  color: #b28504;
+}

@@ -1,0 +1,46 @@
+<div>
+  <button
+    mat-ripple
+    [matMenuTriggerFor]="menu"
+    class="h-12 rounded-xl w-16 mr-2 px-2"
+  >
+    <ng-container *ngIf="getActiveLanguage() === 'pt'">
+      <img
+        ngSrc="../../../../../assets/image/languages/brazil.png"
+        alt="Brazil Flag"
+        height="512"
+        width="512"
+      />
+    </ng-container>
+    <ng-container *ngIf="getActiveLanguage() === 'en'">
+      <img
+        ngSrc="../../../../../assets/image/languages/united-states.png"
+        alt="USA Flag"
+        height="512"
+        width="512"
+      />
+    </ng-container>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="translate('pt')">
+      <div class="flex items-center gap-2">
+        <img
+          src="../../../../../assets/image/languages/brazil.png"
+          alt="Brazil Flag"
+          class="w-10"
+        />
+        <span>Português</span>
+      </div>
+    </button>
+    <button mat-menu-item (click)="translate('en')">
+      <div class="flex items-center gap-2">
+        <img
+          src="../../../../../assets/image/languages/united-states.png"
+          alt="USA Flag"
+          class="w-10"
+        />
+        <span>English</span>
+      </div>
+    </button>
+  </mat-menu>
+</div>

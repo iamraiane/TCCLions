@@ -1,0 +1,47 @@
+<div *transloco="let t; read: 'navigation'">
+  <nav class="flex items-center justify-between px-8 select-none">
+    <a routerLink="">
+      <img
+        src="assets/image/logoLions.png"
+        alt="Logo Lions International"
+        class="w-24"
+      />
+    </a>
+    <div class="flex justify-center items-center gap-3 px-8 h-full w-full">
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menu"
+        class="rounded-full h-9 text-4xl mx-12 relative top-[-6px]"
+      >
+        <span class="navbarText font-bold text-2xl tracking-wider"
+          >{{ t("controlPanel") }}
+          <mat-icon
+            aria-hidden="false"
+            fontIcon="keyboard_arrow_down"
+            class="relative top-1 iconArrowDown"
+          ></mat-icon>
+        </span>
+      </button>
+      <mat-menu #menu>
+        <button mat-menu-item>
+          <a routerLink="control-panel/members">
+            {{ t("members") }}
+          </a>
+        </button>
+        <button mat-menu-item>
+          <a routerLink="control-panel/comissions">
+            {{ t("comissions") }}
+          </a>
+        </button>
+      </mat-menu>
+      <a
+        routerLink="monthly-fees"
+        class="navbarText font-bold text-2xl tracking-wider"
+      >
+        {{ t("checkMonthlyFees") }}
+      </a>
+    </div>
+    <app-user-menu></app-user-menu>
+    <app-transloco-button></app-transloco-button>
+  </nav>
+</div>
