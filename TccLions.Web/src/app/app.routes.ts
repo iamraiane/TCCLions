@@ -3,11 +3,15 @@ import { ComissionsComponent } from './admin/pages/comissions/comissions.compone
 import { ComissionsService } from './admin/pages/comissions/service/comissions.service';
 import { inject } from '@angular/core';
 import { MembersComponent } from './admin/pages/members/members.component';
+import { MembersService } from './admin/pages/members/service/members.service';
 
 export const routes: Routes = [
   {
     path: 'control-panel/members',
-    component: MembersComponent
+    component: MembersComponent,
+    resolve: {
+      members: () => inject(MembersService).get()
+    }
   },
   {
     path: 'control-panel/comissions',

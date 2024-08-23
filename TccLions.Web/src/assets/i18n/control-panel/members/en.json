@@ -1,9 +1,9 @@
 {
-  "comissions": "Commissions",
-  "searchByMember": "Search by member name",
-  "comissionType": "Comission Type",
-  "member": "Member",
+  "members": "Members",
+  "searchByMember": "Search by Member",
+  "name": "Name",
   "actions": "Actions",
+  "create": "New Member",
   "delete": "Delete",
   "edit": "Edit"
 }

@@ -23,16 +23,12 @@
         </span>
       </button>
       <mat-menu #menu>
-        <button mat-menu-item>
-          <a routerLink="control-panel/members">
-            {{ t("members") }}
-          </a>
-        </button>
-        <button mat-menu-item>
-          <a routerLink="control-panel/comissions">
-            {{ t("comissions") }}
-          </a>
-        </button>
+        <a routerLink="control-panel/members" mat-menu-item>
+          {{ t("members") }}
+        </a>
+        <a routerLink="control-panel/comissions" mat-menu-item>
+          {{ t("comissions") }}
+        </a>
       </mat-menu>
       <a
         routerLink="monthly-fees"
