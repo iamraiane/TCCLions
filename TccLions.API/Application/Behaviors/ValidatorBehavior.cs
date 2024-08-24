@@ -19,7 +19,7 @@ public class ValidatorBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest
             .Where(error => error != null)
             .ToList();
 
-        if (failures.Any())
+        if (failures.Count != 0)
             throw new TCCLionsDomainException($"Command Validation Errors for type {typeof(TRequest).Name}", new ValidationException(Message, failures));
 
         return await next();

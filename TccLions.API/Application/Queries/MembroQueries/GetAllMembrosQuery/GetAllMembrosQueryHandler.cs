@@ -13,7 +13,18 @@ public class GetAllMembrosQueryHandler(IMembroRepository repository) : IRequestH
 
         var data = _repository.GetAll()
             .Where(x => request.NomeDoMembro is null || x.Nome.Contains(request.NomeDoMembro, StringComparison.CurrentCultureIgnoreCase))
-            .Select(x => new MembroDTO { Id = x.Id, Bairro = x.Bairro, Cep = x.Cep, Cidade = x.Cidade, Cpf = x.Cpf, Email = x.Email, Endereco = x.Endereco, EstadoCivil = x.EstadoCivil, Nome = x.Nome });
+            .Select(x => new MembroDTO { 
+                Id = x.Id,
+                Bairro = x.Bairro,
+                Cep = x.Cep,
+                Cidade = x.Cidade,
+                Cpf = x.Cpf,
+                Email = x.Email,
+                Endereco = x.Endereco,
+                EstadoCivil = x.EstadoCivil,
+                Nome = x.Nome,
+                IsActive = x.IsActive
+            });
 
         return Task.FromResult(data);
     }

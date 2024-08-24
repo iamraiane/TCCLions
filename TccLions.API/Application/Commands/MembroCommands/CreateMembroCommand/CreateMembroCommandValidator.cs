@@ -32,7 +32,10 @@ public class CreateMembroCommandValidator : AbstractValidator<CreateMembroComman
             .MaximumLength(9)
             .WithMessage("O CEP deve ter exatamente 9 caractéres.");
 
-        RuleFor(x => x.Cpf).Matches(@"^\d{3}\.\d{3}\.\d{3}-\d{2}$")
-            .WithMessage("O CPF informado é inválido.");
+        RuleFor(x => x.Cpf)
+          .NotEmpty()
+          .WithMessage("O atributo Cpf não pode ser vazio")
+          .MaximumLength(11)
+          .WithMessage("O atributo Cpf não pode ter mais que 11 caracteres");
     }
 }

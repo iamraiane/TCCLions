@@ -47,5 +47,8 @@ public class MembroEntityConfiguration : IEntityTypeConfiguration<Membro>
             .IsRequired()
             .HasMaxLength(9)
             .IsUnicode(false);
+
+        builder.Property(x => x.IsActive)
+            .HasColumnType("bit");
     }
 }

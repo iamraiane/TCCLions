@@ -12,6 +12,7 @@ using TCCLions.API.Application.Models.ViewModels.Extensions;
 using TCCLions.API.Application.Queries.MembroQueries.GetAllMembrosQuery;
 using TCCLions.API.Application.Queries.MembroQueries.GetMembroQuery;
 using TccLions.API.Application.Commands.MembroCommands.DeleteMembroCommand;
+using TCCLions.API.Application.Commands.MembroCommands.DisableMembro;
 
 namespace TCCLions.API.Controllers;
 
@@ -72,25 +73,62 @@ public class MembroController(IMediator mediator) : ControllerBase
     [HttpPut("{id}")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    public async Task<IActionResult> Update(Guid id, [FromBody] UpdateMembroRequest request){
-        var isUpdated = await _mediator.Send(new UpdateMembroCommand { Id = id, Nome = request.Nome, 
-        Endereco = request.Endereco, Bairro = request.Bairro, Cidade = request.Cidade,
-        Cep = request.Cep, Email = request.Email, EstadoCivil = request.EstadoCivil, Cpf = request.Cpf});
+    public async Task<IActionResult> Update(Guid id, [FromBody] UpdateMembroRequest request)
+    {
+        var isUpdated = await _mediator.Send(new UpdateMembroCommand
+        {
+            Id = id,
+            Nome = request.Nome,
+            Endereco = request.Endereco,
+            Bairro = request.Bairro,
+            Cidade = request.Cidade,
+            Cep = request.Cep,
+            Email = request.Email,
+            EstadoCivil = request.EstadoCivil,
+            Cpf = request.Cpf
+        });
 
-        if(isUpdated == false)
-        return BadRequest();
+        if (isUpdated == false)
+            return BadRequest();
 
         return Ok();
     }
-    
+
     [HttpDelete("{id}")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    public async Task<IActionResult> Delete(Guid id){
+    public async Task<IActionResult> Delete(Guid id)
+    {
 
-        var isDeleted = await _mediator.Send(new DeleteMembroCommand { Id = id});
+        var isDeleted = await _mediator.Send(new DeleteMembroCommand { Id = id });
 
-        if(isDeleted == false)
+        if (isDeleted == false)
+            return BadRequest();
+
+        return Ok();
+    }
+
+    [HttpPost("{id}/disable")]
+    [ProducesResponseType((int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    public async Task<IActionResult> Disable(Guid id)
+    {
+        var result = await _mediator.Send(new DisableMembroCommand { Id = id });
+
+        if (!result)
+            return BadRequest();
+
+        return Ok();
+    }
+
+    [HttpPost("{id}/enable")]
+    [ProducesResponseType((int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    public async Task<IActionResult> Enable(Guid id)
+    {
+        var result = await _mediator.Send(new EnableMembroCommand { Id = id });
+
+        if (!result)
             return BadRequest();
 
         return Ok();

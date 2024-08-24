@@ -12,7 +12,7 @@ using TCCLions.Infrastructure.Data;
 namespace TccLions.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDataContext))]
-    [Migration("20240818011857_InitialMigration")]
+    [Migration("20240824194011_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -74,9 +74,9 @@ namespace TccLions.Infrastructure.Migrations
 
                     b.Property<string>("Cpf")
                         .IsRequired()
-                        .HasMaxLength(16)
+                        .HasMaxLength(11)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(16)");
+                        .HasColumnType("varchar(11)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -95,6 +95,9 @@ namespace TccLions.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .IsUnicode(false)
                         .HasColumnType("varchar(100)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Nome")
                         .IsRequired()

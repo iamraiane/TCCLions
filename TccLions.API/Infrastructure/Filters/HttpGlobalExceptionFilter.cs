@@ -22,7 +22,7 @@ public class HttpGlobalExceptionFilter : IExceptionFilter
             context.Exception,
             context.Exception.Message);
 
-        if (context.Exception.GetType() == typeof(TCCLionsDomainException))
+        if (context.Exception is TCCLionsDomainException)
         {
             var problemDetails = new ValidationProblemDetails()
             {

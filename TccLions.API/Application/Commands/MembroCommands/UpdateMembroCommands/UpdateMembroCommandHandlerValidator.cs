@@ -66,7 +66,7 @@ namespace TccLions.API.Application.Commands.MembroCommands.UpdateMembroCommands
            .NotEmpty()
            .WithMessage("O atributo Cpf não pode ser vazio")
            .MaximumLength(11)
-           .WithMessage("O atributo Cpf não pode ter mais que 100 caracteres");
+           .WithMessage("O atributo Cpf não pode ter mais que 11 caracteres");
         }
         private bool ToExistMembro(Guid membroId){
             var result = _membroRepository.Get(membroId);

@@ -11,4 +11,5 @@ public class MembroDTO
     public string Email { get; set; }
     public string EstadoCivil { get; set; }
     public string Cpf { get; set; }
+    public bool IsActive { get; set; }
 }

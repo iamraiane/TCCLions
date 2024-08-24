@@ -1,4 +1,5 @@
 ﻿using TCCLions.Domain.Data.Core;
+using TCCLions.Domain.Data.Exceptions;
 
 namespace TCCLions.Domain.Data.Models;
 
@@ -23,6 +24,7 @@ public class Membro : Entity<Guid>
         EstadoCivil = estadoCivil;
         Cpf = cpf;
         _comissoes = [];
+        IsActive = true;
     }
 
     public string Nome { get; private set; }
@@ -33,8 +35,8 @@ public class Membro : Entity<Guid>
     public string Email { get; private set; }
     public string EstadoCivil {  get; private set; }
     public string Cpf { get; private set; }
+    public bool IsActive { get; private set; }
     public IReadOnlyCollection<Comissao> Comissoes => _comissoes;
-
 
     public void Update(string nome, string endereco, string bairro, string cidade, 
     string cep, string email, string estadocivil, string cpf){
@@ -46,6 +48,19 @@ public class Membro : Entity<Guid>
         Email = email;
         EstadoCivil = estadocivil;
         Cpf = cpf;
+    }
 
+    public void Disable()
+    {
+        if (!IsActive) throw new MembroDomainException("Esse membro já está desabilitado.");
+
+        IsActive = false;
+    }
+
+    public void Enable()
+    {
+        if (IsActive) throw new MembroDomainException("Esse membro já está habilitado.");
+
+        IsActive = true;
     }
 }

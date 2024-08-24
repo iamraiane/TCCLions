@@ -23,7 +23,8 @@ namespace TccLions.Infrastructure.Migrations
                     Cep = table.Column<string>(type: "varchar(9)", unicode: false, maxLength: 9, nullable: false),
                     Email = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: false),
                     EstadoCivil = table.Column<string>(type: "varchar(100)", unicode: false, maxLength: 100, nullable: false),
-                    Cpf = table.Column<string>(type: "varchar(16)", unicode: false, maxLength: 16, nullable: false)
+                    Cpf = table.Column<string>(type: "varchar(11)", unicode: false, maxLength: 11, nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {

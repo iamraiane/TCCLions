@@ -71,9 +71,9 @@ namespace TccLions.Infrastructure.Migrations
 
                     b.Property<string>("Cpf")
                         .IsRequired()
-                        .HasMaxLength(16)
+                        .HasMaxLength(11)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(16)");
+                        .HasColumnType("varchar(11)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -92,6 +92,9 @@ namespace TccLions.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .IsUnicode(false)
                         .HasColumnType("varchar(100)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Nome")
                         .IsRequired()

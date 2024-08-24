@@ -33,4 +33,9 @@ public class RepositoryBase<TEntity, TKey> : IRepositoryBase<TEntity, TKey> wher
     {
         _entity.Remove(entity);
     }
+
+    public void Update(TEntity entity)
+    {
+        _entity.Update(entity);
+    }
 }

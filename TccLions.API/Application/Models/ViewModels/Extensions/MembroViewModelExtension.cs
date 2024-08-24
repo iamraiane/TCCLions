@@ -16,6 +16,7 @@ public static class MembroViewModelExtension
             Email = dto.Email,
             Endereco = dto.Endereco,
             EstadoCivil = dto.EstadoCivil,
+            IsActive = dto.IsActive,
         };
     }
 }
