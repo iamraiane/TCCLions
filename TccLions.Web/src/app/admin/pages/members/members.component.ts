@@ -12,11 +12,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateMemberComponent } from './modals/create-member/create-member.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { BehaviorSubject, combineLatest } from 'rxjs';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { CommonModule } from '@angular/common';
+import { EditMemberComponent } from './modals/edit-member/edit-member.component';
 
 @Component({
   selector: 'app-members',
   standalone: true,
-  imports: [MatInputModule, FormsModule, MatSlideToggleModule, ReactiveFormsModule, TranslocoModule, MatButtonModule, MatIconModule, MatMenuModule, MatTableModule],
+  imports: [MatInputModule, CommonModule, MatPaginatorModule, FormsModule, MatSlideToggleModule, ReactiveFormsModule, TranslocoModule, MatButtonModule, MatIconModule, MatMenuModule, MatTableModule],
   templateUrl: './members.component.html',
   providers: [
     provideTranslocoScope({ scope: 'control-panel/members', alias: 'member' }),
@@ -24,24 +27,33 @@ import { BehaviorSubject, combineLatest } from 'rxjs';
 })
 export class MembersComponent implements OnInit {
   members: Member[] = []
+  pagination: { count: number, pageIndex: number, pageSize: number } = { count: 0, pageIndex: 0, pageSize: 0 }
   displayedColumns: string[] = ['name', 'email', 'actions'];
   filters: {
     search: BehaviorSubject<string>,
-    showDisabled: BehaviorSubject<boolean>
+    showDisabled: BehaviorSubject<boolean>,
+    pageIndex: BehaviorSubject<number>,
+    pageSize: BehaviorSubject<number>
   } = {
       search: new BehaviorSubject(''),
-      showDisabled: new BehaviorSubject(false)
+      showDisabled: new BehaviorSubject(false),
+      pageIndex: new BehaviorSubject(0),
+      pageSize: new BehaviorSubject(50)
     }
 
   constructor(private _service: MembersService, private _dialog: MatDialog) { }
 
   ngOnInit(): void {
-    combineLatest([this.filters.search, this.filters.showDisabled]).subscribe(([search, showDisabled]) => {
-      this._service.get(search, showDisabled).subscribe();
+    combineLatest([this.filters.search, this.filters.showDisabled, this.filters.pageIndex, this.filters.pageSize]).subscribe(([search, showDisabled, pageIndex, pageSize]) => {
+      this._service.get(search, showDisabled, pageSize, pageIndex).subscribe();
     })
 
     this._service.members$.subscribe((members: Member[]) => {
       this.members = members;
+    })
+
+    this._service.pagination$.subscribe((pagination: { count: number, pageIndex: number, pageSize: number }) => {
+      this.pagination = pagination;
     })
   }
 
@@ -54,6 +66,54 @@ export class MembersComponent implements OnInit {
   }
 
   openCreateModal() {
-    this._dialog.open(CreateMemberComponent)
+    let dialog = this._dialog.open(CreateMemberComponent)
+
+    dialog.afterClosed().subscribe((member) => {
+      this._service.create(member).subscribe({
+        next: () => {
+          this._service.get(this.filters.search.value, this.filters.showDisabled.value, this.filters.pageSize.value, this.filters.pageIndex.value).subscribe();
+        }
+      });
+    })
+  }
+
+  openEditModal(id: string) {
+    let dialog = this._dialog.open(EditMemberComponent, {
+      data: { id: id }
+    })
+
+    dialog.afterClosed().subscribe((member) => {
+      if (member === 'deleted') {
+        this._service.get(this.filters.search.value, this.filters.showDisabled.value, this.filters.pageSize.value, this.filters.pageIndex.value).subscribe();
+        return;
+      }
+
+      this._service.update(id, member).subscribe({
+        next: () => {
+          this._service.get(this.filters.search.value, this.filters.showDisabled.value, this.filters.pageSize.value, this.filters.pageIndex.value).subscribe();
+        }
+      });
+    })
+  }
+
+  pageChanged(event: any) {
+    this.filters.pageIndex.next(event.pageIndex);
+    this.filters.pageSize.next(event.pageSize);
+  }
+
+  disable(id: string) {
+    this._service.disable(id).subscribe({
+      next: () => {
+        this._service.get(this.filters.search.value, this.filters.showDisabled.value, this.filters.pageSize.value, this.filters.pageIndex.value).subscribe();
+      }
+    });
+  }
+
+  enable(id: string) {
+    this._service.enable(id).subscribe({
+      next: () => {
+        this._service.get(this.filters.search.value, this.filters.showDisabled.value, this.filters.pageSize.value, this.filters.pageIndex.value).subscribe();
+      }
+    });
   }
 }

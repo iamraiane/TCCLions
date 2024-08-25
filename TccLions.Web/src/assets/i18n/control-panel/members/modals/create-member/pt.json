@@ -1,4 +1,18 @@
 {
   "createMember": "Criar novo membro",
-  "name": "Nome"
+  "name": "Nome",
+  "emptyErrorMessage": "O {{value}} é obrigatório.",
+  "nameEmptyErrorMessage": "O nome é obrigatório.",
+  "cpfLengthErrorMessage": "CPF deve ter 11 dígitos.",
+  "maritalStatus": "Estado Civil",
+  "maritalStatusEmptyErrorMessage": "O Estado civil é obrigatório.",
+  "invalidEmailErrorMessage": "Email inválido.",
+  "cepLengthErrorMessage": "O CEP deve ter 9 dígitos.",
+  "city": "Cidade",
+  "cityEmptyErrorMessage": "A Cidade é obrigatória.",
+  "neighborhood": "Bairro",
+  "neighborhoodEmptyErrorMessage": "O Bairro é obrigatório.",
+  "cancel": "Cancelar",
+  "submit": "Enviar",
+  "editMember": "Editar Membro"
 }

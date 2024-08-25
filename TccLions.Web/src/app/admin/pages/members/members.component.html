@@ -83,14 +83,33 @@
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
-                <button mat-menu-item class="focus:outline-none">
+                <button
+                  mat-menu-item
+                  class="focus:outline-none"
+                  (click)="openEditModal(element.id)"
+                >
                   <mat-icon>edit</mat-icon>
                   <span>{{ t("edit") }}</span>
                 </button>
-                <button mat-menu-item class="focus:outline-none">
-                  <mat-icon>delete</mat-icon>
-                  <span>{{ t("delete") }}</span>
+                @if (element.isActive) {
+                <button
+                  mat-menu-item
+                  class="focus:outline-none"
+                  (click)="disable(element.id)"
+                >
+                  <mat-icon>block</mat-icon>
+                  <span>Desabilitar</span>
                 </button>
+                } @else {
+                <button
+                  mat-menu-item
+                  class="focus:outline-none"
+                  (click)="enable(element.id)"
+                >
+                  <mat-icon>check_circle</mat-icon>
+                  <span>Habilitar</span>
+                </button>
+                }
               </mat-menu>
             </td>
           </ng-container>
@@ -106,6 +125,18 @@
             *matRowDef="let row; columns: displayedColumns"
           ></tr>
         </table>
+      </div>
+      <div class="w-full flex justify-start">
+        <mat-paginator
+          #defaultPaginator
+          [length]="pagination.count"
+          [pageIndex]="pagination.pageIndex"
+          [pageSize]="pagination.pageSize"
+          [pageSizeOptions]="[10, 25, 50]"
+          (page)="pageChanged($event)"
+          [showFirstLastButtons]="true"
+        >
+        </mat-paginator>
       </div>
     </div>
   </div>

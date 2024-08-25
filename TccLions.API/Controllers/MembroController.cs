@@ -23,7 +23,6 @@ public class MembroController(IMediator mediator) : ControllerBase
 
     [HttpGet]
     [ProducesResponseType(typeof(PaginatedItemsViewModel<MembroViewModel>), (int)HttpStatusCode.OK)]
-    [ProducesResponseType((int)HttpStatusCode.NoContent)]
     public async Task<IActionResult> GetAll([FromQuery] MembroFilterRequest filter)
     {
         var data = await _mediator.Send(new GetAllMembrosQuery 
@@ -35,7 +34,13 @@ public class MembroController(IMediator mediator) : ControllerBase
         });
 
         if (!data.Any())
-            return NoContent();
+            return Ok(new PaginatedItemsViewModel<MembroViewModel>
+            {
+                IndiceDaPagina = 0,
+                TamanhoDaPagina = 0,
+                Quantidade = 0,
+                Dados = []
+            });
 
         var paginated = new PaginatedItemsViewModel<MembroViewModel>
         {

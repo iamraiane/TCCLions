@@ -1,4 +1,18 @@
 {
   "createMember": "Create new member",
-  "name": "Name"
+  "name": "Name",
+  "emptyErrorMessage": "{{value}} is required",
+  "nameEmptyErrorMessage": "Name is required",
+  "cpfLengthErrorMessage": "CPF must contain 11 digits",
+  "maritalStatus": "Marital Status",
+  "maritalStatusEmptyErrorMessage": "Marital status is required",
+  "invalidEmailErrorMessage": "Invalid email",
+  "cepLengthErrorMessage": "CEP must contain 9 digits",
+  "city": "City",
+  "cityEmptyErrorMessage": "City is required",
+  "neighborhood": "Neighborhood",
+  "neighborhoodEmptyErrorMessage": "Neighborhood is required",
+  "cancel": "Cancel",
+  "submit": "Submit",
+  "editMember": "Edit member"
 }

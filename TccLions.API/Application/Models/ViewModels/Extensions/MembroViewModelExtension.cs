@@ -15,6 +15,7 @@ public static class MembroViewModelExtension
             Cidade = dto.Cidade,
             Email = dto.Email,
             Endereco = dto.Endereco,
+            Cpf = dto.Cpf,
             EstadoCivil = dto.EstadoCivil,
             IsActive = dto.IsActive,
         };

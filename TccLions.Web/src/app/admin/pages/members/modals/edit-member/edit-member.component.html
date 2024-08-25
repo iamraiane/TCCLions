@@ -1,6 +1,10 @@
 <div *transloco="let t; read: 'createMember'" class="px-6 overflow-y-hidden">
-  <h1 mat-dialog-title>{{ t("createMember") }}</h1>
-
+  <div class="flex w-full justify-between items-center">
+    <h1 mat-dialog-title>{{ t("editMember") }}</h1>
+    <button mat-mini-fab color="warn" (click)="delete()">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
   <form [formGroup]="memberInfo">
     <div class="flex gap-6 flex-wrap w-[33em]">
       <!-- Input Nome -->
@@ -187,7 +191,7 @@
         <button mat-raised-button mat-dialog-close="canceled" color="warn">
           {{ t("cancel") }}
         </button>
-        <button mat-raised-button color="primary" (click)="submit()">
+        <button mat-raised-button color="primary" (click)="save()">
           {{ t("submit") }}
         </button>
       </div>
