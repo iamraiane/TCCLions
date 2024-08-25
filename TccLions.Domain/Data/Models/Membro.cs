@@ -12,7 +12,7 @@ public class Membro : Entity<Guid>
         _comissoes = new List<Comissao>();
     }
 
-    public Membro(string nome, string endereco, string bairro, string cidade, string cep, string email, string estadoCivil, string cpf)
+    public Membro(string nome, string endereco, string bairro, string cidade, string cep, string email, EstadoCivilEnum estadoCivil, string cpf)
     {
         Id = Guid.NewGuid();
         Nome = nome;
@@ -21,7 +21,7 @@ public class Membro : Entity<Guid>
         Cidade = cidade;
         Cep = cep;
         Email = email;
-        EstadoCivil = estadoCivil;
+        EstadoCivilId = estadoCivil;
         Cpf = cpf;
         _comissoes = [];
         IsActive = true;
@@ -33,20 +33,20 @@ public class Membro : Entity<Guid>
     public string Cidade { get; private set; }
     public string Cep { get; private set; }
     public string Email { get; private set; }
-    public string EstadoCivil {  get; private set; }
+    public EstadoCivilEnum EstadoCivilId { get; private set; }
     public string Cpf { get; private set; }
     public bool IsActive { get; private set; }
     public IReadOnlyCollection<Comissao> Comissoes => _comissoes;
 
     public void Update(string nome, string endereco, string bairro, string cidade, 
-    string cep, string email, string estadocivil, string cpf){
+    string cep, string email, EstadoCivilEnum estadocivil, string cpf){
         Nome = nome;
         Endereco = endereco;
         Bairro = bairro;
         Cidade = cidade;
         Cep = cep;
         Email = email;
-        EstadoCivil = estadocivil;
+        EstadoCivilId = estadocivil;
         Cpf = cpf;
     }
 

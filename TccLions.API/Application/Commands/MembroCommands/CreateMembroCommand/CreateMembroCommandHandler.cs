@@ -11,7 +11,7 @@ public class CreateMembroCommandHandler(IMembroRepository repository) : IRequest
     {
         ArgumentNullException.ThrowIfNull(request);
 
-        var membro = new Membro(request.Nome, request.Endereco, request.Bairro, request.Cidade, request.Cep, request.Email, request.EstadoCivil, request.Cpf);
+        var membro = new Membro(request.Nome, request.Endereco, request.Bairro, request.Cidade, request.Cep, request.Email, (EstadoCivilEnum)Enum.ToObject(typeof(EstadoCivilEnum), request.EstadoCivilId), request.Cpf);
 
         _repository.Create(membro);
 

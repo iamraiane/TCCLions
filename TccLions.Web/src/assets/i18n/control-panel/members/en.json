@@ -5,5 +5,6 @@
   "actions": "Actions",
   "create": "New Member",
   "delete": "Delete",
-  "edit": "Edit"
+  "edit": "Edit",
+  "showDisabled": "Show disabled"
 }

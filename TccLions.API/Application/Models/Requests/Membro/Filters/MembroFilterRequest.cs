@@ -1,6 +1,9 @@
-﻿namespace TCCLions.API.Application.Models.Requests.Membro.Filters;
+﻿using TCCLions.API.Application.Models.Requests.Common;
 
-public class MembroFilterRequest
+namespace TCCLions.API.Application.Models.Requests.Membro.Filters;
+
+public class MembroFilterRequest : PaginationFilterRequest
 {
     public string NomeDoMembro { get; set; }
+    public bool MostrarDesabilitados { get; set; }
 }

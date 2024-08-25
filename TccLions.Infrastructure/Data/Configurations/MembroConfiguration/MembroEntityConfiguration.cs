@@ -23,10 +23,9 @@ public class MembroEntityConfiguration : IEntityTypeConfiguration<Membro>
             .HasMaxLength(255)
             .IsUnicode(false);
 
-        builder.Property(x => x.EstadoCivil)
-            .IsRequired()
-            .HasMaxLength(100)
-            .IsUnicode(false);
+        builder.HasOne<EstadoCivil>()
+            .WithMany()
+            .HasForeignKey(_ => _.EstadoCivilId);
 
         builder.Property(x => x.Cpf)
             .IsRequired()

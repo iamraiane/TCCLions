@@ -1,1 +1,9 @@
-<p>create-member works!</p>
+<div *transloco="let t; read: 'createMember'">
+  <h1 mat-dialog-title>{{ t("createMember") }}</h1>
+
+  <form>
+    <mat-form-field appearance="outline">
+      <input matInput placeholder="teste" />
+    </mat-form-field>
+  </form>
+</div>

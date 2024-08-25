@@ -25,9 +25,6 @@ public class CreateMembroCommandValidator : AbstractValidator<CreateMembroComman
         RuleFor(x => x.Cidade).MaximumLength(255)
             .WithMessage("A cidade informada é muito longa.");
 
-        RuleFor(x => x.EstadoCivil).MaximumLength(100)
-            .WithMessage("O estado civil informado é muito longo.");
-
         RuleFor(x => x.Cep).MinimumLength(9)
             .MaximumLength(9)
             .WithMessage("O CEP deve ter exatamente 9 caractéres.");

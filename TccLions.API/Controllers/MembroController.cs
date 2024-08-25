@@ -1,5 +1,4 @@
-﻿using System;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using TccLions.API.Application.Commands.MembroCommands.UpdateMembroCommands;
@@ -23,16 +22,30 @@ public class MembroController(IMediator mediator) : ControllerBase
     private readonly IMediator _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
 
     [HttpGet]
-    [ProducesResponseType(typeof(IEnumerable<MembroViewModel>), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(PaginatedItemsViewModel<MembroViewModel>), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     public async Task<IActionResult> GetAll([FromQuery] MembroFilterRequest filter)
     {
-        var data = await _mediator.Send(new GetAllMembrosQuery { NomeDoMembro = filter.NomeDoMembro });
+        var data = await _mediator.Send(new GetAllMembrosQuery 
+        {
+            NomeDoMembro = filter.NomeDoMembro,
+            MostrarDesabilitados = filter.MostrarDesabilitados,
+            TamanhoDaPagina = filter.TamanhoDaPagina,
+            IndiceDaPagina = filter.IndiceDaPagina
+        });
 
         if (!data.Any())
             return NoContent();
 
-        return Ok(data.Select(x => x.ToViewModel()));
+        var paginated = new PaginatedItemsViewModel<MembroViewModel>
+        {
+            IndiceDaPagina = filter.IndiceDaPagina,
+            TamanhoDaPagina = filter.TamanhoDaPagina,
+            Quantidade = data.FirstOrDefault().Quantidade,
+            Dados = data.Select(_ => _.ToViewModel())
+        };
+
+        return Ok(paginated);
     }
 
     [HttpPost]
@@ -48,7 +61,7 @@ public class MembroController(IMediator mediator) : ControllerBase
             Cpf = request.Cpf,
             Email = request.Email,
             Endereco = request.Endereco,
-            EstadoCivil = request.EstadoCivil,
+            EstadoCivilId = request.EstadoCivilId,
             Nome = request.Nome
         });
 
@@ -84,7 +97,7 @@ public class MembroController(IMediator mediator) : ControllerBase
             Cidade = request.Cidade,
             Cep = request.Cep,
             Email = request.Email,
-            EstadoCivil = request.EstadoCivil,
+            EstadoCivilId = request.EstadoCivilId,
             Cpf = request.Cpf
         });
 

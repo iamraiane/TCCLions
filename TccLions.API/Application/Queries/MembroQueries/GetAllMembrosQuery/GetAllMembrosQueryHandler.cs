@@ -11,9 +11,16 @@ public class GetAllMembrosQueryHandler(IMembroRepository repository) : IRequestH
     {
         ArgumentNullException.ThrowIfNull(nameof(request));
 
-        var data = _repository.GetAll()
+        var query = _repository.GetAll()
             .Where(x => request.NomeDoMembro is null || x.Nome.Contains(request.NomeDoMembro, StringComparison.CurrentCultureIgnoreCase))
-            .Select(x => new MembroDTO { 
+            .Where(x => request.MostrarDesabilitados is true || x.IsActive == true);
+
+        var count = query.Count();
+
+        var data = query.Skip(request.IndiceDaPagina * request.TamanhoDaPagina)
+            .Take(request.TamanhoDaPagina)
+            .Select(x => new MembroDTO
+            {
                 Id = x.Id,
                 Bairro = x.Bairro,
                 Cep = x.Cep,
@@ -21,9 +28,10 @@ public class GetAllMembrosQueryHandler(IMembroRepository repository) : IRequestH
                 Cpf = x.Cpf,
                 Email = x.Email,
                 Endereco = x.Endereco,
-                EstadoCivil = x.EstadoCivil,
+                EstadoCivil = x.EstadoCivilId.ToString(),
                 Nome = x.Nome,
-                IsActive = x.IsActive
+                IsActive = x.IsActive,
+                Quantidade = count
             });
 
         return Task.FromResult(data);

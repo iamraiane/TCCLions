@@ -12,7 +12,7 @@ using TCCLions.Infrastructure.Data;
 namespace TccLions.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDataContext))]
-    [Migration("20240824194011_InitialMigration")]
+    [Migration("20240824223442_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -46,6 +46,49 @@ namespace TccLions.Infrastructure.Migrations
                     b.HasIndex("_tipoComissaoId");
 
                     b.ToTable("Comissoes");
+                });
+
+            modelBuilder.Entity("TCCLions.Domain.Data.Models.EstadoCivil", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EstadosCivis");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 0,
+                            Nome = "Solteiro"
+                        },
+                        new
+                        {
+                            Id = 1,
+                            Nome = "Casado"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Nome = "Separado"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Nome = "Divorciado"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Nome = "Viuvo"
+                        });
                 });
 
             modelBuilder.Entity("TCCLions.Domain.Data.Models.Membro", b =>
@@ -90,11 +133,8 @@ namespace TccLions.Infrastructure.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("EstadoCivil")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(100)");
+                    b.Property<int>("EstadoCivilId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -107,7 +147,9 @@ namespace TccLions.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Membro");
+                    b.HasIndex("EstadoCivilId");
+
+                    b.ToTable("Membros");
                 });
 
             modelBuilder.Entity("TCCLions.Domain.Data.Models.TipoComissao", b =>
@@ -144,6 +186,15 @@ namespace TccLions.Infrastructure.Migrations
                     b.Navigation("Membro");
 
                     b.Navigation("TipoComissao");
+                });
+
+            modelBuilder.Entity("TCCLions.Domain.Data.Models.Membro", b =>
+                {
+                    b.HasOne("TCCLions.Domain.Data.Models.EstadoCivil", null)
+                        .WithMany()
+                        .HasForeignKey("EstadoCivilId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("TCCLions.Domain.Data.Models.Membro", b =>

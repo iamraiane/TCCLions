@@ -56,12 +56,6 @@ namespace TccLions.API.Application.Commands.MembroCommands.UpdateMembroCommands
            .MaximumLength(255)
            .WithMessage("O atributo email não pode ter mais que 255 caracteres");
 
-           RuleFor(x => x.EstadoCivil)
-           .NotEmpty()
-           .WithMessage("O atributo estado civil não pode ser vazio")
-           .MaximumLength(100)
-           .WithMessage("O atributo email não pode ter mais que sem 100 caracteres");
-
            RuleFor(x => x.Cpf)
            .NotEmpty()
            .WithMessage("O atributo Cpf não pode ser vazio")

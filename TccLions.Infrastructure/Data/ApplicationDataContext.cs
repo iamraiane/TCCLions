@@ -11,6 +11,8 @@ public class ApplicationDataContext : DbContext
 
     public DbSet<Comissao> Comissoes { get; set; }
     public DbSet<TipoComissao> TipoComissoes { get; set; }
+    public DbSet<Membro> Membros { get; set; }
+    public DbSet<EstadoCivil> EstadosCivis { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

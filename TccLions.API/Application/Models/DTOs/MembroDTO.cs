@@ -12,4 +12,5 @@ public class MembroDTO
     public string EstadoCivil { get; set; }
     public string Cpf { get; set; }
     public bool IsActive { get; set; }
+    public int Quantidade { get; set; }
 }

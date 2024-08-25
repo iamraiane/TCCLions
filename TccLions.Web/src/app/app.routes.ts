@@ -10,7 +10,7 @@ export const routes: Routes = [
     path: 'control-panel/members',
     component: MembersComponent,
     resolve: {
-      members: () => inject(MembersService).get()
+      members: () => inject(MembersService).get('', false)
     }
   },
   {

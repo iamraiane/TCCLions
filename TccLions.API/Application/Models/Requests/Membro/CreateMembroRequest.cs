@@ -8,6 +8,6 @@ public class CreateMembroRequest
     public string Cidade { get; set; }
     public string Cep { get; set; }
     public string Email { get; set; }
-    public string EstadoCivil { get; set; }
+    public int EstadoCivilId { get; set; }
     public string Cpf { get; set; }
 }
