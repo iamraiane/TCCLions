@@ -11,4 +11,8 @@ public class TipoComissao : Entity<Guid>
     }
 
     public string Descricao { get; private set; }
+
+    public void Update(string descricao){
+        Descricao = descricao;
+    }
 }

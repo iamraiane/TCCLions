@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,11 @@ namespace TCCLions.Infrastructure.Data.Repositories
     {
         public TipoComissaoRepository(ApplicationDataContext context) : base(context)
         {
+        }
+
+        public List<TipoComissao> GetAll()
+        {
+            return _entity.ToList();
         }
     }
 }
