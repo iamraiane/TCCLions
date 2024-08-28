@@ -7,6 +7,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using TccLions.API.Application.Commands.MembroCommands.DeleteMembroCommand;
 using TccLions.API.Application.Commands.TipoComissaoCommands.CreateTipoComissaoCommand;
+using TccLions.API.Application.Commands.TipoComissaoCommands.DeleteTipoComissaoCommand;
 using TccLions.API.Application.Commands.TipoComissaoCommands.UpdateTipoComissaoCommand;
 using TccLions.API.Application.Models.Requests.TipoComissao;
 using TccLions.API.Application.Models.ViewModels;
@@ -80,7 +81,7 @@ namespace TccLions.API.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> Delete(Guid id){
 
-            var isDeleted = await _mediator.Send( new DeleteMembroCommand { Id = id} );
+            var isDeleted = await _mediator.Send( new DeleteTipoComissaoCommand { Id = id} );
 
             if(isDeleted == false)
                return BadRequest();
