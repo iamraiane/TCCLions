@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using TccLions.API.Application.Commands.MembroCommands.UpdateMembroCommands;
 using TccLions.API.Application.Models.Requests.Membro;
-using TCCLions.API.Application.Commands.MembroCommands.CreateMembroCommand;
-using TCCLions.API.Application.Models.Requests.Membro;
 using TCCLions.API.Application.Models.Requests.Membro.Filters;
 using TCCLions.API.Application.Models.ViewModels;
 using TCCLions.API.Application.Models.ViewModels.Extensions;
@@ -51,29 +49,6 @@ public class MembroController(IMediator mediator) : ControllerBase
         };
 
         return Ok(paginated);
-    }
-
-    [HttpPost]
-    [ProducesResponseType(typeof(Guid), (int)HttpStatusCode.Created)]
-    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    public async Task<IActionResult> Create([FromBody] CreateMembroRequest request)
-    {
-        var result = await _mediator.Send(new CreateMembroCommand
-        {
-            Bairro = request.Bairro,
-            Cep = request.Cep,
-            Cidade = request.Cidade,
-            Cpf = request.Cpf,
-            Email = request.Email,
-            Endereco = request.Endereco,
-            EstadoCivilId = request.EstadoCivilId,
-            Nome = request.Nome
-        });
-
-        if (result is null)
-            return BadRequest();
-
-        return CreatedAtAction(nameof(Get), new { id = result }, result);
     }
 
     [HttpGet("{id}")]

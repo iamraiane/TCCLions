@@ -1,6 +1,6 @@
-﻿namespace TCCLions.API.Application.Models.Requests.Membro;
+﻿namespace TCCLions.API.Application.Models.Requests.Auth;
 
-public class CreateMembroRequest
+public class RegisterRequest
 {
     public string Nome { get; set; }
     public string Endereco { get; set; }

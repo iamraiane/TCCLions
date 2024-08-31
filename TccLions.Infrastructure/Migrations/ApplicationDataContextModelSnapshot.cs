@@ -22,6 +22,21 @@ namespace TccLions.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("MembroPermissao", b =>
+                {
+                    b.Property<Guid>("MembrosId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PermissoesId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("MembrosId", "PermissoesId");
+
+                    b.HasIndex("PermissoesId");
+
+                    b.ToTable("MembroPermissoes", (string)null);
+                });
+
             modelBuilder.Entity("TCCLions.Domain.Data.Models.Comissao", b =>
                 {
                     b.Property<Guid>("Id")
@@ -142,11 +157,34 @@ namespace TccLions.Infrastructure.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(255)");
 
+                    b.Property<string>("Senha")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(255)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("EstadoCivilId");
 
                     b.ToTable("Membros");
+                });
+
+            modelBuilder.Entity("TCCLions.Domain.Data.Models.Permissao", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Permissoes");
                 });
 
             modelBuilder.Entity("TCCLions.Domain.Data.Models.TipoComissao", b =>
@@ -166,10 +204,42 @@ namespace TccLions.Infrastructure.Migrations
                     b.ToTable("TipoComissoes");
                 });
 
+            modelBuilder.Entity("TccLions.Domain.Data.Models.TipoDespesa", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TipoDespesas");
+                });
+
+            modelBuilder.Entity("MembroPermissao", b =>
+                {
+                    b.HasOne("TCCLions.Domain.Data.Models.Membro", null)
+                        .WithMany()
+                        .HasForeignKey("MembrosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TCCLions.Domain.Data.Models.Permissao", null)
+                        .WithMany()
+                        .HasForeignKey("PermissoesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("TCCLions.Domain.Data.Models.Comissao", b =>
                 {
                     b.HasOne("TCCLions.Domain.Data.Models.Membro", "Membro")
-                        .WithMany("Comissoes")
+                        .WithMany()
                         .HasForeignKey("_membroId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -192,11 +262,6 @@ namespace TccLions.Infrastructure.Migrations
                         .HasForeignKey("EstadoCivilId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("TCCLions.Domain.Data.Models.Membro", b =>
-                {
-                    b.Navigation("Comissoes");
                 });
 #pragma warning restore 612, 618
         }

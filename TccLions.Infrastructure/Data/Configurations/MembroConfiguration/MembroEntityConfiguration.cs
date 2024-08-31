@@ -49,5 +49,14 @@ public class MembroEntityConfiguration : IEntityTypeConfiguration<Membro>
 
         builder.Property(x => x.IsActive)
             .HasColumnType("bit");
+
+        builder.Property(x => x.Senha)
+            .HasMaxLength(255)
+            .IsUnicode(false)
+            .IsRequired();
+
+        builder.HasMany(m => m.Permissoes)
+            .WithMany(p => p.Membros)
+            .UsingEntity(x => x.ToTable("MembroPermissoes"));
     }
 }

@@ -5,14 +5,13 @@ namespace TCCLions.Domain.Data.Models;
 
 public class Membro : Entity<Guid>
 {
-    private List<Comissao> _comissoes;
-
+    private readonly List<Permissao> _permissoes;
     private Membro()
     {
-        _comissoes = new List<Comissao>();
+        _permissoes = [];
     }
 
-    public Membro(string nome, string endereco, string bairro, string cidade, string cep, string email, EstadoCivilEnum estadoCivil, string cpf)
+    public Membro(string nome, string endereco, string bairro, string cidade, string cep, string email, EstadoCivilEnum estadoCivil, string cpf, string senha) : this()
     {
         Id = Guid.NewGuid();
         Nome = nome;
@@ -23,7 +22,7 @@ public class Membro : Entity<Guid>
         Email = email;
         EstadoCivilId = estadoCivil;
         Cpf = cpf;
-        _comissoes = [];
+        Senha = senha;
         IsActive = true;
     }
 
@@ -35,11 +34,13 @@ public class Membro : Entity<Guid>
     public string Email { get; private set; }
     public EstadoCivilEnum EstadoCivilId { get; private set; }
     public string Cpf { get; private set; }
+    public string Senha { get; private set; }
+    public IReadOnlyCollection<Permissao> Permissoes => _permissoes;
     public bool IsActive { get; private set; }
-    public IReadOnlyCollection<Comissao> Comissoes => _comissoes;
 
-    public void Update(string nome, string endereco, string bairro, string cidade, 
-    string cep, string email, EstadoCivilEnum estadocivil, string cpf){
+    public void Update(string nome, string endereco, string bairro, string cidade,
+    string cep, string email, EstadoCivilEnum estadocivil, string cpf)
+    {
         Nome = nome;
         Endereco = endereco;
         Bairro = bairro;
@@ -62,5 +63,10 @@ public class Membro : Entity<Guid>
         if (IsActive) throw new MembroDomainException("Esse membro já está habilitado.");
 
         IsActive = true;
+    }
+
+    public void AddPermission(Permissao permissao)
+    {
+        _permissoes.Add(permissao);
     }
 }
