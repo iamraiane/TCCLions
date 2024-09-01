@@ -1,7 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using TCCLions.API.Application.Commands.AuthCommands.SetAdminCommand;
+using System.Net;
+using TCCLions.API.Application.Commands.AuthCommands.AddRoleCommand;
 using TCCLions.API.Application.Commands.MembroCommands.CreateMembroCommand;
 using TCCLions.API.Application.Models.Requests.Auth;
 using TCCLions.API.Application.Queries.AuthQueries.LoginQuery;
@@ -16,6 +17,8 @@ public class AuthController(IMediator mediator) : ControllerBase
     private readonly IMediator _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
 
     [HttpPost("register")]
+    [ProducesResponseType((int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     [AllowAnonymous]
     public async Task<IActionResult> Register([FromBody] RegisterRequest request)
     {
@@ -39,6 +42,8 @@ public class AuthController(IMediator mediator) : ControllerBase
     }
 
     [HttpPost("login")]
+    [ProducesResponseType(typeof(string), (int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     [AllowAnonymous]
     public async Task<IActionResult> Login([FromBody] LoginRequest request)
     {
@@ -52,8 +57,11 @@ public class AuthController(IMediator mediator) : ControllerBase
     }
 
     [HttpPost("{memberId}/add-role")]
+    [ProducesResponseType((int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType((int)HttpStatusCode.Forbidden)]
     [Authorize(Policy = SecurityInfo.Policies.AdminOnly)]
-    public async Task<IActionResult> SetAdmin(Guid memberId, [FromBody] string roleName)
+    public async Task<IActionResult> AddRole(Guid memberId, [FromBody] string roleName)
     {
         var token = await _mediator.Send(new AddRoleCommand
         {
@@ -61,6 +69,9 @@ public class AuthController(IMediator mediator) : ControllerBase
             NomePermissao = roleName
         });
 
-        return Ok(token);
+        if (!token)
+            return BadRequest();
+
+        return Ok();
     }
 }

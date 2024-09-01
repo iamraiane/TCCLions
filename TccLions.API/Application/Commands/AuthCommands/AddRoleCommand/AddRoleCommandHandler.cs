@@ -2,19 +2,19 @@
 using TCCLions.Domain.Data.Exceptions;
 using TCCLions.Domain.Data.Repositories;
 
-namespace TCCLions.API.Application.Commands.AuthCommands.SetAdminCommand;
+namespace TCCLions.API.Application.Commands.AuthCommands.AddRoleCommand;
 
 public class AddRoleCommandHandler(IMembroRepository membroRepository, IPermissaoRepository permissaoRepository) : IRequestHandler<AddRoleCommand, bool>
 {
     private readonly IMembroRepository _membroRepository = membroRepository ?? throw new ArgumentNullException(nameof(membroRepository));
     private readonly IPermissaoRepository _permissaoRepository = permissaoRepository ?? throw new ArgumentNullException(nameof(permissaoRepository));
 
-    public Task<bool> Handle(AddRoleCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(AddRoleCommand request, CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(request);
 
         var membro = _membroRepository.Get(request.MembroId);
-
+       
         if (membro is null)
             throw new MembroDomainException("Membro não encontrado.");
 
@@ -25,6 +25,8 @@ public class AddRoleCommandHandler(IMembroRepository membroRepository, IPermissa
 
         membro.AddPermission(permissao);
 
-        return _membroRepository.SaveChangesAsync();
+        _membroRepository.Update(membro);
+
+        return await _membroRepository.SaveChangesAsync();
     }
 }

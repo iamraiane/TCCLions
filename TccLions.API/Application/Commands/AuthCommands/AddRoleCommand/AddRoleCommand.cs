@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace TCCLions.API.Application.Commands.AuthCommands.SetAdminCommand;
+namespace TCCLions.API.Application.Commands.AuthCommands.AddRoleCommand;
 
 public class AddRoleCommand : IRequest<bool>
 {

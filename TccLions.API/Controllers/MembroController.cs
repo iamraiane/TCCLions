@@ -10,10 +10,13 @@ using TCCLions.API.Application.Queries.MembroQueries.GetAllMembrosQuery;
 using TCCLions.API.Application.Queries.MembroQueries.GetMembroQuery;
 using TccLions.API.Application.Commands.MembroCommands.DeleteMembroCommand;
 using TCCLions.API.Application.Commands.MembroCommands.DisableMembro;
+using Microsoft.AspNetCore.Authorization;
+using TCCLions.API.Application.Security;
 
 namespace TCCLions.API.Controllers;
 
 [Route("api/v1/membro")]
+[Authorize]
 [ApiController]
 public class MembroController(IMediator mediator) : ControllerBase
 {
@@ -63,9 +66,12 @@ public class MembroController(IMediator mediator) : ControllerBase
 
         return Ok(result.ToViewModel());
     }
+
     [HttpPut("{id}")]
+    [Authorize(Policy = SecurityInfo.Policies.AdminOnly)]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType((int)HttpStatusCode.Forbidden)]
     public async Task<IActionResult> Update(Guid id, [FromBody] UpdateMembroRequest request)
     {
         var isUpdated = await _mediator.Send(new UpdateMembroCommand
@@ -88,8 +94,10 @@ public class MembroController(IMediator mediator) : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [Authorize(Policy = SecurityInfo.Policies.AdminOnly)]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType((int)HttpStatusCode.Forbidden)]
     public async Task<IActionResult> Delete(Guid id)
     {
 
@@ -102,8 +110,10 @@ public class MembroController(IMediator mediator) : ControllerBase
     }
 
     [HttpPost("{id}/disable")]
+    [Authorize(Policy = SecurityInfo.Policies.AdminOnly)]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType((int)HttpStatusCode.Forbidden)]
     public async Task<IActionResult> Disable(Guid id)
     {
         var result = await _mediator.Send(new DisableMembroCommand { Id = id });
@@ -115,8 +125,10 @@ public class MembroController(IMediator mediator) : ControllerBase
     }
 
     [HttpPost("{id}/enable")]
+    [Authorize(Policy = SecurityInfo.Policies.AdminOnly)]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType((int)HttpStatusCode.Forbidden)]
     public async Task<IActionResult> Enable(Guid id)
     {
         var result = await _mediator.Send(new EnableMembroCommand { Id = id });

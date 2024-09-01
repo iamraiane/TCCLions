@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TccLions.API.Application.Commands.MembroCommands.DeleteMembroCommand;
 using TccLions.API.Application.Commands.TipoComissaoCommands.CreateTipoComissaoCommand;
@@ -14,10 +15,12 @@ using TccLions.API.Application.Models.ViewModels;
 using TccLions.API.Application.Models.ViewModels.Extensions;
 using TccLions.API.Application.Queries.TipoComissaoQueries.GetAllTipoComissaoQuery;
 using TccLions.API.Application.Queries.TipoComissaoQueries.GetTipoComissaoQuery;
+using TCCLions.API.Application.Security;
 
 namespace TccLions.API.Controllers
 {
     [ApiController]
+    [Authorize(Policy = SecurityInfo.Policies.AdminOnly)]
     [Route("api/v1/tipoComissao")]
     public class TipoComissaoController(IMediator mediator) : ControllerBase
     {
@@ -26,6 +29,7 @@ namespace TccLions.API.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(List<TipoComissaoViewModel>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
         public async Task<IActionResult> GetAll(){
 
             var data = await _mediator.Send(new GetAllTipoComissaoQuery{});
@@ -40,6 +44,7 @@ namespace TccLions.API.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(Guid), (int)HttpStatusCode.Created)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
         public async Task<IActionResult> Create([FromBody] CreateTipoComissaoRequest request){
             var result = await _mediator.Send(new CreateTipoComissaoCommand{
                 Descricao = request.Descricao
@@ -54,6 +59,7 @@ namespace TccLions.API.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(TipoComissaoViewModel), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
         public async Task<IActionResult> Get(Guid id){
             var result = await _mediator.Send(new GetTipoComissaoByIdQuery { Id = id});
 
@@ -65,6 +71,7 @@ namespace TccLions.API.Controllers
         [HttpPut("{id}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
         public async Task<IActionResult> Update(Guid id, [FromBody] UpdateTipoComissaoRequest request){
             var isUpdated = await _mediator.Send(new UpdateTipoComissaoCommand{
                 Id = id,
@@ -79,6 +86,7 @@ namespace TccLions.API.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
         public async Task<IActionResult> Delete(Guid id){
 
             var isDeleted = await _mediator.Send( new DeleteTipoComissaoCommand { Id = id} );

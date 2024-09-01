@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using TCCLions.API.Application.Commands.ComissaoCommands.CreateComissaoCommand;
@@ -9,10 +10,12 @@ using TCCLions.API.Application.Models.Requests.Comissao.Filters;
 using TCCLions.API.Application.Models.ViewModels;
 using TCCLions.API.Application.Models.ViewModels.Extensions;
 using TCCLions.API.Application.Queries.ComissaoQueries.GetAllComissaoQuery;
+using TCCLions.API.Application.Security;
 
 namespace TCCLions.API.Controllers;
 
 [Route("api/v1/comissao")]
+[Authorize(Policy = SecurityInfo.Policies.AdminOnly)]
 [ApiController]
 public class ComissaoController(IMediator mediator) : ControllerBase
 {
@@ -21,6 +24,7 @@ public class ComissaoController(IMediator mediator) : ControllerBase
     [HttpGet]
     [ProducesResponseType(typeof(List<ComissaoViewModel>), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
+    [ProducesResponseType((int)HttpStatusCode.Forbidden)]
     public async Task<IActionResult> GetAll([FromQuery] ComissaoFilterRequest filter)
     {
         var data = await _mediator.Send(new GetAllComissaoQuery { NomeDoMembro = filter.NomeDoMembro, TipoComissao = filter.TipoComissao });
@@ -36,6 +40,7 @@ public class ComissaoController(IMediator mediator) : ControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(Guid), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType((int)HttpStatusCode.Forbidden)]
     public async Task<IActionResult> Create([FromBody] CreateComissaoRequest request)
     {
         var isCreated = await _mediator.Send(new CreateComissaoCommand { TipoComissaoId = request.TipoComissaoId, MembroId = request.MembroId });
@@ -49,6 +54,7 @@ public class ComissaoController(IMediator mediator) : ControllerBase
     [HttpGet("{id}")]
     [ProducesResponseType(typeof(ComissaoViewModel), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
+    [ProducesResponseType((int)HttpStatusCode.Forbidden)]
     public async Task<IActionResult> Get(Guid id)
     {
         var data = await _mediator.Send(new GetComissaoQuery { Id = id });
@@ -62,6 +68,7 @@ public class ComissaoController(IMediator mediator) : ControllerBase
     [HttpPut("{id}")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType((int)HttpStatusCode.Forbidden)]
     public async Task<IActionResult> Update(Guid id, [FromBody] UpdateComissaoRequest request)
     {
         var isUpdated = await _mediator.Send(new UpdateComissaoCommand { Id = id, TipoComissaoId = request.TipoComissaoId });
@@ -75,6 +82,7 @@ public class ComissaoController(IMediator mediator) : ControllerBase
     [HttpDelete("{id}")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType((int)HttpStatusCode.Forbidden)]
     public async Task<IActionResult> Delete(Guid id)
     {
         var isDeleted = await _mediator.Send(new DeleteComissaoCommand { Id = id });
@@ -84,5 +92,4 @@ public class ComissaoController(IMediator mediator) : ControllerBase
 
         return Ok();
     }
-
 }
