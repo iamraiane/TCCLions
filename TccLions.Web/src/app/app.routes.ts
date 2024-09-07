@@ -4,6 +4,7 @@ import { ComissionsService } from './admin/pages/comissions/service/comissions.s
 import { inject } from '@angular/core';
 import { MembersComponent } from './admin/pages/members/members.component';
 import { MembersService } from './admin/pages/members/service/members.service';
+import { LoginComponent } from './public/login/login.component';
 
 export const routes: Routes = [
   {
@@ -19,5 +20,9 @@ export const routes: Routes = [
     resolve: {
       comissions: () => inject(ComissionsService).get('')
     }
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   }
 ];

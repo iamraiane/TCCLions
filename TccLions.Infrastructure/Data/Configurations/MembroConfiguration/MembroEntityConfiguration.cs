@@ -25,7 +25,7 @@ public class MembroEntityConfiguration : IEntityTypeConfiguration<Membro>
 
         builder.HasOne<EstadoCivil>()
             .WithMany()
-            .HasForeignKey(_ => _.EstadoCivilId);
+            .HasForeignKey(_ => _.EstadoCivil);
 
         builder.Property(x => x.Cpf)
             .IsRequired()
@@ -49,5 +49,14 @@ public class MembroEntityConfiguration : IEntityTypeConfiguration<Membro>
 
         builder.Property(x => x.IsActive)
             .HasColumnType("bit");
+
+        builder.Property(x => x.Senha)
+            .HasMaxLength(255)
+            .IsUnicode(false)
+            .IsRequired();
+
+        builder.HasMany(m => m.Permissoes)
+            .WithMany()
+            .UsingEntity(x => x.ToTable("MembroPermissoes"));
     }
 }

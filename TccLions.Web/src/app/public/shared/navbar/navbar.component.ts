@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslocoModule, provideTranslocoScope } from '@jsverse/transloco';
 import { RouterLink } from "@angular/router";
 import { TranslocoButtonComponent } from "./transloco-button/transloco-button.component";
 import { UserMenuComponent } from './user-menu/user-menu.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { AuthService } from '../../../core/auth/auth.service';
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -17,5 +18,11 @@ import { MatMenuModule } from '@angular/material/menu';
   styleUrl: './navbar.component.css',
 
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
+  isAdmin: boolean = false
+  authService = inject(AuthService);
+
+  ngOnInit(): void {
+    this.isAdmin = this.authService.isAdmin();
+  }
 }

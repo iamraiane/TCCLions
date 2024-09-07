@@ -13,11 +13,13 @@ public class ApplicationDataContext : DbContext
     public DbSet<Comissao> Comissoes { get; set; }
     public DbSet<TipoComissao> TipoComissoes { get; set; }
     public DbSet<Membro> Membros { get; set; }
+    public DbSet<Permissao> Permissoes { get; set; }
     public DbSet<EstadoCivil> EstadosCivis { get; set; }
     public DbSet<TipoDespesa> TipoDespesas {get; set;}
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDataContext).Assembly);
+
         base.OnModelCreating(modelBuilder);
     }
 }

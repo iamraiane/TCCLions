@@ -13,4 +13,5 @@ public class MembroDTO
     public string Cpf { get; set; }
     public bool IsActive { get; set; }
     public int Quantidade { get; set; }
+    public IEnumerable<PermissaoDTO> Permissoes { get; set; }
 }

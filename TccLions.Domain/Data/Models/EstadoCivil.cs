@@ -7,9 +7,9 @@ public class EstadoCivil {
 
 public enum EstadoCivilEnum : int
 {
-    Solteiro = 0,
-    Casado = 1,
-    Separado = 2,
-    Divorciado = 3,
-    Viuvo = 4
+    Solteiro = 1,
+    Casado = 2,
+    Separado = 3,
+    Divorciado = 4,
+    Viuvo = 5
 }

@@ -28,7 +28,7 @@ public class GetAllMembrosQueryHandler(IMembroRepository repository) : IRequestH
                 Cpf = x.Cpf,
                 Email = x.Email,
                 Endereco = x.Endereco,
-                EstadoCivil = x.EstadoCivilId.ToString(),
+                EstadoCivil = x.EstadoCivil.ToString(),
                 Nome = x.Nome,
                 IsActive = x.IsActive,
                 Quantidade = count

@@ -22,6 +22,21 @@ namespace TccLions.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("MembroPermissao", b =>
+                {
+                    b.Property<Guid>("MembroId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PermissoesId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("MembroId", "PermissoesId");
+
+                    b.HasIndex("PermissoesId");
+
+                    b.ToTable("MembroPermissoes", (string)null);
+                });
+
             modelBuilder.Entity("TCCLions.Domain.Data.Models.Comissao", b =>
                 {
                     b.Property<Guid>("Id")
@@ -63,27 +78,27 @@ namespace TccLions.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 0,
+                            Id = 1,
                             Nome = "Solteiro"
                         },
                         new
                         {
-                            Id = 1,
+                            Id = 2,
                             Nome = "Casado"
                         },
                         new
                         {
-                            Id = 2,
+                            Id = 3,
                             Nome = "Separado"
                         },
                         new
                         {
-                            Id = 3,
+                            Id = 4,
                             Nome = "Divorciado"
                         },
                         new
                         {
-                            Id = 4,
+                            Id = 5,
                             Nome = "Viuvo"
                         });
                 });
@@ -130,7 +145,7 @@ namespace TccLions.Infrastructure.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(255)");
 
-                    b.Property<int>("EstadoCivilId")
+                    b.Property<int>("EstadoCivil")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsActive")
@@ -142,11 +157,34 @@ namespace TccLions.Infrastructure.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(255)");
 
+                    b.Property<string>("Senha")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(255)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("EstadoCivilId");
+                    b.HasIndex("EstadoCivil");
 
                     b.ToTable("Membros");
+                });
+
+            modelBuilder.Entity("TCCLions.Domain.Data.Models.Permissao", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Permissoes");
                 });
 
             modelBuilder.Entity("TCCLions.Domain.Data.Models.TipoComissao", b =>
@@ -166,10 +204,42 @@ namespace TccLions.Infrastructure.Migrations
                     b.ToTable("TipoComissoes");
                 });
 
+            modelBuilder.Entity("TccLions.Domain.Data.Models.TipoDespesa", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TipoDespesas");
+                });
+
+            modelBuilder.Entity("MembroPermissao", b =>
+                {
+                    b.HasOne("TCCLions.Domain.Data.Models.Membro", null)
+                        .WithMany()
+                        .HasForeignKey("MembroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TCCLions.Domain.Data.Models.Permissao", null)
+                        .WithMany()
+                        .HasForeignKey("PermissoesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("TCCLions.Domain.Data.Models.Comissao", b =>
                 {
                     b.HasOne("TCCLions.Domain.Data.Models.Membro", "Membro")
-                        .WithMany("Comissoes")
+                        .WithMany()
                         .HasForeignKey("_membroId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -189,14 +259,9 @@ namespace TccLions.Infrastructure.Migrations
                 {
                     b.HasOne("TCCLions.Domain.Data.Models.EstadoCivil", null)
                         .WithMany()
-                        .HasForeignKey("EstadoCivilId")
+                        .HasForeignKey("EstadoCivil")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("TCCLions.Domain.Data.Models.Membro", b =>
-                {
-                    b.Navigation("Comissoes");
                 });
 #pragma warning restore 612, 618
         }

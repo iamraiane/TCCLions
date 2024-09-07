@@ -13,7 +13,7 @@ public class ComissaoEntityConfiguration : IEntityTypeConfiguration<Comissao>
            .HasColumnName("MembroId");
 
         builder.HasOne(c => c.Membro)
-            .WithMany(m => m.Comissoes)
+            .WithMany()
             .HasForeignKey("_membroId");
 
         builder.Property<Guid>("_tipoComissaoId")

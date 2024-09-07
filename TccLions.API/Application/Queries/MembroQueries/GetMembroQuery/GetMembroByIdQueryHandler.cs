@@ -24,7 +24,7 @@ public class GetMembroByIdQueryHandler(IMembroRepository repository) : IRequestH
             Cpf = membro.Cpf,
             Email = membro.Email,
             Endereco = membro.Endereco,
-            EstadoCivil = membro.EstadoCivilId.ToString(),
+            EstadoCivil = membro.EstadoCivil.ToString(),
             Nome = membro.Nome,
             IsActive = membro.IsActive
         });
