@@ -13,6 +13,9 @@ public class MembroEntityConfiguration : IEntityTypeConfiguration<Membro>
             .HasMaxLength(255)
             .IsUnicode(false);
 
+        builder.HasIndex(_ => _.Email)
+            .IsUnique();
+
         builder.HasOne<EstadoCivil>()
             .WithMany()
             .HasForeignKey(_ => _.EstadoCivil);

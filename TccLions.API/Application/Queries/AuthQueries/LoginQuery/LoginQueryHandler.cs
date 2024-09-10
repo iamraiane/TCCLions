@@ -29,7 +29,7 @@ public class LoginQueryHandler(IMembroRepository repository, IPasswordHasher pas
 
         return Task.FromResult(new LoginResponse
         { 
-            Token = _jwtTokenGenerator.GenerateToken(membro)
+            Token = _jwtTokenGenerator.GenerateToken(membro),
         });
     }
 }

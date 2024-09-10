@@ -20,6 +20,7 @@ public static class ProgramExtensions
         service.AddScoped<IMembroRepository, MembroRepository>();
         service.AddScoped<IPasswordHasher, PasswordHasher>();
         service.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+        service.AddScoped<ITipoComissaoRepository, TipoComissaoRepository>();
 
         return service;
     }

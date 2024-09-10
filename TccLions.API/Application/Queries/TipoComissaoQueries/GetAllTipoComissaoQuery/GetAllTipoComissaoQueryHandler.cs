@@ -1,6 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using MediatR;
 using TccLions.API.Application.Models.DTOs;
-using TCCLions.Domain.Data.Models;
 using TCCLions.Domain.Data.Repositories;
 
 namespace TccLions.API.Application.Queries.TipoComissaoQueries.GetAllTipoComissaoQuery
@@ -9,15 +12,18 @@ namespace TccLions.API.Application.Queries.TipoComissaoQueries.GetAllTipoComissa
     {
         private readonly ITipoComissaoRepository _repository = repository ?? throw new ArgumentNullException(nameof(repository));
 
-    public Task<IEnumerable<TipoComissaoDTO>> Handle(GetAllTipoComissaoQuery request, CancellationToken cancellationToken){
-        ArgumentNullException.ThrowIfNull(nameof(request));
+        public Task<IEnumerable<TipoComissaoDTO>> Handle(GetAllTipoComissaoQuery request, CancellationToken cancellationToken)
+        {
+            ArgumentNullException.ThrowIfNull(nameof(request));
 
-        var data = _repository.GetAll()
-        .Select(x => new TipoComissaoDTO{
-            Id = x.Id,
-            Descricao = x.Descricao
-        });
+            var data = _repository.GetAll()
+            .Select(x => new TipoComissaoDTO
+            {
+                Id = x.Id,
+                Descricao = x.Descricao
+            });
 
-        return Task.FromResult(data);
+            return Task.FromResult(data);
+        }
     }
 }
