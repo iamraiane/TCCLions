@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using TCCLions.Domain.Data.Models;
 
 namespace TCCLions.API.Application.Commands.MembroCommands.CreateMembroCommand;
 
@@ -34,5 +35,11 @@ public class CreateMembroCommandValidator : AbstractValidator<CreateMembroComman
           .WithMessage("O atributo Cpf não pode ser vazio")
           .MaximumLength(11)
           .WithMessage("O atributo Cpf não pode ter mais que 11 caracteres");
+
+        RuleFor(x => x.EstadoCivilId)
+            .NotEmpty()
+            .WithMessage("O Estado Civil não pode ser vazio")
+            .Must(estadoCivilId => Enum.IsDefined(typeof(EstadoCivilEnum), estadoCivilId))
+            .WithMessage("O Estado Civil deve existir no banco de dados");
     }
 }

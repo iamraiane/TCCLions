@@ -1,27 +1,23 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using MediatR;
 using TccLions.API.Application.Models.DTOs;
+using TCCLions.Domain.Data.Models;
 using TCCLions.Domain.Data.Repositories;
 
-namespace TccLions.API.Application.Queries.TipoComissaoQueries.GetAllTipoComissaoQuery
+namespace TccLions.API.Application.Queries.TipoComissaoQueries.GetAllTipoComissaoQuery;
+
+public class GetAllTipoComissaoQueryHandler(IRepositoryBase<TipoComissao, Guid> repository) : IRequestHandler<GetAllTipoComissaoQuery, IEnumerable<TipoComissaoDTO>>
 {
-    public class GetAllTipoComissaoQueryHandler(ITipoComissaoRepository repository) : IRequestHandler<GetAllTipoComissaoQuery, IEnumerable<TipoComissaoDTO>>
-    {
-        private readonly ITipoComissaoRepository _repository = repository;
+    private readonly IRepositoryBase<TipoComissao, Guid> _repository = repository;
 
-        public Task<IEnumerable<TipoComissaoDTO>> Handle(GetAllTipoComissaoQuery request, CancellationToken cancellationToken){
-            ArgumentNullException.ThrowIfNull(nameof(request));
+    public Task<IEnumerable<TipoComissaoDTO>> Handle(GetAllTipoComissaoQuery request, CancellationToken cancellationToken){
+        ArgumentNullException.ThrowIfNull(nameof(request));
 
-            var data = _repository.GetAll()
-            .Select(x => new TipoComissaoDTO{
-                Id = x.Id,
-                Descricao = x.Descricao
-            });
+        var data = _repository.GetAll()
+        .Select(x => new TipoComissaoDTO{
+            Id = x.Id,
+            Descricao = x.Descricao
+        });
 
-            return Task.FromResult(data);
-        }
+        return Task.FromResult(data);
     }
 }

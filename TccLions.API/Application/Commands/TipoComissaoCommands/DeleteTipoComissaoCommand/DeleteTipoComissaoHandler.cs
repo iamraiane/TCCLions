@@ -1,27 +1,23 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using MediatR;
+using TCCLions.Domain.Data.Models;
 using TCCLions.Domain.Data.Repositories;
 
-namespace TccLions.API.Application.Commands.TipoComissaoCommands.DeleteTipoComissaoCommand
+namespace TccLions.API.Application.Commands.TipoComissaoCommands.DeleteTipoComissaoCommand;
+
+public class DeleteTipoComissaoHandler : IRequestHandler<DeleteTipoComissaoCommand, bool>
 {
-    public class DeleteTipoComissaoHandler : IRequestHandler<DeleteTipoComissaoCommand, bool>
+    private readonly IRepositoryBase<TipoComissao, Guid> _tipoComissaoRepository;
+    public DeleteTipoComissaoHandler(IRepositoryBase<TipoComissao, Guid> tipoComissaoRepository)
     {
-        private readonly ITipoComissaoRepository _tipoComissaoRepository;
-        public DeleteTipoComissaoHandler(ITipoComissaoRepository tipoComissaoRepository)
-        {
-            _tipoComissaoRepository = tipoComissaoRepository;
-        }
-        public async Task<bool> Handle(DeleteTipoComissaoCommand request, CancellationToken cancellationToken){
-            ArgumentNullException.ThrowIfNull(request);
+        _tipoComissaoRepository = tipoComissaoRepository;
+    }
+    public async Task<bool> Handle(DeleteTipoComissaoCommand request, CancellationToken cancellationToken){
+        ArgumentNullException.ThrowIfNull(request);
 
-            var tipoComissao = _tipoComissaoRepository.Get(request.Id);
+        var tipoComissao = _tipoComissaoRepository.Get(request.Id);
 
-            _tipoComissaoRepository.Remove(tipoComissao);
+        _tipoComissaoRepository.Remove(tipoComissao);
 
-            return await _tipoComissaoRepository.SaveChangesAsync();
-        }
+        return await _tipoComissaoRepository.SaveChangesAsync();
     }
 }

@@ -13,7 +13,5 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.login('string', 'string').subscribe();
-
-    console.log(this.authService.isAdmin());
   }
 }

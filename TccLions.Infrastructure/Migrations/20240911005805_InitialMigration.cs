@@ -14,6 +14,20 @@ namespace TccLions.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Atas",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Titulo = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: false),
+                    DataEscrita = table.Column<DateOnly>(type: "date", nullable: false),
+                    Descricao = table.Column<string>(type: "varchar(max)", unicode: false, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Atas", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "EstadosCivis",
                 columns: table => new
                 {
@@ -149,6 +163,11 @@ namespace TccLions.Infrastructure.Migrations
                     { 5, "Viuvo" }
                 });
 
+            migrationBuilder.InsertData(
+                table: "Permissoes",
+                columns: new[] { "Id", "Nome" },
+                values: new object[] { new Guid("1a036859-b82b-4e41-b228-046df5451411"), "Admin" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Comissoes_MembroId",
                 table: "Comissoes",
@@ -173,6 +192,9 @@ namespace TccLions.Infrastructure.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Atas");
+
             migrationBuilder.DropTable(
                 name: "Comissoes");
 

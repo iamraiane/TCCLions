@@ -16,7 +16,7 @@ public class LoginQueryHandler(IMembroRepository repository, IPasswordHasher pas
     {
         ArgumentNullException.ThrowIfNull(nameof(request));
 
-        var membro = _repository.GetByName(request.Nome);
+        var membro = _repository.GetByNameOrEmail(request.NomeOuEmail);
 
         if (membro is null)
             throw new MembroDomainException("Usuário inválido");

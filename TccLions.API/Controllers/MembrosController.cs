@@ -18,7 +18,7 @@ namespace TCCLions.API.Controllers;
 [Route("api/v1/membro")]
 [Authorize]
 [ApiController]
-public class MembroController(IMediator mediator) : ControllerBase
+public class MembrosController(IMediator mediator) : ControllerBase
 {
     private readonly IMediator _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
 

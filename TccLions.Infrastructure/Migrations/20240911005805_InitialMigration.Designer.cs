@@ -12,7 +12,7 @@ using TCCLions.Infrastructure.Data;
 namespace TccLions.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDataContext))]
-    [Migration("20240906132953_InitialMigration")]
+    [Migration("20240911005805_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -38,6 +38,30 @@ namespace TccLions.Infrastructure.Migrations
                     b.HasIndex("PermissoesId");
 
                     b.ToTable("MembroPermissoes", (string)null);
+                });
+
+            modelBuilder.Entity("TCCLions.Domain.Data.Models.Ata", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateOnly>("DataEscrita")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
+
+                    b.Property<string>("Titulo")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Atas");
                 });
 
             modelBuilder.Entity("TCCLions.Domain.Data.Models.Comissao", b =>
@@ -188,6 +212,13 @@ namespace TccLions.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Permissoes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("1a036859-b82b-4e41-b228-046df5451411"),
+                            Nome = "Admin"
+                        });
                 });
 
             modelBuilder.Entity("TCCLions.Domain.Data.Models.TipoComissao", b =>

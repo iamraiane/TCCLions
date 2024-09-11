@@ -51,7 +51,7 @@ public class AuthController(IMediator mediator) : ControllerBase
     {
         var response = await _mediator.Send(new LoginQuery
         {
-            Nome = request.Nome,
+            NomeOuEmail = request.NomeOuEmail,
             Senha = request.Senha
         });
 

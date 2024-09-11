@@ -14,5 +14,8 @@ internal class PermissaoEntityConfiguration : IEntityTypeConfiguration<Permissao
             .IsRequired()
             .HasMaxLength(255)
             .IsUnicode(false);
+
+        builder.HasData(
+                new Permissao("Admin"));
     }
 }

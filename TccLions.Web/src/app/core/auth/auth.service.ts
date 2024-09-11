@@ -47,11 +47,4 @@ export class AuthService {
 
         return !!token;
     }
-
-    isAdmin(): boolean {
-        var isAdmin = false
-        this.membro$.subscribe(response => isAdmin = response?.permissoes.some(p => p.nome === 'Admin') ?? false)
-
-        return isAdmin;
-    }
 }

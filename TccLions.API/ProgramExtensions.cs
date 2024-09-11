@@ -13,8 +13,8 @@ public static class ProgramExtensions
     public static void InjectDependencies(this IServiceCollection service)
     {
         service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+        service.AddScoped(typeof(IRepositoryBase<,>), typeof(RepositoryBase<,>));
         service.AddScoped<IComissaoRepository, ComissaoRepository>();
-        service.AddScoped<ITipoComissaoRepository, TipoComissaoRepository>();
         service.AddScoped<IPermissaoRepository, PermissaoRepository>();
         service.AddScoped<IMembroRepository, MembroRepository>();
         service.AddScoped<IPasswordHasher, PasswordHasher>();

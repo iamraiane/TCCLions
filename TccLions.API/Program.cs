@@ -3,6 +3,7 @@ using Autofac.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 using TCCLions.API;
+using TCCLions.API.Infrastructure.Data;
 using TCCLions.API.Infrastructure.Filters;
 using TCCLions.API.Infrastructure.Modules;
 using TCCLions.Infrastructure.Data;
@@ -48,6 +49,7 @@ using (var Scope = app.Services.CreateScope())
 {
     var context = Scope.ServiceProvider.GetRequiredService<ApplicationDataContext>();
     context.Database.Migrate();
+    ApplicationDataContextSeed.Seed(context);
 }
 
 app.UseSwagger();

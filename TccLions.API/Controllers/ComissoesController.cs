@@ -17,7 +17,7 @@ namespace TCCLions.API.Controllers;
 [Route("api/v1/comissao")]
 [Authorize(Policy = SecurityInfo.Policies.AdminOnly)]
 [ApiController]
-public class ComissaoController(IMediator mediator) : ControllerBase
+public class ComissoesController(IMediator mediator) : ControllerBase
 {
     private readonly IMediator _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
 

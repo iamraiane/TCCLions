@@ -7,6 +7,7 @@ public interface IRepositoryBase<TEntity, TKey> where TEntity : Entity<TKey>
     TEntity Get(TKey key);
     void Create(TEntity entity);
     Task<bool> SaveChangesAsync();
+    List<TEntity> GetAll();
     void Remove(TEntity entity);
     void Update(TEntity entity);
 }

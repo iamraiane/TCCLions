@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using TCCLions.Domain.Data.Models;
 using TCCLions.Domain.Data.Repositories;
 using TCCLions.Infrastructure.Data.Repositories;
 
@@ -6,9 +7,9 @@ namespace TCCLions.API.Application.Commands.ComissaoCommands.CreateComissaoComma
 
 public class CreateComissaoCommandHandlerValidator : AbstractValidator<CreateComissaoCommand>
 {
-    private readonly ITipoComissaoRepository _tipoComissaoRepository;
+    private readonly IRepositoryBase<TipoComissao, Guid> _tipoComissaoRepository;
     private readonly IMembroRepository _membroRepository;
-    public CreateComissaoCommandHandlerValidator(ITipoComissaoRepository tipoComissaoRepository, IMembroRepository membroRepository)
+    public CreateComissaoCommandHandlerValidator(IRepositoryBase<TipoComissao, Guid> tipoComissaoRepository, IMembroRepository membroRepository)
     {
         _tipoComissaoRepository = tipoComissaoRepository ?? throw new ArgumentNullException(nameof(tipoComissaoRepository));
         _membroRepository = membroRepository ?? throw new ArgumentNullException(nameof(membroRepository));
