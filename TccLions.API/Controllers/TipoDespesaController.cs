@@ -9,6 +9,7 @@ using TccLions.API.Application.Models.Requests.TipoDespesa;
 using TccLions.API.Application.Models.ViewModels;
 using TccLions.API.Application.Models.ViewModels.Extensions;
 using TccLions.API.Application.Queries.TipoDespesaQueries.GetAllTipoDespesaQuery;
+using TccLions.API.Application.Queries.TipoDespesaQueries.GetTipoDespesaQuery;
 using TCCLions.API.Application.Security;
 
 namespace TccLions.API.Controllers
@@ -46,7 +47,19 @@ namespace TccLions.API.Controllers
             if(result == null)
                 return BadRequest();
 
-            return CreatedAtAction(nameof(GetAll), new { id = result}, result);
+            return CreatedAtAction(nameof(Get), new { id = result}, result);
+        }
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(TipoDespesaViewModel), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+        public async Task<IActionResult> Get(Guid id){
+            var result = await _mediator.Send(new GetTipoDespesaByIdQuery { Id = id});
+        
+            if(result == null)
+                return NotFound();
+            
+            return Ok(result.ToViewModel());
         }
         [HttpPut("{id}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]

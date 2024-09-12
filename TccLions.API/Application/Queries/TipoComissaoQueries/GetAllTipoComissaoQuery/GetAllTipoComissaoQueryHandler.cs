@@ -10,7 +10,7 @@ namespace TccLions.API.Application.Queries.TipoComissaoQueries.GetAllTipoComissa
 {
     public class GetAllTipoComissaoQueryHandler(ITipoComissaoRepository repository) : IRequestHandler<GetAllTipoComissaoQuery, IEnumerable<TipoComissaoDTO>>
     {
-        private readonly ITipoComissaoRepository _repository = repository;
+        private readonly ITipoComissaoRepository _repository = repository ?? throw new ArgumentNullException(nameof(repository));
 
         public Task<IEnumerable<TipoComissaoDTO>> Handle(GetAllTipoComissaoQuery request, CancellationToken cancellationToken){
             ArgumentNullException.ThrowIfNull(nameof(request));

@@ -7,10 +7,10 @@ using TCCLions.Domain.Data.Repositories;
 
 namespace TccLions.API.Application.Commands.TipoComissaoCommands.DeleteTipoComissaoCommand
 {
-    public class DeleteTipoComissaoHandlerValidation : AbstractValidator<DeleteTipoComissaoCommand>
+    public class DeleteTipoComissaoCommandHandlerValidation : AbstractValidator<DeleteTipoComissaoCommand>
     {
         private readonly ITipoComissaoRepository _tipoComissaoRepository;
-        public DeleteTipoComissaoHandlerValidation(ITipoComissaoRepository tipoComissaoRepository)
+        public DeleteTipoComissaoCommandHandlerValidation(ITipoComissaoRepository tipoComissaoRepository)
         {
             _tipoComissaoRepository = tipoComissaoRepository ?? throw new ArgumentNullException(nameof(tipoComissaoRepository));
         

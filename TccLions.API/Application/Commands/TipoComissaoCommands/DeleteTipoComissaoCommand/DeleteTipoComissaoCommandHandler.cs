@@ -7,10 +7,10 @@ using TCCLions.Domain.Data.Repositories;
 
 namespace TccLions.API.Application.Commands.TipoComissaoCommands.DeleteTipoComissaoCommand
 {
-    public class DeleteTipoComissaoHandler : IRequestHandler<DeleteTipoComissaoCommand, bool>
+    public class DeleteTipoComissaoCommandHandler : IRequestHandler<DeleteTipoComissaoCommand, bool>
     {
         private readonly ITipoComissaoRepository _tipoComissaoRepository;
-        public DeleteTipoComissaoHandler(ITipoComissaoRepository tipoComissaoRepository)
+        public DeleteTipoComissaoCommandHandler(ITipoComissaoRepository tipoComissaoRepository)
         {
             _tipoComissaoRepository = tipoComissaoRepository;
         }

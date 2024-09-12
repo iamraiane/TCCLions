@@ -10,7 +10,7 @@ namespace TccLions.API.Application.Queries.TipoDespesaQueries.GetAllTipoDespesaQ
 {
     public class GetAllTipoDespesaQueryHandler(ITipoDespesaRepository repository) : IRequestHandler<GetAllTipoDespesaQuery, IEnumerable<TipoDespesaDTO>>
     {
-        private readonly ITipoDespesaRepository _repository = repository;
+        private readonly ITipoDespesaRepository _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         
         public Task<IEnumerable<TipoDespesaDTO>> Handle(GetAllTipoDespesaQuery request, CancellationToken cancellationToken){
             ArgumentNullException.ThrowIfNull(nameof(request));

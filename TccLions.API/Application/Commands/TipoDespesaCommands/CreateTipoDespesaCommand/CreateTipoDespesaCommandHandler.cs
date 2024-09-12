@@ -19,6 +19,9 @@ namespace TccLions.API.Application.Commands.TipoDespesaCommands.CreateTipoDespes
 
             _repository.Create(tipoDespesa);
 
+            if(!await _repository.SaveChangesAsync())
+                return null;
+
             return tipoDespesa.Id;
         }
     }
