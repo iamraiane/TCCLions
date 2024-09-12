@@ -23,7 +23,7 @@ export class AuthService {
     login(username: string, password: string): Observable<AuthResponse> {
         return this.http.post<AuthResponse>(`${this.apiUrl}/api/auth/login`,
             {
-                nome: username,
+                nomeOuEmail: username,
                 senha: password
             }).pipe(
                 tap(response => {
@@ -31,10 +31,13 @@ export class AuthService {
                         localStorage.setItem('token', response.token);
 
                     this._membroSubject.next(response.membro);
-                }), catchError(error => {
-                    throw error;
                 })
             );
+    }
+
+    getToken(): string | null {
+        console.log(localStorage.getItem('token'))
+        return localStorage.getItem('token');
     }
 
     logout() {

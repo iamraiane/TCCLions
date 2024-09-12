@@ -12,6 +12,13 @@ export class LoginComponent implements OnInit {
   authService = inject(AuthService)
 
   ngOnInit(): void {
+  }
+
+  login() {
     this.authService.login('string', 'string').subscribe();
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

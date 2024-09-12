@@ -20,14 +20,11 @@ import { AuthService } from '../../../core/auth/auth.service';
 })
 export class NavbarComponent implements OnInit {
   authService = inject(AuthService);
-  isAdmin: boolean = false;
+  isAdmin: boolean = true;
 
   ngOnInit(): void {
     this.authService.membro$.subscribe(membro => {
-      console.log(membro)
-      this.isAdmin = membro?.permissoes.some(p => p.nome == 'Admin') ?? false;
     })
 
-    console.log(this.isAdmin)
   }
 }
