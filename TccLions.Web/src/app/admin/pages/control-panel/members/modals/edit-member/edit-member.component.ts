@@ -22,11 +22,11 @@ import { MembersService } from '../../service/members.service';
 })
 export class EditMemberComponent {
   readonly maritalStatus: { [key: string]: number } = {
-    'Solteiro': 0,
-    'Casado': 1,
-    'Separado': 2,
-    'Divorciado': 3,
-    'Viuvo': 4
+    'Solteiro': 1,
+    'Casado': 2,
+    'Separado': 3,
+    'Divorciado': 4,
+    'Viuvo': 5
   }
 
   constructor(private _service: MembersService, @Inject(MAT_DIALOG_DATA) private data: { id: string }, private dialogRef: MatDialogRef<EditMemberComponent>) {
@@ -48,7 +48,7 @@ export class EditMemberComponent {
     cpf: new FormControl<string>('', [Validators.required, Validators.maxLength(11), Validators.minLength(11)]),
     maritalStatus: new FormControl<string>('', [Validators.required]),
     email: new FormControl<string>('', [Validators.required, Validators.email, Validators.maxLength(255)]),
-    cep: new FormControl<string>('', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]),
+    cep: new FormControl<string>('', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]),
     city: new FormControl<string>('', [Validators.required, Validators.maxLength(255)]),
     neighborhood: new FormControl<string>('', [Validators.required, Validators.maxLength(255)]),
     logradouro: new FormControl<string>('', [Validators.required, Validators.maxLength(255)]),

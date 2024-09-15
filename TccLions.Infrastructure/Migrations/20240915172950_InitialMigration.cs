@@ -81,10 +81,6 @@ namespace TccLions.Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Nome = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: false),
-                    Endereco = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: false),
-                    Bairro = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: false),
-                    Cidade = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: false),
-                    Cep = table.Column<string>(type: "varchar(8)", unicode: false, maxLength: 8, nullable: false),
                     Email = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: false),
                     EstadoCivil = table.Column<int>(type: "int", nullable: false),
                     Cpf = table.Column<string>(type: "varchar(11)", unicode: false, maxLength: 11, nullable: false),
@@ -128,6 +124,29 @@ namespace TccLions.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Enderecos",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Bairro = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: false),
+                    Logradouro = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: false),
+                    Numero = table.Column<int>(type: "int", nullable: false),
+                    Cidade = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: false),
+                    Estado = table.Column<string>(type: "varchar(2)", unicode: false, maxLength: 2, nullable: false),
+                    Cep = table.Column<string>(type: "varchar(8)", unicode: false, maxLength: 8, nullable: false),
+                    MembroId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Enderecos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Enderecos_Membros_MembroId",
+                        column: x => x.MembroId,
+                        principalTable: "Membros",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "MembroPermissoes",
                 columns: table => new
                 {
@@ -166,7 +185,7 @@ namespace TccLions.Infrastructure.Migrations
             migrationBuilder.InsertData(
                 table: "Permissoes",
                 columns: new[] { "Id", "Nome" },
-                values: new object[] { new Guid("b28ee481-3a86-4840-8482-29965a1803d2"), "Admin" });
+                values: new object[] { new Guid("7a466da1-2585-4933-9082-ed7c72dc3613"), "Admin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comissoes_MembroId",
@@ -177,6 +196,11 @@ namespace TccLions.Infrastructure.Migrations
                 name: "IX_Comissoes_TipoComissaoId",
                 table: "Comissoes",
                 column: "TipoComissaoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Enderecos_MembroId",
+                table: "Enderecos",
+                column: "MembroId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MembroPermissoes_PermissoesId",
@@ -197,6 +221,9 @@ namespace TccLions.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Comissoes");
+
+            migrationBuilder.DropTable(
+                name: "Enderecos");
 
             migrationBuilder.DropTable(
                 name: "MembroPermissoes");

@@ -7,7 +7,7 @@ export namespace MembersEndpoints {
     export const endpoints: Endpoints = {
         get: (apiUrl: string) => `${apiUrl}${base}/membro`,
         getDetails: (apiUrl: string, id: string) => `${apiUrl}${base}/membro/${id}`,
-        create: (apiUrl: string) => `${apiUrl}${base}/membro`,
+        register: (apiUrl: string) => `${apiUrl}${base}/auth/register`,
         update: (apiUrl: string, id: string) => `${apiUrl}${base}/membro/${id}`,
         delete: (apiUrl: string, id: string) => `${apiUrl}${base}/membro/${id}`,
         disable: (apiUrl: string, id: string) => `${apiUrl}${base}/membro/${id}/disable`,

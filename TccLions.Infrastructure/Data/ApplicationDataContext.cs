@@ -17,6 +17,7 @@ public class ApplicationDataContext : DbContext
     public DbSet<EstadoCivil> EstadosCivis { get; set; }
     public DbSet<TipoDespesa> TipoDespesas { get; set; }
     public DbSet<Ata> Atas { get; set; }
+    public DbSet<Endereco> Enderecos { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDataContext).Assembly);

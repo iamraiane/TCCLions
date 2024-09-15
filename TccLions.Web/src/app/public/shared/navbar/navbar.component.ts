@@ -28,7 +28,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.authService.membro$.subscribe(membro => {
       this.isLogged = Boolean(membro);
-      this.isAdmin = membro?.permissoes?.some(p => p == ApplicationConstants.permissions.admin) ?? false;
+      this.isAdmin = membro?.permissoes?.some(p => p == ApplicationConstants.permissions.Admin) ?? false;
       this.nomeDoMembro = membro?.nome || '';
     })
   }

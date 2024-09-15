@@ -8,7 +8,7 @@ namespace TCCLions.API.Application.Queries.AtasQueries.GetAtaById;
 public class GetAtaByIdQueryHandler(IRepositoryBase<Ata, Guid> repository) : IRequestHandler<GetAtaByIdQuery, AtaDTO>
 {
     private readonly IRepositoryBase<Ata, Guid> _repository = repository ?? throw new ArgumentNullException(nameof(repository)); 
-    public async Task<AtaDTO> Handle(GetAtaByIdQuery request, CancellationToken cancellationToken)
+    public Task<AtaDTO> Handle(GetAtaByIdQuery request, CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(request);
         
@@ -17,12 +17,12 @@ public class GetAtaByIdQueryHandler(IRepositoryBase<Ata, Guid> repository) : IRe
         if (ata is null)
             return null;
 
-        return new AtaDTO
+        return Task.FromResult(new AtaDTO
         {
             Id = ata.Id,
             DataEscrita = ata.DataEscrita,
             Descricao = ata.Descricao,
             Titulo = ata.Titulo
-        };
+        });
     }
 }

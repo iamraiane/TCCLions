@@ -22,12 +22,8 @@ public class GetAllMembrosQueryHandler(IMembroRepository repository) : IRequestH
             .Select(x => new MembroDTO
             {
                 Id = x.Id,
-                Bairro = x.Bairro,
-                Cep = x.Cep,
-                Cidade = x.Cidade,
                 Cpf = x.Cpf,
                 Email = x.Email,
-                Endereco = x.Endereco,
                 EstadoCivil = x.EstadoCivil.ToString(),
                 Nome = x.Nome,
                 IsActive = x.IsActive,

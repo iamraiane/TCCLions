@@ -10,14 +10,9 @@ public static class MembroViewModelExtension
         {
             Id = dto.Id,
             Nome = dto.Nome,
-            Bairro = dto.Bairro,
-            Cep = dto.Cep,
-            Cidade = dto.Cidade,
             Email = dto.Email,
-            Endereco = dto.Endereco,
             EstadoCivil = dto.EstadoCivil,
-            IsActive = dto.IsActive,
-            Permissoes = dto.Permissoes?.Select(_ => _.Nome)
+            IsActive = dto.IsActive
         };
     }
 }

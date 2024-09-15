@@ -7,12 +7,10 @@
   "maritalStatus": "Estado Civil",
   "maritalStatusEmptyErrorMessage": "O Estado civil é obrigatório.",
   "invalidEmailErrorMessage": "Email inválido.",
-  "cepLengthErrorMessage": "O CEP deve ter 9 dígitos.",
-  "city": "Cidade",
-  "cityEmptyErrorMessage": "A Cidade é obrigatória.",
-  "neighborhood": "Bairro",
-  "neighborhoodEmptyErrorMessage": "O Bairro é obrigatório.",
   "cancel": "Cancelar",
   "submit": "Enviar",
-  "editMember": "Editar Membro"
+  "editMember": "Editar Membro",
+  "password": "Senha",
+  "passwordEmptyErrorMessage": "A Senha é obrigatória.",
+  "passwordLengthErrorMessage": "A Senha deve ter no máximo 255 caractéres."
 }

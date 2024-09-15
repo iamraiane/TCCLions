@@ -42,8 +42,8 @@ export class MembersService {
     return this._httpClient.get<MemberDetails>(MembersEndpoints.endpoints['getDetails'](this.apiUrl, id))
   }
 
-  create(member: CreateMember) {
-    return this._httpClient.post(MembersEndpoints.endpoints['create'](this.apiUrl), member)
+  register(member: CreateMember) {
+    return this._httpClient.post(MembersEndpoints.endpoints['register'](this.apiUrl), member)
   }
 
   update(id: string, member: MemberDetails) {

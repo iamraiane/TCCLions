@@ -37,7 +37,7 @@ export const routes: Routes = [
       {
         path: 'control-panel',
         data: {
-          permissions: [ApplicationConstants.permissions.admin]
+          permissions: [ApplicationConstants.permissions.Admin]
         },
         loadChildren: () => import('./admin/pages/control-panel/control-panel.routes').then(m => m.routes)
       }

@@ -3,5 +3,6 @@
 public class MembroDetailsViewModel : MembroViewModel
 {
     public string Cpf { get; set; }
-    public IEnumerable<PermissaoViewModel> Permissoes { get; set; }
+    public IEnumerable<string> Permissoes { get; set; }
+    public IEnumerable<EnderecoViewModel> Enderecos { get; set; }
 }

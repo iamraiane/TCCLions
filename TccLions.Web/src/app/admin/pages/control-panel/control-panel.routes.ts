@@ -7,8 +7,8 @@ export const routes: Routes = [
     {
         path: '',
         children: [
-            { path: 'members', component: MembersComponent, data: { permissions: [ApplicationConstants.permissions.admin] } },
-            { path: 'commissions', component: ComissionsComponent, data: { permissions: [ApplicationConstants.permissions.admin] } }
+            { path: 'members', component: MembersComponent, data: { permissions: [ApplicationConstants.permissions.Admin] } },
+            { path: 'commissions', component: ComissionsComponent, data: { permissions: [ApplicationConstants.permissions.Admin] } }
         ]
     }
 ]

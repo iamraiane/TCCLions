@@ -84,6 +84,55 @@ namespace TccLions.Infrastructure.Migrations
                     b.ToTable("Comissoes");
                 });
 
+            modelBuilder.Entity("TCCLions.Domain.Data.Models.Endereco", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Bairro")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("Cep")
+                        .IsRequired()
+                        .HasMaxLength(8)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(8)");
+
+                    b.Property<string>("Cidade")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .HasMaxLength(2)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(2)");
+
+                    b.Property<string>("Logradouro")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<Guid?>("MembroId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Numero")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MembroId");
+
+                    b.ToTable("Enderecos");
+                });
+
             modelBuilder.Entity("TCCLions.Domain.Data.Models.EstadoCivil", b =>
                 {
                     b.Property<int>("Id")
@@ -133,24 +182,6 @@ namespace TccLions.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Bairro")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("Cep")
-                        .IsRequired()
-                        .HasMaxLength(8)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(8)");
-
-                    b.Property<string>("Cidade")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(255)");
-
                     b.Property<string>("Cpf")
                         .IsRequired()
                         .HasMaxLength(11)
@@ -158,12 +189,6 @@ namespace TccLions.Infrastructure.Migrations
                         .HasColumnType("varchar(11)");
 
                     b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("Endereco")
                         .IsRequired()
                         .HasMaxLength(255)
                         .IsUnicode(false)
@@ -213,7 +238,7 @@ namespace TccLions.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b28ee481-3a86-4840-8482-29965a1803d2"),
+                            Id = new Guid("7a466da1-2585-4933-9082-ed7c72dc3613"),
                             Nome = "Admin"
                         });
                 });
@@ -286,6 +311,13 @@ namespace TccLions.Infrastructure.Migrations
                     b.Navigation("TipoComissao");
                 });
 
+            modelBuilder.Entity("TCCLions.Domain.Data.Models.Endereco", b =>
+                {
+                    b.HasOne("TCCLions.Domain.Data.Models.Membro", null)
+                        .WithMany("Enderecos")
+                        .HasForeignKey("MembroId");
+                });
+
             modelBuilder.Entity("TCCLions.Domain.Data.Models.Membro", b =>
                 {
                     b.HasOne("TCCLions.Domain.Data.Models.EstadoCivil", null)
@@ -293,6 +325,11 @@ namespace TccLions.Infrastructure.Migrations
                         .HasForeignKey("EstadoCivil")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("TCCLions.Domain.Data.Models.Membro", b =>
+                {
+                    b.Navigation("Enderecos");
                 });
 #pragma warning restore 612, 618
         }

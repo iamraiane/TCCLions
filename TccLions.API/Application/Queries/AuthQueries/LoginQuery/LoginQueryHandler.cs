@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using TCCLions.API.Application.Models.DTOs;
 using TCCLions.API.Application.Services;
 using TCCLions.Domain.Data.Exceptions;
 using TCCLions.Domain.Data.Repositories;
@@ -30,21 +29,7 @@ public class LoginQueryHandler(IMembroRepository repository, IPasswordHasher pas
 
         return Task.FromResult(new LoginResponse
         { 
-            Token = _jwtTokenGenerator.GenerateToken(membro),
-            Membro = new MembroDTO 
-            {
-                Bairro = membro.Bairro,
-                Cep = membro.Cep,
-                Cidade = membro.Cidade,
-                Cpf = membro.Cpf,
-                Email = membro.Email,
-                Endereco = membro.Endereco,
-                EstadoCivil = membro.EstadoCivil.ToString(),
-                Id = membro.Id,
-                IsActive = membro.IsActive,
-                Nome = membro.Nome,
-                Permissoes = membro.Permissoes.Select(_ => new PermissaoDTO { Id = _.Id, Nome = _.Nome })
-            }
+            Token = _jwtTokenGenerator.GenerateToken(membro)
         });
     }
 }

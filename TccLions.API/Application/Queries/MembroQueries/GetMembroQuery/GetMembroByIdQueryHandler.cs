@@ -18,15 +18,25 @@ public class GetMembroByIdQueryHandler(IMembroRepository repository) : IRequestH
 
         return Task.FromResult(new MembroDTO {
             Id = membro.Id,
-            Bairro = membro.Bairro,
-            Cep = membro.Cep,
-            Cidade = membro.Cidade,
             Cpf = membro.Cpf,
             Email = membro.Email,
-            Endereco = membro.Endereco,
             EstadoCivil = membro.EstadoCivil.ToString(),
             Nome = membro.Nome,
-            IsActive = membro.IsActive
+            IsActive = membro.IsActive,
+            Permissoes = membro.Permissoes.Select(_ => new PermissaoDTO
+            {
+                Id = _.Id,
+                Nome = _.Nome,
+            }),
+            Enderecos = membro.Enderecos.Select(_ => new EnderecoDTO
+            {
+                Bairro = _.Bairro,
+                Cep = _.Cep,
+                Cidade = _.Cidade,
+                Estado = _.Estado,
+                Logradouro = _.Logradouro,
+                Numero = _.Numero
+            })
         });
     }
 }

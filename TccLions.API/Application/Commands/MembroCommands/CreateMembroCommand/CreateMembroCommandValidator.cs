@@ -17,19 +17,6 @@ public class CreateMembroCommandValidator : AbstractValidator<CreateMembroComman
             .MaximumLength(255)
             .WithMessage("O nome informado é muito longo.");
 
-        RuleFor(x => x.Endereco).MaximumLength(255)
-            .WithMessage("O endereço informado é muito longo.");
-
-        RuleFor(x => x.Bairro).MaximumLength(255)
-            .WithMessage("O bairro informado é muito longo.");
-
-        RuleFor(x => x.Cidade).MaximumLength(255)
-            .WithMessage("A cidade informada é muito longa.");
-
-        RuleFor(x => x.Cep).MinimumLength(8)
-            .MaximumLength(8)
-            .WithMessage("O CEP deve ter exatamente 8 caractéres.");
-
         RuleFor(x => x.Cpf)
           .NotEmpty()
           .WithMessage("O atributo Cpf não pode ser vazio")

@@ -6,13 +6,12 @@ using TCCLions.API.Application.Commands.AuthCommands.AddRoleCommand;
 using TCCLions.API.Application.Commands.MembroCommands.CreateMembroCommand;
 using TCCLions.API.Application.Models.Requests.Auth;
 using TCCLions.API.Application.Models.ViewModels;
-using TCCLions.API.Application.Models.ViewModels.Extensions;
 using TCCLions.API.Application.Queries.AuthQueries.LoginQuery;
 using TCCLions.API.Application.Security;
 
 namespace TCCLions.API.Controllers;
 
-[Route("api/auth")]
+[Route("api/v1/auth")]
 [ApiController]
 public class AuthController(IMediator mediator) : ControllerBase
 {
@@ -26,12 +25,8 @@ public class AuthController(IMediator mediator) : ControllerBase
     {
         var operationResult = await _mediator.Send(new CreateMembroCommand
         { 
-            Bairro = request.Bairro,
-            Cep = request.Cep,
-            Cidade = request.Cidade,
             Cpf = request.Cpf,
             Email = request.Email,
-            Endereco = request.Endereco,
             EstadoCivilId = request.EstadoCivilId,
             Nome = request.Nome,
             Senha = request.Senha
@@ -57,7 +52,6 @@ public class AuthController(IMediator mediator) : ControllerBase
 
         var result = new LoginResponseViewModel
         {
-            Membro = response.Membro.ToViewModel(),
             Token = response.Token
         };
 

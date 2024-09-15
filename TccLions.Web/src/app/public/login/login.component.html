@@ -1,4 +1,7 @@
-<div class="login h-[88vh] relative flex items-center justify-center">
+<div
+  *transloco="let t; read: 'login'"
+  class="login h-[88vh] relative flex items-center justify-center"
+>
   <div
     class="background absolute w-[45vw] left-[50%] transform -translate-x-1/2 grayscale select-none"
   >
@@ -12,20 +15,20 @@
         </div>
       </div>
       <div class="inputs">
-        <p class="text-lg relative top-2">Nome / Email</p>
+        <p class="text-lg relative top-2">{{ t("nameOrEmail") }}</p>
         <mat-form-field appearance="outline" class="w-full">
           <input
             matInput
-            placeholder="Insira seu nome ou email"
+            [placeholder]="t('enterYourNameOrEmail')"
             formControlName="userOrEmail"
             maxlength="255"
           />
         </mat-form-field>
-        <p class="text-lg relative top-2">Senha</p>
+        <p class="text-lg relative top-2">{{ t("password") }}</p>
         <mat-form-field appearance="outline" class="w-full">
           <input
             matInput
-            placeholder="Insira sua senha"
+            [placeholder]="t('enterYourPassword')"
             formControlName="password"
             maxlength="255"
           />
@@ -38,7 +41,7 @@
           class="w-full mt-8"
           (click)="login()"
         >
-          Entrar
+          {{ t("login") }}
         </button>
       </div>
     </form>

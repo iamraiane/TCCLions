@@ -8,7 +8,7 @@ public class MembroRepository(ApplicationDataContext context) : RepositoryBase<M
 {
     public override Membro Get(Guid id)
     {
-        return _entity.Include(x => x.Permissoes).FirstOrDefault(x => x.Id == id);
+        return _entity.Include(x => x.Permissoes).Include(x => x.Enderecos).FirstOrDefault(x => x.Id == id);
     }
 
     public Membro GetByNameOrEmail(string nameOrEmail)

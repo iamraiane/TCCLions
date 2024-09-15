@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,6 +15,7 @@ import { BehaviorSubject, combineLatest } from 'rxjs';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { CommonModule } from '@angular/common';
 import { EditMemberComponent } from './modals/edit-member/edit-member.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-members',
@@ -26,6 +27,8 @@ import { EditMemberComponent } from './modals/edit-member/edit-member.component'
   ]
 })
 export class MembersComponent implements OnInit {
+  private _snackBar: MatSnackBar = inject(MatSnackBar);
+
   members: Member[] = []
   pagination: { count: number, pageIndex: number, pageSize: number } = { count: 0, pageIndex: 0, pageSize: 0 }
   displayedColumns: string[] = ['name', 'email', 'actions'];
@@ -69,7 +72,7 @@ export class MembersComponent implements OnInit {
     let dialog = this._dialog.open(CreateMemberComponent)
 
     dialog.afterClosed().subscribe((member) => {
-      this._service.create(member).subscribe({
+      this._service.register(member).subscribe({
         next: () => {
           this._service.get(this.filters.search.value, this.filters.showDisabled.value, this.filters.pageSize.value, this.filters.pageIndex.value).subscribe();
         }
@@ -105,6 +108,17 @@ export class MembersComponent implements OnInit {
     this._service.disable(id).subscribe({
       next: () => {
         this._service.get(this.filters.search.value, this.filters.showDisabled.value, this.filters.pageSize.value, this.filters.pageIndex.value).subscribe();
+        this._snackBar.open("Desabilitado com sucesso", undefined, {
+          duration: 2000
+        });
+
+      }, error: (err) => {
+        if (err?.error?.errors?.DomainValidations)
+          this._snackBar.open(err.error.errors.DomainValidations[0], undefined, {
+            duration: 2000
+          });
+
+        console.error(err);
       }
     });
   }
@@ -113,6 +127,9 @@ export class MembersComponent implements OnInit {
     this._service.enable(id).subscribe({
       next: () => {
         this._service.get(this.filters.search.value, this.filters.showDisabled.value, this.filters.pageSize.value, this.filters.pageIndex.value).subscribe();
+        this._snackBar.open("Habilitado com sucesso", undefined, {
+          duration: 2000
+        });
       }
     });
   }

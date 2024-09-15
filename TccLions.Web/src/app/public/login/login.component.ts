@@ -5,12 +5,16 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { provideTranslocoScope, TranslocoModule } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [MatInputModule, FormsModule, ReactiveFormsModule, MatButtonModule, CommonModule],
+  imports: [MatInputModule, FormsModule, ReactiveFormsModule, MatButtonModule, CommonModule, TranslocoModule],
+  providers: [
+    provideTranslocoScope({ scope: 'login', alias: 'login' })
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -23,8 +27,6 @@ export class LoginComponent implements OnInit {
     userOrEmail: new FormControl<string>('', [Validators.required]),
     password: new FormControl<string>('', [Validators.required])
   });
-
-
 
   ngOnInit(): void {
   }
@@ -48,9 +50,5 @@ export class LoginComponent implements OnInit {
         console.error(err);
       }
     });
-  }
-
-  logout() {
-    this._authService.logout();
   }
 }

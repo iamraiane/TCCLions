@@ -6,19 +6,18 @@ namespace TCCLions.Domain.Data.Models;
 public class Membro : Entity<Guid>
 {
     private readonly List<Permissao> _permissoes;
+    private readonly List<Endereco> _enderecos;
+
     private Membro()
     {
         _permissoes = [];
+        _enderecos = [];
     }
 
-    public Membro(string nome, string endereco, string bairro, string cidade, string cep, string email, EstadoCivilEnum estadoCivil, string cpf, string senha) : this()
+    public Membro(string nome, string email, EstadoCivilEnum estadoCivil, string cpf, string senha) : this()
     {
         Id = Guid.NewGuid();
         Nome = nome;
-        Endereco = endereco;
-        Bairro = bairro;
-        Cidade = cidade;
-        Cep = cep;
         Email = email;
         EstadoCivil = estadoCivil;
         Cpf = cpf;
@@ -27,25 +26,17 @@ public class Membro : Entity<Guid>
     }
 
     public string Nome { get; private set; }
-    public string Endereco { get; private set; }
-    public string Bairro { get; private set; }
-    public string Cidade { get; private set; }
-    public string Cep { get; private set; }
     public string Email { get; private set; }
     public EstadoCivilEnum EstadoCivil { get; private set; }
     public string Cpf { get; private set; }
     public string Senha { get; private set; }
     public IReadOnlyCollection<Permissao> Permissoes => _permissoes;
+    public IReadOnlyCollection<Endereco> Enderecos => _enderecos;
     public bool IsActive { get; private set; }
 
-    public void Update(string nome, string endereco, string bairro, string cidade,
-    string cep, string email, EstadoCivilEnum estadocivil, string cpf)
+    public void Update(string nome, string email, EstadoCivilEnum estadocivil, string cpf)
     {
         Nome = nome;
-        Endereco = endereco;
-        Bairro = bairro;
-        Cidade = cidade;
-        Cep = cep;
         Email = email;
         EstadoCivil = estadocivil;
         Cpf = cpf;
@@ -53,7 +44,9 @@ public class Membro : Entity<Guid>
 
     public void Disable()
     {
-        if (_permissoes.Any(p => p.Nome == "Admin")) throw new MembroDomainException("Não pode desabilitar um Admin");
+        const string AdminRole = "Admin";
+
+        if (_permissoes.Any(p => p.Nome == AdminRole)) throw new MembroDomainException("Não pode desabilitar um Admin");
         if (!IsActive) throw new MembroDomainException("Esse membro já está desabilitado.");
 
         IsActive = false;

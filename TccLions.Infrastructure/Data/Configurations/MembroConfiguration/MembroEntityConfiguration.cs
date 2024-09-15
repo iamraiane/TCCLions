@@ -13,16 +13,6 @@ public class MembroEntityConfiguration : IEntityTypeConfiguration<Membro>
             .HasMaxLength(255)
             .IsUnicode(false);
 
-        builder.Property(x => x.Endereco)
-            .IsRequired()
-            .HasMaxLength(255)
-            .IsUnicode(false);
-
-        builder.Property(x => x.Bairro)
-            .IsRequired()
-            .HasMaxLength(255)
-            .IsUnicode(false);
-
         builder.HasOne<EstadoCivil>()
             .WithMany()
             .HasForeignKey(_ => _.EstadoCivil);
@@ -32,19 +22,9 @@ public class MembroEntityConfiguration : IEntityTypeConfiguration<Membro>
             .HasMaxLength(11)
             .IsUnicode(false);
 
-        builder.Property(x => x.Cidade)
-            .IsRequired()
-            .HasMaxLength(255)
-            .IsUnicode(false);
-
         builder.Property(x => x.Email)
             .IsRequired()
             .HasMaxLength(255)
-            .IsUnicode(false);
-
-        builder.Property(x => x.Cep)
-            .IsRequired()
-            .HasMaxLength(8)
             .IsUnicode(false);
 
         builder.Property(x => x.IsActive)
@@ -54,6 +34,10 @@ public class MembroEntityConfiguration : IEntityTypeConfiguration<Membro>
             .HasMaxLength(255)
             .IsUnicode(false)
             .IsRequired();
+
+        builder.HasMany(m => m.Enderecos)
+            .WithOne()
+            .HasForeignKey("MembroId");
 
         builder.HasMany(m => m.Permissoes)
             .WithMany()

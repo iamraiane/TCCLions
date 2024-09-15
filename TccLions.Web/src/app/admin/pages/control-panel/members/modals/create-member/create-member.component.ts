@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { provideTranslocoScope, TranslocoModule } from '@jsverse/transloco';
 import { CreateMember } from '../../members.models';
+import { ApplicationConstants } from '../../../../../../core/settings/application-constants';
 
 @Component({
   selector: 'app-create-member',
@@ -20,16 +21,14 @@ import { CreateMember } from '../../members.models';
   templateUrl: './create-member.component.html'
 })
 export class CreateMemberComponent {
+  readonly maritalStatuses = ApplicationConstants.maritalStatuses;
+
   readonly memberInfo: FormGroup = new FormGroup({
     name: new FormControl<string>('', [Validators.required, Validators.maxLength(255)]),
     cpf: new FormControl<string>('', [Validators.required, Validators.maxLength(11), Validators.minLength(11)]),
     maritalStatus: new FormControl<string>('', [Validators.required]),
     email: new FormControl<string>('', [Validators.required, Validators.email, Validators.maxLength(255)]),
-    cep: new FormControl<string>('', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]),
-    city: new FormControl<string>('', [Validators.required, Validators.maxLength(255)]),
-    neighborhood: new FormControl<string>('', [Validators.required, Validators.maxLength(255)]),
-    logradouro: new FormControl<string>('', [Validators.required, Validators.maxLength(255)]),
-    numero: new FormControl<string>('', [Validators.required, Validators.maxLength(8)])
+    password: new FormControl<string>('', [Validators.required, Validators.maxLength(255)]),
   })
 
   constructor(private dialogRef: MatDialogRef<CreateMemberComponent>) { }
@@ -40,12 +39,9 @@ export class CreateMemberComponent {
     const membro: CreateMember = {
       nome: this.memberInfo.get('name')?.value,
       cpf: this.memberInfo.get('cpf')?.value,
-      estadoCivil: this.memberInfo.get('maritalStatus')?.value,
+      estadoCivilId: this.memberInfo.get('maritalStatus')?.value,
       email: this.memberInfo.get('email')?.value,
-      cep: this.memberInfo.get('cep')?.value,
-      cidade: this.memberInfo.get('city')?.value,
-      bairro: this.memberInfo.get('neighborhood')?.value,
-      endereco: `${this.memberInfo.get('logradouro')?.value}, ${this.memberInfo.get('numero')?.value}`
+      senha: this.memberInfo.get('password')?.value
     }
 
     this.dialogRef.close(membro)

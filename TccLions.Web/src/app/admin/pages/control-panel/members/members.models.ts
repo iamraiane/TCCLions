@@ -19,10 +19,7 @@ export interface MemberDetails {
 export type CreateMember = {
     nome: string;
     cpf: string;
-    estadoCivil: number;
+    estadoCivilId: number;
     email: string;
-    cep: string;
-    cidade: string;
-    bairro: string;
-    endereco: string;
+    senha: string;
 }

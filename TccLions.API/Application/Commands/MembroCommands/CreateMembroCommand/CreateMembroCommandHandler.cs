@@ -18,10 +18,6 @@ public class CreateMembroCommandHandler(IMembroRepository repository, IPasswordH
         var membro = new Membro
             (
                 request.Nome,
-                request.Endereco,
-                request.Bairro,
-                request.Cidade,
-                request.Cep,
                 request.Email,
                 (EstadoCivilEnum)Enum.ToObject(typeof(EstadoCivilEnum), request.EstadoCivilId),
                 request.Cpf,
