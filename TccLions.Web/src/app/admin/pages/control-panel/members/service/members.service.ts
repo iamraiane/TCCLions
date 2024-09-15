@@ -1,9 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MembersEndpoints } from '../members.endpoints';
-import { ApplicationSettingsService } from '../../../../core/settings/application-settings.service';
 import { BehaviorSubject, tap } from 'rxjs';
 import { CreateMember, Member, MemberDetails } from '../members.models';
+import { ApplicationSettingsService } from '../../../../../core/settings/application-settings.service';
 
 @Injectable({
   providedIn: 'root'

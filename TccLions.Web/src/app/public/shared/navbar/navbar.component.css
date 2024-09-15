@@ -11,6 +11,7 @@ nav {
 }
 
 .navbarText,
-.iconArrowDown {
+.iconArrowDown,
+.helloMessage {
   color: #b28504;
 }

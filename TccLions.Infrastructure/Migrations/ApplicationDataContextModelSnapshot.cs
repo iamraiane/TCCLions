@@ -141,9 +141,9 @@ namespace TccLions.Infrastructure.Migrations
 
                     b.Property<string>("Cep")
                         .IsRequired()
-                        .HasMaxLength(9)
+                        .HasMaxLength(8)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(9)");
+                        .HasColumnType("varchar(8)");
 
                     b.Property<string>("Cidade")
                         .IsRequired()
@@ -213,7 +213,7 @@ namespace TccLions.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("1a036859-b82b-4e41-b228-046df5451411"),
+                            Id = new Guid("b28ee481-3a86-4840-8482-29965a1803d2"),
                             Nome = "Admin"
                         });
                 });

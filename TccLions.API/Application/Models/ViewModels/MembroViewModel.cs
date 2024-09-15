@@ -11,4 +11,5 @@ public class MembroViewModel
     public string Email { get; set; }
     public string EstadoCivil { get; set; }
     public bool IsActive { get; set; }
+    public IEnumerable<string> Permissoes { get; set; }
 }

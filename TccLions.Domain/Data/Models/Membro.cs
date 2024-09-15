@@ -53,6 +53,7 @@ public class Membro : Entity<Guid>
 
     public void Disable()
     {
+        if (_permissoes.Any(p => p.Nome == "Admin")) throw new MembroDomainException("Não pode desabilitar um Admin");
         if (!IsActive) throw new MembroDomainException("Esse membro já está desabilitado.");
 
         IsActive = false;

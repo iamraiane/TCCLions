@@ -2,5 +2,7 @@
   "controlPanel": "Control Panel",
   "checkMonthlyFees": "Check Monthly Fees",
   "comissions": "Commissions",
-  "members": "Members"
+  "members": "Members",
+  "home": "Home",
+  "helloMessage": "Hello, {{memberName}}"
 }

@@ -6,12 +6,12 @@
   <mat-icon class="userIcon" [inline]="true">account_circle</mat-icon>
 </button>
 <mat-menu #menu>
-  <button mat-menu-item (click)="redirectToLogin()">
+  <button mat-menu-item (click)="redirectToLogin()" *ngIf="!this.isLogged">
     <mat-icon>login</mat-icon>
     <span>Login</span>
   </button>
-  <button mat-menu-item *ngIf="isAdmin" (click)="redirectToAdminPage()">
-    <mat-icon>admin_panel_settings</mat-icon>
-    <span>Admin</span>
+  <button mat-menu-item (click)="logout()" *ngIf="this.isLogged">
+    <mat-icon>power_settings_new</mat-icon>
+    <span>Logout</span>
   </button>
 </mat-menu>

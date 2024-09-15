@@ -1,28 +1,46 @@
 import { Routes } from '@angular/router';
-import { ComissionsComponent } from './admin/pages/comissions/comissions.component';
-import { ComissionsService } from './admin/pages/comissions/service/comissions.service';
-import { inject } from '@angular/core';
-import { MembersComponent } from './admin/pages/members/members.component';
-import { MembersService } from './admin/pages/members/service/members.service';
 import { LoginComponent } from './public/login/login.component';
+import { AuthGuard } from './core/auth/auth.guard';
+import { throwError } from 'rxjs';
+import { ApplicationConstants } from './core/settings/application-constants';
+import { PermissionDeniedComponent } from './public/permission-denied/permission-denied.component';
 
 export const routes: Routes = [
   {
-    path: 'control-panel/members',
-    component: MembersComponent,
-    resolve: {
-      members: () => inject(MembersService).get('', false, 50, 0)
-    }
+    path: '',
+    children: [
+      {
+        path: 'login',
+        resolve: {
+          isLogged: () => {
+            if (localStorage.getItem('token')) {
+              return throwError(() => new Error('Usuário já logado'));
+            }
+
+            return true;
+          }
+        },
+        component: LoginComponent
+      },
+      {
+        path: 'permission-denied',
+        component: PermissionDeniedComponent
+      }
+    ]
   },
+
   {
-    path: 'control-panel/comissions',
-    component: ComissionsComponent,
-    resolve: {
-      comissions: () => inject(ComissionsService).get('')
-    }
-  },
-  {
-    path: 'login',
-    component: LoginComponent
+    path: '',
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
+    children: [
+      {
+        path: 'control-panel',
+        data: {
+          permissions: [ApplicationConstants.permissions.admin]
+        },
+        loadChildren: () => import('./admin/pages/control-panel/control-panel.routes').then(m => m.routes)
+      }
+    ]
   }
 ];

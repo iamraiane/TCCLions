@@ -1,9 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ComissionsEndpoints } from '../comissions.endpoints';
-import { ApplicationSettingsService } from '../../../../core/settings/application-settings.service';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Comission } from '../comissions.models';
+import { ApplicationSettingsService } from '../../../../../core/settings/application-settings.service';
 
 @Injectable({
   providedIn: 'root'

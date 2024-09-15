@@ -4,8 +4,7 @@ export type AuthResponse = {
 };
 
 export type MembroAuthResponse = {
-    name: string;
+    nome: string;
     email: string;
-    permissoes: [{ nome: string }];
+    permissoes: string[];
 };
-

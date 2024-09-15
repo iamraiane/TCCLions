@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../../../core/auth/auth.service';
 
 @Component({
   selector: 'app-user-menu',
@@ -12,8 +13,8 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './user-menu.component.css'
 })
 export class UserMenuComponent {
-  isLogged: boolean = false;
-  isAdmin: boolean = true;
+  private _authService = inject(AuthService);
+  @Input() isLogged: boolean = false;
 
   constructor(private router: Router) {
 
@@ -23,7 +24,7 @@ export class UserMenuComponent {
     this.router.navigate(['/login'])
   }
 
-  redirectToAdminPage() {
-    this.router.navigate(['/admin'])
+  logout() {
+    this._authService.logout();
   }
 }

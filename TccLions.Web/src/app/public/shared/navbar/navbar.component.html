@@ -27,7 +27,7 @@
         <a routerLink="control-panel/members" mat-menu-item>
           {{ t("members") }}
         </a>
-        <a routerLink="control-panel/comissions" mat-menu-item>
+        <a routerLink="control-panel/commissions" mat-menu-item>
           {{ t("comissions") }}
         </a>
       </mat-menu>
@@ -44,11 +44,24 @@
         mat-icon-button
         class="rounded-full h-9 text-4xl mx-12 relative top-[-6px]"
       >
-        <span class="navbarText font-bold text-2xl tracking-wider">Home </span>
+        <a routerLink="/" class="navbarText font-bold text-2xl tracking-wider"
+          >{{ t("home") }}
+        </a>
       </button>
     </div>
     }
-    <app-user-menu></app-user-menu>
+    <div class="user flex">
+      @if (nomeDoMembro) {
+      <div
+        class="helloMessage relative top-1 h-auto text-2xl tracking-wider whitespace-nowrap"
+      >
+        <p class="font-bold">
+          {{ t("helloMessage", { memberName: nomeDoMembro }) }}
+        </p>
+      </div>
+      }
+      <app-user-menu [isLogged]="isLogged"></app-user-menu>
+    </div>
     <app-transloco-button></app-transloco-button>
   </nav>
 </div>

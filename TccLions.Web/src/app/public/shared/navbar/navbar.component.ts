@@ -7,6 +7,7 @@ import { TranslocoButtonComponent } from "./transloco-button/transloco-button.co
 import { UserMenuComponent } from './user-menu/user-menu.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { AuthService } from '../../../core/auth/auth.service';
+import { ApplicationConstants } from '../../../core/settings/application-constants';
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -20,11 +21,15 @@ import { AuthService } from '../../../core/auth/auth.service';
 })
 export class NavbarComponent implements OnInit {
   authService = inject(AuthService);
-  isAdmin: boolean = true;
+  isAdmin: boolean = false;
+  isLogged: boolean = false;
+  nomeDoMembro: string = '';
 
   ngOnInit(): void {
     this.authService.membro$.subscribe(membro => {
+      this.isLogged = Boolean(membro);
+      this.isAdmin = membro?.permissoes?.some(p => p == ApplicationConstants.permissions.admin) ?? false;
+      this.nomeDoMembro = membro?.nome || '';
     })
-
   }
 }

@@ -84,7 +84,7 @@ namespace TccLions.Infrastructure.Migrations
                     Endereco = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: false),
                     Bairro = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: false),
                     Cidade = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: false),
-                    Cep = table.Column<string>(type: "varchar(9)", unicode: false, maxLength: 9, nullable: false),
+                    Cep = table.Column<string>(type: "varchar(8)", unicode: false, maxLength: 8, nullable: false),
                     Email = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: false),
                     EstadoCivil = table.Column<int>(type: "int", nullable: false),
                     Cpf = table.Column<string>(type: "varchar(11)", unicode: false, maxLength: 11, nullable: false),
@@ -166,7 +166,7 @@ namespace TccLions.Infrastructure.Migrations
             migrationBuilder.InsertData(
                 table: "Permissoes",
                 columns: new[] { "Id", "Nome" },
-                values: new object[] { new Guid("1a036859-b82b-4e41-b228-046df5451411"), "Admin" });
+                values: new object[] { new Guid("b28ee481-3a86-4840-8482-29965a1803d2"), "Admin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comissoes_MembroId",

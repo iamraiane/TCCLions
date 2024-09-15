@@ -16,7 +16,8 @@ public static class MembroViewModelExtension
             Email = dto.Email,
             Endereco = dto.Endereco,
             EstadoCivil = dto.EstadoCivil,
-            IsActive = dto.IsActive
+            IsActive = dto.IsActive,
+            Permissoes = dto.Permissoes?.Select(_ => _.Nome)
         };
     }
 }

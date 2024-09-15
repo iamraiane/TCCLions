@@ -44,7 +44,7 @@ public class MembroEntityConfiguration : IEntityTypeConfiguration<Membro>
 
         builder.Property(x => x.Cep)
             .IsRequired()
-            .HasMaxLength(9)
+            .HasMaxLength(8)
             .IsUnicode(false);
 
         builder.Property(x => x.IsActive)

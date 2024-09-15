@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { ApplicationSettingsService } from '../settings/application-settings.service';
 import { AuthResponse, MembroAuthResponse } from './auth.models';
 
@@ -27,22 +27,23 @@ export class AuthService {
                 senha: password
             }).pipe(
                 tap(response => {
-                    if (response.token)
+                    if (response) {
+                        console.log(response)
                         localStorage.setItem('token', response.token);
-
-                    this._membroSubject.next(response.membro);
+                        this._membroSubject.next(response.membro);
+                    }
                 })
             );
     }
 
     getToken(): string | null {
-        console.log(localStorage.getItem('token'))
         return localStorage.getItem('token');
     }
 
     logout() {
         localStorage.removeItem('token');
-        this.router.navigate(['/login']);
+        this._membroSubject.next(null);
+        this.router.navigate(['/']);
     }
 
     isAuthenticated(): boolean {
