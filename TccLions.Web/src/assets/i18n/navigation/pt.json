@@ -4,5 +4,8 @@
   "comissions": "Comissões",
   "members": "Membros",
   "home": "Início",
-  "helloMessage": "Olá, {{memberName}}"
+  "helloMessage": "Olá, {{memberName}}",
+  "expenses": "Despesas",
+  "expensesType": "Tipos de Despesa",
+  "commissionTypes": "Tipos de Comissão"
 }
