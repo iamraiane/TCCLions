@@ -1,0 +1,7 @@
+{
+  "editCommissionType": "Edit Commission Type",
+  "description": "Description",
+  "cancel": "Cancel",
+  "edit": "Edit",
+  "descriptionEmptyErrorMessage": "Description is required."
+}

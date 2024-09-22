@@ -1,0 +1,7 @@
+{
+  "editCommissionType": "Editar tipo de comissão",
+  "description": "Descrição",
+  "cancel": "Cancelar",
+  "edit": "Editar",
+  "descriptionEmptyErrorMessage": "A descrição é obrigatória."
+}

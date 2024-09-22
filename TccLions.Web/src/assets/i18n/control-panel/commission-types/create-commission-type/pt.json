@@ -1,0 +1,7 @@
+{
+  "createCommissionType": "Criar tipo de comissão",
+  "description": "Descrição",
+  "cancel": "Cancelar",
+  "create": "Criar",
+  "descriptionEmptyErrorMessage": "A descrição é obrigatória."
+}

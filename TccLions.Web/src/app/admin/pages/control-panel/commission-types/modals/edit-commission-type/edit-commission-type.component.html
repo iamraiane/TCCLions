@@ -1,0 +1,42 @@
+<div
+  *transloco="let t; read: 'editCommissionType'"
+  class="px-6 overflow-y-hidden"
+>
+  <h1 mat-dialog-title>{{ t("editCommissionType") }}</h1>
+
+  <form [formGroup]="commissionTypeForm">
+    <div class="flex">
+      <div class="nomeInputField" class="w-full">
+        <p class="text-lg relative top-2">{{ t("description") }} *</p>
+        <mat-form-field appearance="outline" class="w-full">
+          <input
+            matInput
+            [placeholder]="t('description')"
+            formControlName="description"
+            #inputNome
+            maxlength="255"
+          />
+          <mat-error
+            *ngIf="commissionTypeForm.get('description')?.hasError('required')"
+          >
+            {{ t("descriptionEmptyErrorMessage") }}
+          </mat-error>
+          <mat-hint
+            align="end"
+            class="font-medium"
+            [ngClass]="{ 'text-red-600': inputNome.value.length == 255 }"
+            >{{ inputNome.value.length }} / 255</mat-hint
+          >
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="buttons w-full flex justify-end gap-2 py-4">
+      <button mat-raised-button mat-dialog-close="canceled" color="warn">
+        {{ t("cancel") }}
+      </button>
+      <button mat-raised-button color="primary" (click)="edit()">
+        {{ t("edit") }}
+      </button>
+    </div>
+  </form>
+</div>
