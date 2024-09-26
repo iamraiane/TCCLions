@@ -10,7 +10,7 @@ namespace TCCLions.API;
 
 public static class ProgramExtensions
 {
-    public static void InjectDependencies(this IServiceCollection service)
+    public static IServiceCollection InjectDependencies(this IServiceCollection service)
     {
         service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
         service.AddScoped(typeof(IRepositoryBase<,>), typeof(RepositoryBase<,>));
@@ -19,9 +19,11 @@ public static class ProgramExtensions
         service.AddScoped<IMembroRepository, MembroRepository>();
         service.AddScoped<IPasswordHasher, PasswordHasher>();
         service.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+
+        return service;
     }
 
-    public static void ConfigureSwagger(this IServiceCollection service)
+    public static IServiceCollection ConfigureSwagger(this IServiceCollection service)
     {
         service.AddSwaggerGen(c =>
         {
@@ -56,9 +58,11 @@ public static class ProgramExtensions
                 }
             });
         });
+
+        return service;
     }
 
-    public static void ConfigureCors(this IServiceCollection service)
+    public static IServiceCollection ConfigureCors(this IServiceCollection service)
     {
         service.AddCors(options =>
         {
@@ -69,9 +73,11 @@ public static class ProgramExtensions
                        .AllowAnyHeader();
             });
         });
+
+        return service;
     }
 
-    public static void AddAuth(this IServiceCollection service, IConfiguration configuration) {
+    public static IServiceCollection AddAuth(this IServiceCollection service, IConfiguration configuration) {
 
         service.AddAuthentication(cfg =>
         {
@@ -90,6 +96,8 @@ public static class ProgramExtensions
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:SecretKey"]))
             };
         });
+
+        return service;
     }
 
 }

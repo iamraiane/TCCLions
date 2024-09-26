@@ -6,6 +6,7 @@ export namespace ComissionsEndpoints {
 
     export const endpoints: Endpoints = {
         get: (apiUrl: string) => `${apiUrl}${base}/comissao`,
-        delete: (apiUrl: string, id: string) => `${apiUrl}${base}/comissao/${id}`
+        delete: (apiUrl: string, id: string) => `${apiUrl}${base}/comissao/${id}`,
+        create: (apiUrl: string) => `${apiUrl}${base}/comissao`,
     };
 }

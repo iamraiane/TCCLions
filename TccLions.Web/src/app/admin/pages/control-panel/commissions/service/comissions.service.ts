@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ComissionsEndpoints } from '../comissions.endpoints';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { Comission } from '../comissions.models';
+import { Comission, CreateCommission } from '../comissions.models';
 import { ApplicationSettingsService } from '../../../../../core/settings/application-settings.service';
 
 @Injectable({
@@ -35,6 +35,14 @@ export class ComissionsService {
         comissions = comissions.filter(comission => comission.id !== id);
         this._comissions.next(comissions);
       })
+    );
+  }
+
+  create(request: CreateCommission): Observable<string> {
+    return this._httpClient.post<string>(ComissionsEndpoints.endpoints["create"](this.apiUrl), request).pipe(
+      tap(
+        () => this.get('').subscribe(),
+      )
     );
   }
 }

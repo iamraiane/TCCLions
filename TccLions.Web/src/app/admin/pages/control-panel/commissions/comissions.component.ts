@@ -8,11 +8,13 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { Comission } from './comissions.models';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { DeleteComissaoModalComponent } from './modals/delete-comissao-modal/delete-comissao-modal.component';
+import { MatButtonModule } from '@angular/material/button';
+import { DeleteComissaoModalComponent } from './modals/delete-commission-modal/delete-comissao-modal.component';
+import { CreateCommissionModalComponent } from './modals/create-commission-modal/create-commission-modal.component';
 @Component({
   selector: 'app-comissions',
   standalone: true,
-  imports: [TranslocoModule, MatInputModule, MatTableModule, MatMenuModule, MatIconModule, MatDialogModule],
+  imports: [TranslocoModule, MatInputModule, MatTableModule, MatMenuModule, MatIconModule, MatDialogModule, MatButtonModule],
   providers: [provideTranslocoScope({ scope: 'control-panel/comissions', alias: 'comissions' })],
   templateUrl: './comissions.component.html',
   styleUrl: './comissions.component.css'
@@ -47,6 +49,12 @@ export class ComissionsComponent implements OnInit {
       if (!result) return
 
       this._service.delete(id).subscribe()
+    })
+  }
+
+  openCreateModal() {
+    this._dialog.open(CreateCommissionModalComponent, {
+      width: '400px'
     })
   }
 }

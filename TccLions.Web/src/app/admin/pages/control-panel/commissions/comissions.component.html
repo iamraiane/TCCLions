@@ -1,15 +1,22 @@
 <div *transloco="let t; read: 'comissions'">
-  <div class="p-6 ml-[260px]">
-    <p class="font-bold text-2xl text-gray-500 tracking-wider">
-      {{ t("comissions") }}
-    </p>
-    <input
-      matInput
-      #searchInput
-      (change)="search(searchInput.value)"
-      class="rounded-md text-gray-600 w-1/4 text-md p-3 outline-none border-2 focus:border-yellow-400 border-gray-300 placeholder:text-lg placeholder:relative placeholder:top-[2px]"
-      placeholder="{{ t('searchByMember') }}"
-    />
+  <div class="p-6 mx-[260px] flex justify-between items-center">
+    <div class="w-[30em]">
+      <p class="font-bold text-2xl text-gray-500 tracking-wider">
+        {{ t("comissions") }}
+      </p>
+      <input
+        matInput
+        #searchInput
+        (change)="search(searchInput.value)"
+        class="rounded-md text-gray-600 w-full text-md p-3 outline-none border-2 focus:border-yellow-400 border-gray-300 placeholder:text-lg placeholder:relative placeholder:top-[2px]"
+        placeholder="{{ t('searchByMember') }}"
+      />
+    </div>
+    <div class="w-auto flex items-end self-end">
+      <button mat-fab color="primary" (click)="openCreateModal()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
   </div>
   <div class="w-full flex">
     <div
@@ -63,7 +70,7 @@
               <button
                 mat-icon-button
                 [matMenuTriggerFor]="menu"
-                class="focus:outline-none absolute top-3.5 right-6"
+                class="focus:outline-none"
               >
                 <mat-icon>more_vert</mat-icon>
               </button>

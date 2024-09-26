@@ -1,6 +1,6 @@
 {
-  "nameOrEmail": "Name / Email",
-  "enterYourNameOrEmail": "Enter your name or email",
+  "nameOrEmail": "Email",
+  "enterYourNameOrEmail": "Enter your email",
   "password": "Password",
   "enterYourPassword": "Enter your password",
   "login": "Login"

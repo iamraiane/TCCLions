@@ -3,3 +3,8 @@ export interface Comission {
     tipoComissao: string;
     nomeDoMembro: string;
 }
+
+export interface CreateCommission {
+    tipoComissaoId: string;
+    membroId: string;
+}
