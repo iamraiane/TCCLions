@@ -15,6 +15,7 @@ public static class ProgramExtensions
         service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
         service.AddScoped(typeof(IRepositoryBase<,>), typeof(RepositoryBase<,>));
         service.AddScoped<IComissaoRepository, ComissaoRepository>();
+        service.AddScoped<IAtaRepository, AtaRepository>();
         service.AddScoped<IPermissaoRepository, PermissaoRepository>();
         service.AddScoped<IMembroRepository, MembroRepository>();
         service.AddScoped<IPasswordHasher, PasswordHasher>();

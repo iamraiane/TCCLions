@@ -11,6 +11,9 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { DeleteComissaoModalComponent } from './modals/delete-commission-modal/delete-comissao-modal.component';
 import { CreateCommissionModalComponent } from './modals/create-commission-modal/create-commission-modal.component';
+import { EditCommissionModalComponent } from './modals/edit-commission-modal/edit-commission-modal.component';
+import { CommissionTypesService } from '../commission-types/commission-types.service';
+import { TipoComissao } from '../commission-types/commission-types.models';
 @Component({
   selector: 'app-comissions',
   standalone: true,
@@ -25,11 +28,14 @@ export class ComissionsComponent implements OnInit {
   filters = {
     memberName: new BehaviorSubject<string>('')
   }
+  commissionTypes: TipoComissao[] = [];
 
-  constructor(private _service: ComissionsService, private _dialog: MatDialog) { }
+  constructor(private _service: ComissionsService, private _dialog: MatDialog, public commissionTypeService: CommissionTypesService) { }
 
   ngOnInit(): void {
     this._service.comissions$.subscribe(comissions => this.comissions = comissions);
+    this.commissionTypeService.getAll().subscribe();
+    this.commissionTypeService.commissionTypes$.subscribe(commissionTypes => this.commissionTypes = commissionTypes);
 
     this.filters.memberName.subscribe(memberName => {
       this._service.get(memberName).subscribe();
@@ -55,6 +61,15 @@ export class ComissionsComponent implements OnInit {
   openCreateModal() {
     this._dialog.open(CreateCommissionModalComponent, {
       width: '400px'
+    })
+  }
+
+  openEditModal(commissionTypeDescription: string) {
+    this._dialog.open(EditCommissionModalComponent, {
+      width: '400px',
+      data: {
+        commissionTypeId: this.commissionTypes.find(commissionType => commissionType.descricao === commissionTypeDescription)!.id
+      }
     })
   }
 }

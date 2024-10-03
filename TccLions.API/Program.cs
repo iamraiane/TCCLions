@@ -27,7 +27,11 @@ if (!string.IsNullOrEmpty(appConfigConnectionString))
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add<HttpGlobalExceptionFilter>();
-});
+}).AddNewtonsoftJson(options =>
+    {
+        options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
+        options.SerializerSettings.DateFormatString = "yyyy-MM-dd";
+    }); ;
 
 builder.Services.InjectDependencies();
 

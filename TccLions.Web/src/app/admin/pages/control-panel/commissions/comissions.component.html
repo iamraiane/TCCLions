@@ -75,7 +75,11 @@
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
-                <button mat-menu-item class="focus:outline-none">
+                <button
+                  mat-menu-item
+                  class="focus:outline-none"
+                  (click)="openEditModal(element.tipoComissao)"
+                >
                   <mat-icon>edit</mat-icon>
                   <span>{{ t("edit") }}</span>
                 </button>

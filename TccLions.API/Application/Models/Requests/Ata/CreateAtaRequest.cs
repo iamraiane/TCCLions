@@ -1,8 +1,7 @@
-﻿namespace TCCLions.API.Application.Models.DTOs;
+﻿namespace TCCLions.API.Application.Models.Requests.Ata;
 
-public class AtaDTO
+public class CreateAtaRequest
 {
-    public Guid Id { get; set; }
     public string Titulo { get; set; }
     public string Descricao { get; set; }
     public DateTime DataEscrita { get; set; }
