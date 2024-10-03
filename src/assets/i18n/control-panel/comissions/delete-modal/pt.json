@@ -1,0 +1,6 @@
+{
+  "deleteCommission": "Deletar Comissão",
+  "confirmationMessage": "Você tem certeza que deseja deletar a comissão do(a) {{member}}?",
+  "cancel": "Cancelar",
+  "delete": "Deletar"
+}

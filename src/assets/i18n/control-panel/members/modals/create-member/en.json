@@ -1,0 +1,16 @@
+{
+  "createMember": "Create new member",
+  "name": "Name",
+  "emptyErrorMessage": "{{value}} is required",
+  "nameEmptyErrorMessage": "Name is required",
+  "cpfLengthErrorMessage": "CPF must contain 11 digits",
+  "maritalStatus": "Marital Status",
+  "maritalStatusEmptyErrorMessage": "Marital status is required",
+  "invalidEmailErrorMessage": "Invalid email",
+  "cancel": "Cancel",
+  "submit": "Submit",
+  "editMember": "Edit member",
+  "password": "Password",
+  "passwordEmptyErrorMessage": "Password is required",
+  "passwordLengthErrorMessage": "The password max length is 255"
+}
