@@ -1,9 +1,0 @@
-{
-  "createCommission": "Create commission",
-  "create": "Create",
-  "cancel": "Cancel",
-  "member": "Member",
-  "commissionType": "Commission Type",
-  "memberEmptyErrorMessage": "Member is required",
-  "commissionTypeEmptyErrorMessage": "Commission Type is required"
-}

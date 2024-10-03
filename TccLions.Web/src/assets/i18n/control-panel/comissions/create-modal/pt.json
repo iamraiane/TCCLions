@@ -1,9 +1,0 @@
-{
-  "createCommission": "Criar comissão",
-  "create": "Criar",
-  "cancel": "Cancelar",
-  "member": "Membro",
-  "commissionType": "Tipo de Comissão",
-  "memberEmptyErrorMessage": "O Membro é obrigatório",
-  "commissionTypeEmptyErrorMessage": "O Tipo de Comissão é obrigatório"
-}

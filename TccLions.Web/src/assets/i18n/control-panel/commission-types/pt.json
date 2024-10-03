@@ -1,9 +1,5 @@
 {
   "commissionTypes": "Tipos de Comissão",
   "commissionTypeId": "Id",
-  "commissionTypeDescription": "Descrição",
-  "actions": "Ações",
-  "edit": "Editar",
-  "delete": "Excluir",
-  "searchByDescription": "Procurar por descrição"
+  "commissionTypeDescription": "Descrição"
 }

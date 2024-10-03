@@ -1,9 +1,5 @@
 {
   "commissionTypes": "Commission Types",
   "commissionTypeId": "Id",
-  "commissionTypeDescription": "Description",
-  "actions": "Actions",
-  "edit": "Edit",
-  "delete": "Delete",
-  "searchByDescription": "Search by Description"
+  "commissionTypeDescription": "Description"
 }
