@@ -1,6 +1,8 @@
-﻿namespace TCCLions.Domain.Data.Models;
+﻿using TCCLions.Domain.Data.Core;
 
-public class Endereco
+namespace TCCLions.Domain.Data.Models;
+
+public class Endereco : Entity<Guid>
 {
     public Endereco(string bairro, string logradouro, int numero, string cidade, string estado, string cep)
     {
