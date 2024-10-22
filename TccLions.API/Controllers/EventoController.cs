@@ -7,6 +7,8 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TccLions.API.Application.Commands.EventoCommands.CreateEventoCommand;
+using TccLions.API.Application.Commands.EventoCommands.DeleteEventoCommand;
+using TccLions.API.Application.Commands.EventoCommands.UpdateEventoCommand;
 using TccLions.API.Application.Models.Requests.Evento;
 using TccLions.API.Application.Models.ViewModels;
 using TccLions.API.Application.Models.ViewModels.Extensions;
@@ -65,6 +67,44 @@ namespace TccLions.API.Controllers
                 return BadRequest();
 
             return CreatedAtAction(nameof(Get), new {id = result}, result);
+        }
+
+
+        [HttpDelete("{id}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+        public async Task<IActionResult> Delete(Guid id){
+            
+            var isDeleted = await _mediator.Send(new DeleteEventoCommand { Id = id});
+
+            if(isDeleted == false)
+                return BadRequest();
+
+            return Ok();
+
+        }
+
+        [HttpPut("{id}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+        public async Task<IActionResult> Update(Guid id, [FromBody] UpdateEventoRequest request)
+        {
+            var isUpdated = await _mediator.Send(new UpdateEventoCommand{
+                Id = id,
+                NomeEvento = request.NomeEvento,
+                QuantidadeVenda = request.QuantidadeVenda,
+                DataVenda = request.DataVenda,
+                ValorTotal = request.ValorTotal
+            });
+
+
+            if(isUpdated == false)
+                return BadRequest();
+
+            return Ok();
+
         }
 
     }

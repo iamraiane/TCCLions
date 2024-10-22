@@ -9,4 +9,8 @@ public class AtaRepository : RepositoryBase<Ata, Guid>, IAtaRepository
     {
         
     }
+    public List<Ata> GetAll(){
+        return _entity.ToList();
+    }
+
 }

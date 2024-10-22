@@ -24,11 +24,6 @@ public class RepositoryBase<TEntity, TKey> : IRepositoryBase<TEntity, TKey> wher
         _entity.Add(entity);
     }
 
-    public virtual List<TEntity> GetAll()
-    {
-        return _entity.ToList();
-    }
-
     public virtual TEntity Get(TKey key)
     {
         return _entity.Find(key);
@@ -38,7 +33,9 @@ public class RepositoryBase<TEntity, TKey> : IRepositoryBase<TEntity, TKey> wher
     {
         _entity.Remove(entity);
     }
-
+    public virtual List<TEntity> GetAll(){
+        return _entity.ToList();
+    }
     public void Update(TEntity entity)
     {
         _entity.Update(entity);
