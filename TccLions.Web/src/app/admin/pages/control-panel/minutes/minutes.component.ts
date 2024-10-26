@@ -12,6 +12,8 @@ import { EditCommissionModalComponent } from '../commissions/modals/edit-commiss
 import { Minute } from './minutes.models';
 import { MinutesService } from './service/minutes.service';
 import { CreateMinuteComponent } from './modals/create-minute/create-minute.component';
+import { DeleteMinuteModalComponent } from './modals/delete-minute/delete-minute-modal.component';
+import { SeeDescriptionComponent } from './modals/see-description/see-description.component';
 
 @Component({
   selector: 'app-minutes',
@@ -30,13 +32,9 @@ export class MinutesComponent {
     this._service.minutes$.subscribe(minutes => this.minutes = minutes);
   }
 
-  // search(value: string): void {
-  //   this.filters.memberName.next(value);
-  // }
-
-  openDeleteModal(id: string, memberName: string) {
-    let result = this._dialog.open(DeleteComissaoModalComponent, {
-      data: memberName
+  openDeleteModal(id: string, minuteName: string) {
+    let result = this._dialog.open(DeleteMinuteModalComponent, {
+      data: minuteName
     })
 
     result.afterClosed().subscribe(result => {
@@ -52,12 +50,11 @@ export class MinutesComponent {
     })
   }
 
-  openEditModal(commissionTypeDescription: string) {
-    this._dialog.open(EditCommissionModalComponent, {
+  openDescriptionModal(description: string) {
+    console.log(description)
+    this._dialog.open(SeeDescriptionComponent, {
       width: '400px',
-      data: {
-        // commissionTypeId: this.commissionTypes.find(commissionType => commissionType.descricao === commissionTypeDescription)!.id
-      }
+      data: description
     })
   }
 }

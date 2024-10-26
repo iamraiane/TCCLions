@@ -1,0 +1,11 @@
+<div *transloco="let t; read: 'see-minute-description'">
+  <h2 mat-dialog-title>{{ t("seeDescription") }}</h2>
+  <mat-dialog-content>
+    <p class="break-words">{{ description }}</p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" [mat-dialog-close]="false">
+      {{ t("cancel") }}
+    </button>
+  </mat-dialog-actions>
+</div>

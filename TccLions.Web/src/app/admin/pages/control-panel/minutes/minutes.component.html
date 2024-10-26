@@ -77,15 +77,15 @@
                 <button
                   mat-menu-item
                   class="focus:outline-none"
-                  (click)="openEditModal(element.tipoComissao)"
+                  (click)="openDescriptionModal(element.descricao)"
                 >
-                  <mat-icon>edit</mat-icon>
-                  <span>{{ t("edit") }}</span>
+                  <mat-icon>visibility</mat-icon>
+                  <span>{{ t("seeDescription") }}</span>
                 </button>
                 <button
                   mat-menu-item
                   class="focus:outline-none"
-                  (click)="openDeleteModal(element.id, element.nomeDoMembro)"
+                  (click)="openDeleteModal(element.id, element.titulo)"
                 >
                   <mat-icon>delete</mat-icon>
                   <span>{{ t("delete") }}</span>
