@@ -19,8 +19,7 @@ import { TipoComissao } from '../commission-types/commission-types.models';
   standalone: true,
   imports: [TranslocoModule, MatInputModule, MatTableModule, MatMenuModule, MatIconModule, MatDialogModule, MatButtonModule],
   providers: [provideTranslocoScope({ scope: 'control-panel/comissions', alias: 'comissions' })],
-  templateUrl: './comissions.component.html',
-  styleUrl: './comissions.component.css'
+  templateUrl: './comissions.component.html'
 })
 export class ComissionsComponent implements OnInit {
   comissions: Comission[] = [];

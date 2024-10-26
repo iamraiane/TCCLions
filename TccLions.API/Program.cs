@@ -52,7 +52,7 @@ var app = builder.Build();
 using (var Scope = app.Services.CreateScope())
 {
     var context = Scope.ServiceProvider.GetRequiredService<ApplicationDataContext>();
-    //context.Database.Migrate();
+    context.Database.Migrate();
     ApplicationDataContextSeed.Seed(context);
 }
 

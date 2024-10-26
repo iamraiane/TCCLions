@@ -1,0 +1,51 @@
+<div *transloco="let t; read: 'createMinute'" class="px-6 overflow-y-hidden">
+  <h1 mat-dialog-title class="text-center">{{ t("createMinute") }}</h1>
+
+  <form [formGroup]="minuteGroup">
+    <div class="w-full">
+      <p class="text-lg relative top-2">{{ t("title") }} *</p>
+      <mat-form-field appearance="outline" class="w-full">
+        <input
+          matInput
+          [placeholder]="t('title')"
+          formControlName="title"
+          #inputTitulo
+          maxlength="255"
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="descriptionInputField w-full">
+      <p class="text-lg relative top-2">{{ t("description") }} *</p>
+      <mat-form-field appearance="outline" class="w-full">
+        <input
+          matInput
+          [placeholder]="t('description')"
+          formControlName="description"
+          #inputDescription
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="writtenOnInputField">
+      <p class="text-lg relative top-2">{{ t("writtenOn") }}</p>
+      <mat-form-field class="w-full">
+        <input matInput [matDatepicker]="picker" formControlName="writtenOn" />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="buttons w-full flex justify-end gap-2 py-4">
+      <button mat-raised-button mat-dialog-close color="warn">
+        {{ t("cancel") }}
+      </button>
+      <button mat-raised-button color="primary" (click)="submit()">
+        {{ t("create") }}
+      </button>
+    </div>
+  </form>
+</div>

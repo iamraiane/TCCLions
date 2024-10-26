@@ -6,6 +6,8 @@ import { CommissionTypesComponent } from "./commission-types/commission-types.co
 import { inject } from "@angular/core";
 import { CommissionTypesService } from "./commission-types/commission-types.service";
 import { ComissionsComponent } from "./commissions/comissions.component";
+import { MinutesComponent } from "./minutes/minutes.component";
+import { MinutesService } from "./minutes/service/minutes.service";
 
 export const routes: Routes = [
     {
@@ -21,6 +23,14 @@ export const routes: Routes = [
                     commissionTypes: () => inject(CommissionTypesService).getAll()
                 },
                 data: { permissions: [ApplicationConstants.permissions.Admin] }
+            },
+            {
+                path: 'minutes',
+                component: MinutesComponent,
+                data: { permissions: [ApplicationConstants.permissions.Admin] },
+                resolve: {
+                    minutes: () => inject(MinutesService).get()
+                }
             }
         ]
     }

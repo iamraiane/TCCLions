@@ -7,5 +7,6 @@
   "helloMessage": "Olá, {{memberName}}",
   "expenses": "Despesas",
   "expensesType": "Tipos de Despesa",
-  "commissionTypes": "Tipos de Comissão"
+  "commissionTypes": "Tipos de Comissão",
+  "minutes": "Atas"
 }
