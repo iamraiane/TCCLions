@@ -2,6 +2,8 @@
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using TccLions.Domain.Data.Repositories;
+using TccLions.Infrastructure.Data.Repositories;
 using TCCLions.API.Application.Services;
 using TCCLions.Domain.Data.Repositories;
 using TCCLions.Infrastructure.Data.Repositories;
@@ -21,6 +23,7 @@ public static class ProgramExtensions
         service.AddScoped<IPasswordHasher, PasswordHasher>();
         service.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
         service.AddScoped<ITipoComissaoRepository, TipoComissaoRepository>();
+        service.AddScoped<ITipoDespesaRepository, TipoDespesaRepository>();
 
         return service;
     }
