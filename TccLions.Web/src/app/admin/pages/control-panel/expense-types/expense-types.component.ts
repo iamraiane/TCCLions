@@ -16,8 +16,7 @@ import { EditExpenseTypeComponent } from './modals/edit-expense-type/edit-expens
   selector: 'app-expense-types',
   standalone: true,
   imports: [TranslocoModule, MatInputModule, MatTableModule, MatMenuModule, MatIconModule, MatDialogModule, MatButtonModule],
-  templateUrl: './expense-types.component.html',
-  styleUrl: './expense-types.component.css'
+  templateUrl: './expense-types.component.html'
 })
 export class ExpenseTypesComponent {
   private readonly _service = inject(ExpenseTypesService);

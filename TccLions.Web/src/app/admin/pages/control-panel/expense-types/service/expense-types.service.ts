@@ -10,11 +10,11 @@ import { ExpenseTypesEndpoints } from '../expense-types.endpoints';
 })
 export class ExpenseTypesService {
   private readonly apiUrl = this._appSettings.apiUrl;
-  private _expenseTypes: BehaviorSubject<TipoDespesa[]> = new BehaviorSubject<TipoDespesa[]>([]);
+  private readonly _expenseTypes: BehaviorSubject<TipoDespesa[]> = new BehaviorSubject<TipoDespesa[]>([]);
 
   constructor(private _httpClient: HttpClient, private _appSettings: ApplicationSettingsService) { }
 
-get expenseTypes$(): Observable<TipoDespesa[]> {
+  get expenseTypes$(): Observable<TipoDespesa[]> {
     return this._expenseTypes.asObservable();
   }
 
@@ -26,12 +26,12 @@ get expenseTypes$(): Observable<TipoDespesa[]> {
     );
   }
 
-  create(createexpenseType: CreateTipoDespesa): Observable<string> {
-    return this._httpClient.post<string>(ExpenseTypesEndpoints.endpoints['create'](this.apiUrl), createexpenseType).pipe(
+  create(createExpenseType: CreateTipoDespesa): Observable<string> {
+    return this._httpClient.post<string>(ExpenseTypesEndpoints.endpoints['create'](this.apiUrl), createExpenseType).pipe(
       tap(
         expenseTypeId => {
-          const currentexpenseTypes = this._expenseTypes.value;
-          this._expenseTypes.next([...currentexpenseTypes, { id: expenseTypeId, descricao: createexpenseType.descricao }]);
+          const currentExpenseTypes = this._expenseTypes.value ?? [];
+          this._expenseTypes.next([...currentExpenseTypes, { id: expenseTypeId, descricao: createExpenseType.descricao }]);
         }
       )
     );

@@ -7,7 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { provideTranslocoScope, TranslocoModule } from '@jsverse/transloco';
+import { TranslocoModule } from '@jsverse/transloco';
 import { ExpenseTypesService } from '../../service/expense-types.service';
 import { CreateTipoDespesa } from '../../expense-types.modals';
 
