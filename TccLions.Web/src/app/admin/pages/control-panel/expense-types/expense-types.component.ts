@@ -7,7 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
-import { TranslocoModule } from '@jsverse/transloco';
+import { provideTranslocoScope, TranslocoModule } from '@jsverse/transloco';
 import { CreateExpenseTypeComponent } from './modals/create-expense-type/create-expense-type.component';
 import { DeleteExpenseTypeComponent } from './modals/delete-expense-type/delete-expense-type.component';
 import { EditExpenseTypeComponent } from './modals/edit-expense-type/edit-expense-type.component';
@@ -16,6 +16,9 @@ import { EditExpenseTypeComponent } from './modals/edit-expense-type/edit-expens
   selector: 'app-expense-types',
   standalone: true,
   imports: [TranslocoModule, MatInputModule, MatTableModule, MatMenuModule, MatIconModule, MatDialogModule, MatButtonModule],
+  providers: [
+    provideTranslocoScope({ scope: 'control-panel/expense-types', alias: 'expense-types' })
+  ],
   templateUrl: './expense-types.component.html'
 })
 export class ExpenseTypesComponent {

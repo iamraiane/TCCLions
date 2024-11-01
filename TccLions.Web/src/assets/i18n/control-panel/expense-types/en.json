@@ -1,0 +1,8 @@
+{
+  "expenseType": "Expense Type",
+  "searchByDescription": "Search by Description",
+  "description": "Description",
+  "actions": "Actions",
+  "edit": "Edit",
+  "delete": "Delete"
+}
