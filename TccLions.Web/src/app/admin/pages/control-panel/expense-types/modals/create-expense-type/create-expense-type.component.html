@@ -1,16 +1,17 @@
 <div
   class="px-6 overflow-y-hidden"
+  *transloco="let t; read: 'createExpenseType'"
 >
-  <h1 mat-dialog-title>Criar um tipo de despesa</h1>
+  <h1 mat-dialog-title>{{ t("title") }}</h1>
 
   <form [formGroup]="expenseTypeForm">
     <div class="flex">
       <div class="nomeInputField" class="w-full">
-        <p class="text-lg relative top-2">description</p>
+        <p class="text-lg relative top-2">{{ t("description") }}</p>
         <mat-form-field appearance="outline" class="w-full">
           <input
             matInput
-            placeholder="description"
+            [placeholder]="t('description')"
             formControlName="description"
             #inputNome
             maxlength="255"
@@ -18,7 +19,7 @@
           <mat-error
             *ngIf="expenseTypeForm.get('description')?.hasError('required')"
           >
-          Descricao Vazia
+            Descricao Vazia
           </mat-error>
           <mat-hint
             align="end"
@@ -31,10 +32,10 @@
     </div>
     <div class="buttons w-full flex justify-end gap-2 py-4">
       <button mat-raised-button mat-dialog-close="canceled" color="warn">
-        cancel
+        {{ t("cancel") }}
       </button>
       <button mat-raised-button color="primary" (click)="submit()">
-        create
+        {{ t("create") }}
       </button>
     </div>
   </form>

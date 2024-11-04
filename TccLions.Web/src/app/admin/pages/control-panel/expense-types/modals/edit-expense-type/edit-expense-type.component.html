@@ -1,16 +1,14 @@
-<div
-  class="px-6 overflow-y-hidden"
->
-  <h1 mat-dialog-title>editCommissionType</h1>
+<div class="px-6 overflow-y-hidden" *transloco="let t; read: 'editExpenseType'">
+  <h1 mat-dialog-title>{{ t("title") }}</h1>
 
   <form [formGroup]="expenseTypeForm">
     <div class="flex">
       <div class="nomeInputField" class="w-full">
-        <p class="text-lg relative top-2">description</p>
+        <p class="text-lg relative top-2">{{ t("description") }}</p>
         <mat-form-field appearance="outline" class="w-full">
           <input
             matInput
-            placeholder=description
+            [placeholder]="t('description')"
             formControlName="description"
             #inputNome
             maxlength="255"
@@ -31,10 +29,10 @@
     </div>
     <div class="buttons w-full flex justify-end gap-2 py-4">
       <button mat-raised-button mat-dialog-close="canceled" color="warn">
-        cancel
+        {{ t("cancel") }}
       </button>
       <button mat-raised-button color="primary" (click)="edit()">
-        edit
+        {{ t("edit") }}
       </button>
     </div>
   </form>

@@ -13,7 +13,7 @@ import { CreateTipoDespesa } from '../../expense-types.modals';
   standalone: true,
   imports: [MatDialogModule, MatButtonModule, MatInputModule, FormsModule, ReactiveFormsModule, CommonModule, TranslocoModule],
   providers: [
-    provideTranslocoScope({ scope: 'control-panel/expense-types/edit-expense-type', alias: 'editCommissionType' }),
+    provideTranslocoScope({ scope: 'control-panel/expense-types/modals/edit-expense-type', alias: 'editExpenseType' }),
   ],
   templateUrl: './edit-expense-type.component.html'
 })

@@ -7,7 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { TranslocoModule } from '@jsverse/transloco';
+import { provideTranslocoScope, TranslocoModule } from '@jsverse/transloco';
 import { ExpenseTypesService } from '../../service/expense-types.service';
 import { CreateTipoDespesa } from '../../expense-types.modals';
 
@@ -15,6 +15,9 @@ import { CreateTipoDespesa } from '../../expense-types.modals';
   selector: 'app-create-expense-type',
   standalone: true,
   imports: [MatDialogModule, MatButtonModule, MatSelectModule, CommonModule, MatIconModule, TranslocoModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule],
+  providers: [
+    provideTranslocoScope({ scope: 'control-panel/expense-types/modals/create-expense-type', alias: 'createExpenseType' })
+  ],
   templateUrl: './create-expense-type.component.html'
 })
 export class CreateExpenseTypeComponent {
