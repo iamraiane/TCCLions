@@ -15,8 +15,7 @@ import { provideTranslocoScope, TranslocoModule } from '@jsverse/transloco';
   providers: [
     provideTranslocoScope({ scope: 'login', alias: 'login' })
   ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
   private _authService = inject(AuthService)
