@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TCCLions.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using TCCLions.Infrastructure.Data;
 namespace TccLions.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDataContext))]
-    partial class ApplicationDataContextModelSnapshot : ModelSnapshot
+    [Migration("20241107170246_AddedDespesaTable")]
+    partial class AddedDespesaTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -95,12 +98,11 @@ namespace TccLions.Infrastructure.Migrations
                     b.Property<DateOnly>("DataVencimento")
                         .HasColumnType("date");
 
+                    b.Property<Guid?>("MembroId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<double>("ValorTotal")
                         .HasColumnType("float");
-
-                    b.Property<Guid>("_membroId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("MembroId");
 
                     b.Property<Guid>("_tipoDeDespesaId")
                         .HasColumnType("uniqueidentifier")
@@ -108,7 +110,7 @@ namespace TccLions.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("_membroId");
+                    b.HasIndex("MembroId");
 
                     b.HasIndex("_tipoDeDespesaId");
 
@@ -272,7 +274,7 @@ namespace TccLions.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("90190963-154b-4add-89a0-775dd7f69d1d"),
+                            Id = new Guid("0c60c946-51e8-4e71-9b00-2666bc360d15"),
                             Nome = "Admin"
                         });
                 });
@@ -377,10 +379,8 @@ namespace TccLions.Infrastructure.Migrations
             modelBuilder.Entity("TCCLions.Domain.Data.Models.Despesa", b =>
                 {
                     b.HasOne("TCCLions.Domain.Data.Models.Membro", "Membro")
-                        .WithMany("Despesas")
-                        .HasForeignKey("_membroId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("MembroId");
 
                     b.HasOne("TccLions.Domain.Data.Models.TipoDespesa", "TipoDeDespesa")
                         .WithMany()
@@ -411,8 +411,6 @@ namespace TccLions.Infrastructure.Migrations
 
             modelBuilder.Entity("TCCLions.Domain.Data.Models.Membro", b =>
                 {
-                    b.Navigation("Despesas");
-
                     b.Navigation("Enderecos");
                 });
 #pragma warning restore 612, 618

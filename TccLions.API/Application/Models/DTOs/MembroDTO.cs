@@ -11,4 +11,6 @@ public class MembroDTO
     public int Quantidade { get; set; }
     public IEnumerable<PermissaoDTO> Permissoes { get; set; }
     public IEnumerable<EnderecoDTO> Enderecos { get; set; }
+    public IEnumerable<DespesaDTO> Despesas { get; set; }
+
 }

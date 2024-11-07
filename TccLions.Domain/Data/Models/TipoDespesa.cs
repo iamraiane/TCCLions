@@ -13,7 +13,7 @@ namespace TccLions.Domain.Data.Models
             Id = Guid.NewGuid();
             Descricao = descricao;
         }
-        public string Descricao {get; private set;}
+        public string Descricao { get; private set; }
 
         public void Update(string descricao){
             Descricao = descricao;

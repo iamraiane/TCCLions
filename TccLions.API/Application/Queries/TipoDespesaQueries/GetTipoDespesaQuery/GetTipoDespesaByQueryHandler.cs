@@ -1,30 +1,24 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using MediatR;
-using TccLions.API.Application.Models.DTOs;
 using TccLions.Domain.Data.Repositories;
-using TCCLions.Infrastructure.Data.Repositories;
+using TCCLions.API.Application.Models.DTOs;
 
-namespace TccLions.API.Application.Queries.TipoDespesaQueries.GetTipoDespesaQuery
+namespace TccLions.API.Application.Queries.TipoDespesaQueries.GetTipoDespesaQuery;
+
+public class GetTipoDespesaByQueryHandler(ITipoDespesaRepository repository) : IRequestHandler<GetTipoDespesaByIdQuery, TipoDeDespesaDTO>
 {
-    public class GetTipoDespesaByQueryHandler(ITipoDespesaRepository repository) : IRequestHandler<GetTipoDespesaByIdQuery, TipoDespesaDTO>
-    {
-        private readonly ITipoDespesaRepository _repository = repository ?? throw new ArgumentNullException(nameof(repository));
-    
-        public Task<TipoDespesaDTO> Handle(GetTipoDespesaByIdQuery request, CancellationToken cancellationToken){
-            ArgumentNullException.ThrowIfNull(request);
+    private readonly ITipoDespesaRepository _repository = repository ?? throw new ArgumentNullException(nameof(repository));
 
-            var tipoDespesa = _repository.Get(request.Id);
+    public Task<TipoDeDespesaDTO> Handle(GetTipoDespesaByIdQuery request, CancellationToken cancellationToken){
+        ArgumentNullException.ThrowIfNull(request);
 
-            if(tipoDespesa == null)
-                return Task.FromResult((TipoDespesaDTO)null);
+        var tipoDespesa = _repository.Get(request.Id);
 
-            return Task.FromResult( new TipoDespesaDTO{
-                Id = tipoDespesa.Id,
-                Descricao = tipoDespesa.Descricao
-            });
-        }
+        if(tipoDespesa == null)
+            return Task.FromResult((TipoDeDespesaDTO)null);
+
+        return Task.FromResult( new TipoDeDespesaDTO{
+            Id = tipoDespesa.Id,
+            Descricao = tipoDespesa.Descricao
+        });
     }
 }

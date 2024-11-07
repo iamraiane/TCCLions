@@ -18,6 +18,7 @@ public class ApplicationDataContext : DbContext
     public DbSet<TipoDespesa> TipoDespesas { get; set; }
     public DbSet<Ata> Atas { get; set; }
     public DbSet<Endereco> Enderecos { get; set; }
+    public DbSet<Despesa> Despesas { get; set; }
     public DbSet<Evento> Eventos {get; set;}
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

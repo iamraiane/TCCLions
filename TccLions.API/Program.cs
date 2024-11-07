@@ -30,8 +30,7 @@ builder.Services.AddControllers(options =>
 }).AddNewtonsoftJson(options =>
     {
         options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
-        options.SerializerSettings.DateFormatString = "yyyy-MM-dd";
-    }); ;
+    });
 
 builder.Services.InjectDependencies();
 

@@ -5,6 +5,7 @@ using System.Text;
 using TccLions.Domain.Data.Repositories;
 using TccLions.Infrastructure.Data.Repositories;
 using TCCLions.API.Application.Services;
+using TCCLions.API.Infrastructure.Filters;
 using TCCLions.Domain.Data.Repositories;
 using TCCLions.Infrastructure.Data.Repositories;
 
@@ -24,6 +25,7 @@ public static class ProgramExtensions
         service.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
         service.AddScoped<ITipoComissaoRepository, TipoComissaoRepository>();
         service.AddScoped<ITipoDespesaRepository, TipoDespesaRepository>();
+        service.AddScoped<IDespesaRepository, DespesaRepository>();
 
         return service;
     }
@@ -32,6 +34,8 @@ public static class ProgramExtensions
     {
         service.AddSwaggerGen(c =>
         {
+            c.SchemaFilter<DateOnlySchemaFilter>();
+
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "TCCLions API", Version = "v1" });
 
             c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme

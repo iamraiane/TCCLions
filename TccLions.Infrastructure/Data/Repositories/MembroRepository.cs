@@ -15,4 +15,18 @@ public class MembroRepository(ApplicationDataContext context) : RepositoryBase<M
     {
         return _entity.Include(x => x.Permissoes).FirstOrDefault(x => x.Nome == nameOrEmail || x.Email == nameOrEmail);
     }
+
+    public List<Membro> GetAllMembroDespesas()
+    {
+        return _entity.Include(_ => _.Despesas)
+            .ThenInclude(_ => _.TipoDeDespesa)
+            .ToList();
+    }
+
+    public Membro GetMembroDespesasById(Guid id)
+    {
+        return _entity.Include(_ => _.Despesas)
+           .ThenInclude(_ => _.TipoDeDespesa)
+           .FirstOrDefault(x => x.Id == id);
+    }
 }

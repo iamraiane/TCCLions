@@ -7,11 +7,13 @@ public class Membro : Entity<Guid>
 {
     private readonly List<Permissao> _permissoes;
     private readonly List<Endereco> _enderecos;
+    private readonly List<Despesa> _despesas;
 
     private Membro()
     {
         _permissoes = [];
         _enderecos = [];
+        _despesas = [];
     }
 
     public Membro(string nome, string email, EstadoCivilEnum estadoCivil, string cpf, string senha) : this()
@@ -32,6 +34,7 @@ public class Membro : Entity<Guid>
     public string Senha { get; private set; }
     public IReadOnlyCollection<Permissao> Permissoes => _permissoes;
     public IReadOnlyCollection<Endereco> Enderecos => _enderecos;
+    public IReadOnlyCollection<Despesa> Despesas => _despesas;
     public bool IsActive { get; private set; }
 
     public void Update(string nome, string email, EstadoCivilEnum estadocivil, string cpf)
