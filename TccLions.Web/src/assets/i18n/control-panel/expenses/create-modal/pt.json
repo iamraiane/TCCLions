@@ -1,10 +1,14 @@
 {
-  "title": "Despesas do(a) {{member}}",
-  "close": "Fechar",
+  "createTitle": "Criar nova despesa",
+  "cancel": "Cancelar",
+  "submit": "Enviar",
+  "member": "Membro",
+  "memberEmptyErrorMessage": "O Membro é obrigatório",
+  "expenseType": "Tipo de despesa",
+  "expenseTypeEmptyErrorMessage": "Tipo de Despesa é obrigatório",
   "registerDate": "Data de Registro",
+  "registerDateEmptyErrorMessage": "A Data de Registro é obrigatória",
   "dueDate": "Data de Vencimento",
-  "value": "Valor",
-  "expenseType": "Tipo de Despesa",
-  "actions": "Ações",
-  "remove": "Remover"
+  "dueDateEmptyErrorMessage": "A Data de Vencimento é obrigatória",
+  "value": "Valor"
 }

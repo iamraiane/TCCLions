@@ -34,4 +34,12 @@ export class ExpensesService {
       })
     );
   }
+
+  create(expense: Expense): Observable<Expense> {
+    return this._httpClient.post<Expense>(ExpensesEndpoints.endpoints["create"](this.apiUrl), expense).pipe(
+      tap(() => {
+        this.get().subscribe();
+      })
+    );
+  }
 }

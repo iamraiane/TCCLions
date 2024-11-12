@@ -2,6 +2,9 @@
   <h2 mat-dialog-title>{{ t("title", { member: memberName }) }}</h2>
 
   <mat-dialog-content>
+    <p class="font-bold">
+      {{ t("totalExpenseSum") }} R$ {{ totalExpensesValue }}
+    </p>
     <div
       class="xl:col-span-2 flex flex-col flex-auto border-2 shadow-gray-400 overflow-y-auto rounded-2xl mt-1 mx-[1em] px-4 py-2 h-auto max-h-[50vh]"
     >

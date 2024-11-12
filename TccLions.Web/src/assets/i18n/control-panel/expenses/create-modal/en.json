@@ -1,10 +1,14 @@
 {
-  "title": "{{member}} Expenses",
-  "close": "Close",
-  "registerDate": "Register Date",
-  "dueDate": "Due Date",
-  "value": "Value",
+  "createTitle": "Create a new expense",
+  "cancel": "Cancel",
+  "submit": "Submit",
+  "member": "Member",
+  "memberEmptyErrorMessage": "Member is required",
   "expenseType": "Expense Type",
-  "actions": "Actions",
-  "remove": "Remove"
+  "expenseTypeEmptyErrorMessage": "Expense Type is required",
+  "registerDate": "Register Date",
+  "registerDateEmptyErrorMessage": "Register Date is required",
+  "dueDate": "Due Date",
+  "dueDateEmptyErrorMessage": "Due Date is required",
+  "value": "Value"
 }

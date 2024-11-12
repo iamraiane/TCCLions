@@ -19,10 +19,12 @@ export class SeeMemberExpensesModalComponent {
   displayedColumns = ['registerDate', 'dueDate', 'value', 'expenseType', 'actions']
   memberName: string = ''
   expenses: MemberExpenses[] = []
+  totalExpensesValue: number = 0;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: { expenses: MemberExpenses[], memberName: string }, private _service: ExpensesService, private _dialogRef: MatDialogRef<SeeMemberExpensesModalComponent>) {
     this.expenses = data.expenses
     this.memberName = data.memberName
+    this.totalExpensesValue = data.expenses.reduce((acc, curr) => acc + curr.valorTotal, 0)
   }
 
   removeExpense(id: string) {

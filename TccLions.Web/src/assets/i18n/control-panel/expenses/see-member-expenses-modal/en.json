@@ -6,5 +6,6 @@
   "value": "Value",
   "expenseType": "Expense Type",
   "actions": "Actions",
-  "remove": "Remove"
+  "remove": "Remove",
+  "totalExpenseSum": "Expenses Total Value"
 }

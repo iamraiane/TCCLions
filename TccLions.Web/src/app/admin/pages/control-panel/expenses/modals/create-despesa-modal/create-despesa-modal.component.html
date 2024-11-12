@@ -1,17 +1,103 @@
-<div *transloco="let t; read: 'modal'">
-  <h2 mat-dialog-title>`{{ t("deleteExpense") }}</h2>
+<div *transloco="let t; read: 'create-modal'">
+  <h2 mat-dialog-title>{{ t("createTitle") }}</h2>
   <mat-dialog-content>
-    <p>{{ t("confirmationMessage", { member: nomeDoMembro }) }}</p>
+    <form [formGroup]="expenseForm">
+      <div class="flex gap-6 flex-wrap w-[30em]">
+        <div class="nomeInputField">
+          <p class="text-lg relative top-2">{{ t("member") }} *</p>
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-select
+              [placeholder]="t('member')"
+              formControlName="membroId"
+              #selectMembro
+            >
+              <mat-option *ngFor="let member of members" [value]="member.id">{{
+                member.nome
+              }}</mat-option>
+            </mat-select>
+            <mat-error
+              *ngIf="expenseForm.get('membroId')?.hasError('required')"
+            >
+              {{ t("memberEmptyErrorMessage") }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <p class="text-lg relative top-2">{{ t("expenseType") }} *</p>
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-select
+              [placeholder]="t('expenseType')"
+              formControlName="tipoDeDespesaId"
+              #selectTipoDeDespesa
+            >
+              <mat-option
+                *ngFor="let expenseType of expenseTypes"
+                [value]="expenseType.id"
+                >{{ expenseType.descricao }}</mat-option
+              >
+            </mat-select>
+            <mat-error
+              *ngIf="expenseForm.get('tipoDeDespesaId')?.hasError('required')"
+            >
+              {{ t("expenseTypeEmptyErrorMessage") }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="flex">
+          <div class="registerDateInputField">
+            <p class="text-lg relative top-2">{{ t("registerDate") }}</p>
+            <mat-form-field class="w-[85%]" appearance="outline">
+              <input
+                matInput
+                [matDatepicker]="pickerRegisterDate"
+                formControlName="dataRegistro"
+              />
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="pickerRegisterDate"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #pickerRegisterDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="dueDateInputField">
+            <p class="text-lg relative top-2">{{ t("dueDate") }}</p>
+            <mat-form-field
+              class="w-[85%] relative right-[.8em]"
+              appearance="outline"
+            >
+              <input
+                matInput
+                [matDatepicker]="pickerDueDate"
+                formControlName="dataVencimento"
+              />
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="pickerDueDate"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #pickerDueDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="valorTotalInput">
+          <p class="text-lg relative top-2">{{ t("value") }}</p>
+          <mat-form-field appearance="outline">
+            <input matInput type="number" formControlName="valorTotal" />
+          </mat-form-field>
+        </div>
+
+        <div class="buttons w-full flex justify-end gap-2 py-4">
+          <button mat-raised-button mat-dialog-close="canceled" color="warn">
+            {{ t("cancel") }}
+          </button>
+          <button mat-raised-button color="primary" (click)="save()">
+            {{ t("submit") }}
+          </button>
+        </div>
+      </div>
+    </form>
   </mat-dialog-content>
-  <mat-dialog-actions aling="end">
-    <button mat-button [mat-dialog-close]="false">{{ t("cancel") }}</button>
-    <button
-      mat-button
-      [mat-dialog-close]="true"
-      color="primary"
-      cdkFocusinitial
-    >
-      {{ t("delete") }}
-    </button>
-  </mat-dialog-actions>
 </div>

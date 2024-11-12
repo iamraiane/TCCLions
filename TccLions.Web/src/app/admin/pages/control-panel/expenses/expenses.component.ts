@@ -5,13 +5,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { provideTranslocoScope, TranslocoModule } from '@jsverse/transloco';
-import { BehaviorSubject } from 'rxjs';
 import { ExpensesService } from './service/expenses.service';
 import { Expense } from './expenses.models';
-import { DeleteDespesaModalComponent } from './modals/delete-despesa-modal/delete-despesa-modal.component';
 import { MatButtonModule } from '@angular/material/button';
 import { SeeMemberExpensesModalComponent } from './modals/see-member-expenses-modal/see-member-expenses.component';
-import { Router } from '@angular/router';
+import { CreateDespesaModalComponent } from './modals/create-despesa-modal/create-despesa-modal.component';
 
 @Component({
   selector: 'app-expenses',
@@ -25,7 +23,7 @@ export class ExpensesComponent implements OnInit {
   expenses: Expense[] = [];
   displayedColumns = ['membro', 'acoes'];
 
-  constructor(private _service: ExpensesService, private _dialog: MatDialog, private router: Router) { }
+  constructor(private _service: ExpensesService, private _dialog: MatDialog) { }
 
   ngOnInit(): void {
     this._service.expenses$.subscribe(expenses => {
@@ -37,7 +35,7 @@ export class ExpensesComponent implements OnInit {
   }
 
   openCreateModal() {
-
+    this._dialog.open(CreateDespesaModalComponent)
   }
 
   seeExpenses(memberId: string) {
@@ -45,7 +43,8 @@ export class ExpensesComponent implements OnInit {
       data: {
         expenses: this.expenses.find(expense => expense.id === memberId)?.despesas,
         memberName: this.expenses.find(expense => expense.id === memberId)?.nome
-      }
+      },
+      width: '900px'
     })
 
     dialog.afterClosed().subscribe((id: string) => {
