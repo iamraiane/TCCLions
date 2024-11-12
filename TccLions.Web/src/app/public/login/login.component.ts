@@ -7,17 +7,19 @@ import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { provideTranslocoScope, TranslocoModule } from '@jsverse/transloco';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [MatInputModule, FormsModule, ReactiveFormsModule, MatButtonModule, CommonModule, TranslocoModule],
+  imports: [MatInputModule, FormsModule, ReactiveFormsModule, MatButtonModule, CommonModule, TranslocoModule, MatIconModule],
   providers: [
     provideTranslocoScope({ scope: 'login', alias: 'login' })
   ],
   templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
+  protected isPasswordVisible: boolean = false;
   private _authService = inject(AuthService)
   private _router = inject(Router);
   private _snackBar = inject(MatSnackBar);
@@ -28,6 +30,10 @@ export class LoginComponent implements OnInit {
   });
 
   ngOnInit(): void {
+  }
+
+  togglePasswordVisible() {
+    this.isPasswordVisible = !this.isPasswordVisible;
   }
 
   login() {

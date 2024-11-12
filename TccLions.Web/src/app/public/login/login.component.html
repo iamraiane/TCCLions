@@ -23,11 +23,27 @@
         <mat-form-field appearance="outline" class="w-full">
           <input
             matInput
-            type="password"
+            [type]="isPasswordVisible ? 'text' : 'password'"
             [placeholder]="t('enterYourPassword')"
             formControlName="password"
             maxlength="255"
           />
+          <mat-icon
+            *ngIf="isPasswordVisible"
+            matSuffix
+            class="cursor-pointer"
+            (click)="togglePasswordVisible()"
+          >
+            visibility_off
+          </mat-icon>
+          <mat-icon
+            *ngIf="!isPasswordVisible"
+            matSuffix
+            class="cursor-pointer"
+            (click)="togglePasswordVisible()"
+          >
+            visibility
+          </mat-icon>
         </mat-form-field>
       </div>
       <div class="actions">
