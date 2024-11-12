@@ -9,7 +9,7 @@ public class GetAllDespesasQueryHandler(IMembroRepository repository) : IRequest
     private readonly IMembroRepository _repository = repository ?? throw new ArgumentNullException(nameof(repository));
     public Task<IEnumerable<MembroDTO>> Handle(GetAllDespesasQuery request, CancellationToken cancellationToken)
     {
-        var data = _repository.GetAllMembroDespesas().Select(_ => new MembroDTO
+        var data = _repository.GetAllMembroDespesas().Where(m => m.Despesas.Count != 0).Select(_ => new MembroDTO
         {
            Cpf = _.Cpf,
            Enderecos = [],

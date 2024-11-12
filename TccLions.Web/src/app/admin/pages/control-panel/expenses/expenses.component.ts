@@ -7,47 +7,59 @@ import { MatTableModule } from '@angular/material/table';
 import { provideTranslocoScope, TranslocoModule } from '@jsverse/transloco';
 import { BehaviorSubject } from 'rxjs';
 import { ExpensesService } from './service/expenses.service';
-import { Expense } from './despesas.models';
+import { Expense } from './expenses.models';
 import { DeleteDespesaModalComponent } from './modals/delete-despesa-modal/delete-despesa-modal.component';
+import { MatButtonModule } from '@angular/material/button';
+import { SeeMemberExpensesModalComponent } from './modals/see-member-expenses-modal/see-member-expenses.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-expenses',
   standalone: true,
-  imports: [TranslocoModule, MatInputModule, MatTableModule, MatMenuModule, MatIconModule, MatDialogModule],
-  providers: [provideTranslocoScope({ scope: 'control-painel/expenses', alias: 'expenses' })],
-  templateUrl: './expenses.component.html',
-  styleUrl: './expenses.component.css'
+  imports: [MatButtonModule, TranslocoModule, MatInputModule, MatTableModule, MatMenuModule, MatIconModule, MatDialogModule],
+  providers: [provideTranslocoScope({ scope: 'control-panel/expenses', alias: 'expenses' })],
+  templateUrl: './expenses.component.html'
 })
+
 export class ExpensesComponent implements OnInit {
   expenses: Expense[] = [];
-  displayedColumns = ['membro', 'tipoDespesa', 'actions'];
-  filters = {
-    memberName: new BehaviorSubject<string>('')
-  }
+  displayedColumns = ['membro', 'acoes'];
 
-  constructor(private _service: ExpensesService, private _dialog: MatDialog) { }
+  constructor(private _service: ExpensesService, private _dialog: MatDialog, private router: Router) { }
 
   ngOnInit(): void {
-    this._service.expenses$.subscribe(expenses => this.expenses = expenses);
-
-    this.filters.memberName.subscribe(memberName => {
-      this._service.get(memberName).subscribe();
-    })
+    this._service.expenses$.subscribe(expenses => {
+      this.expenses = expenses
+    });
   }
 
   search(value: string): void {
-    this.filters.memberName.next(value);
   }
 
-  openDeleteModal(id: string, memberName: string) {
-    let result = this._dialog.open(DeleteDespesaModalComponent, {
-      data: memberName
+  openCreateModal() {
+
+  }
+
+  seeExpenses(memberId: string) {
+    let dialog = this._dialog.open(SeeMemberExpensesModalComponent, {
+      data: {
+        expenses: this.expenses.find(expense => expense.id === memberId)?.despesas,
+        memberName: this.expenses.find(expense => expense.id === memberId)?.nome
+      }
     })
 
-    result.afterClosed().subscribe(result => {
-      if (!result) return
+    dialog.afterClosed().subscribe((id: string) => {
+      if (id) {
+        const despesas = this.expenses.findIndex(x => x.id == memberId);
 
-      this._service.delete(id).subscribe()
+        if (despesas !== -1) {
+          const despesaIndex = this.expenses[despesas].despesas.findIndex(x => x.id == id);
+
+          if (despesaIndex !== -1) {
+            this.expenses[despesas].despesas.splice(despesaIndex, 1);
+          }
+        }
+      }
     })
   }
 }

@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ExpensesEndpoints } from '../expenses.endpoints';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { Expense } from '../despesas.models';
+import { Expense } from '../expenses.models';
 import { ApplicationSettingsService } from '../../../../../core/settings/application-settings.service';
 
 @Injectable({
@@ -19,11 +19,8 @@ export class ExpensesService {
 
   constructor(private _httpClient: HttpClient, private _settings: ApplicationSettingsService) { }
 
-  get(memberName: string): Observable<Expense[]> {
-    var params = new HttpParams();
-    params = params.append('nomeDoMembro', memberName);
-
-    return this._httpClient.get<Expense[]>(ExpensesEndpoints.endpoints["get"](this.apiUrl), { params: params }).pipe(
+  get(): Observable<Expense[]> {
+    return this._httpClient.get<Expense[]>(ExpensesEndpoints.endpoints["get"](this.apiUrl)).pipe(
       tap(expenses => this._expenses.next(expenses))
     )
   }

@@ -1,0 +1,10 @@
+{
+  "title": "Despesas do(a) {{member}}",
+  "close": "Fechar",
+  "registerDate": "Data de Registro",
+  "dueDate": "Data de Vencimento",
+  "value": "Valor",
+  "expenseType": "Tipo de Despesa",
+  "actions": "Ações",
+  "remove": "Remover"
+}

@@ -10,6 +10,7 @@ import { MinutesComponent } from "./minutes/minutes.component";
 import { MinutesService } from "./minutes/service/minutes.service";
 import { ExpenseTypesComponent } from "./expense-types/expense-types.component";
 import { ExpenseTypesService } from "./expense-types/service/expense-types.service";
+import { ExpensesService } from "./expenses/service/expenses.service";
 
 export const routes: Routes = [
     {
@@ -17,11 +18,21 @@ export const routes: Routes = [
         children: [
             { path: 'members', component: MembersComponent, data: { permissions: [ApplicationConstants.permissions.Admin] } },
             { path: 'commissions', component: ComissionsComponent, data: { permissions: [ApplicationConstants.permissions.Admin] } },
-            { path: 'expenses', component: ExpensesComponent, data: { permissions: [ApplicationConstants.permissions.Admin] } },
-            { path: 'expense-types', component: ExpenseTypesComponent, data: { permissions: [ApplicationConstants.permissions.Admin] },
-            resolve: {
-                expenseTypes: () => inject(ExpenseTypesService).getAll()
-            }
+            {
+                path: 'expenses',
+                component: ExpensesComponent,
+                data: { permissions: [ApplicationConstants.permissions.Admin] },
+                resolve: {
+                    expenses: () => inject(ExpensesService).get()
+                }
+            },
+            {
+                path: 'expense-types',
+                component: ExpenseTypesComponent,
+                data: { permissions: [ApplicationConstants.permissions.Admin] },
+                resolve: {
+                    expenseTypes: () => inject(ExpenseTypesService).getAll()
+                }
             },
             {
                 path: 'commission-types',

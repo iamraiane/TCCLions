@@ -1,0 +1,133 @@
+<div *transloco="let t; read: 'modal'">
+  <h2 mat-dialog-title>{{ t("title", { member: memberName }) }}</h2>
+
+  <mat-dialog-content>
+    <div
+      class="xl:col-span-2 flex flex-col flex-auto border-2 shadow-gray-400 overflow-y-auto rounded-2xl mt-1 mx-[1em] px-4 py-2 h-auto max-h-[50vh]"
+    >
+      <div class="overflow-y-auto">
+        <table
+          mat-table
+          [dataSource]="expenses"
+          class="mat-elevation-z8 demo-table"
+        >
+          <ng-container matColumnDef="registerDate">
+            <th
+              class="text-left px-1 w-3/12 sticky top-0"
+              mat-header-cell
+              *matHeaderCellDef
+            >
+              {{ t("registerDate") }}
+            </th>
+            <td
+              class="text-left px-1 w-3/12"
+              mat-cell
+              *matCellDef="let element"
+            >
+              {{ element.dataRegistro }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="dueDate">
+            <th
+              class="text-left px-1 w-3/12 sticky top-0"
+              mat-header-cell
+              *matHeaderCellDef
+            >
+              {{ t("dueDate") }}
+            </th>
+            <td
+              class="text-left px-1 w-3/12"
+              mat-cell
+              *matCellDef="let element"
+            >
+              {{ element.dataVencimento }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="value">
+            <th
+              class="text-left px-1 w-1/12 sticky top-0"
+              mat-header-cell
+              *matHeaderCellDef
+            >
+              {{ t("value") }}
+            </th>
+            <td
+              class="text-left px-1 w-1/12"
+              mat-cell
+              *matCellDef="let element"
+            >
+              {{ element.valorTotal }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="expenseType">
+            <th
+              class="text-left px-1 w-6/12 sticky top-0"
+              mat-header-cell
+              *matHeaderCellDef
+            >
+              {{ t("expenseType") }}
+            </th>
+            <td
+              class="text-left px-1 w-6/12"
+              mat-cell
+              *matCellDef="let element"
+            >
+              {{ element.tipoDeDespesa }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th
+              class="text-left px-1 w-1/12 sticky top-0"
+              mat-header-cell
+              *matHeaderCellDef
+            >
+              {{ t("actions") }}
+            </th>
+            <td
+              class="text-left px-1 w-1/12 relative"
+              mat-cell
+              *matCellDef="let element"
+            >
+              <button
+                mat-icon-button
+                [matMenuTriggerFor]="menu"
+                class="focus:outline-none absolute top-0 right-2"
+              >
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button
+                  mat-menu-item
+                  class="focus:outline-none"
+                  (click)="removeExpense(element.id)"
+                >
+                  <mat-icon>delete</mat-icon>
+                  <span>{{ t("remove") }}</span>
+                </button>
+              </mat-menu>
+            </td>
+          </ng-container>
+
+          <tr
+            mat-header-row
+            *matHeaderRowDef="displayedColumns"
+            class="text-[12.5px]"
+          ></tr>
+          <tr
+            mat-row
+            class="text-[12.5px]"
+            *matRowDef="let row; columns: displayedColumns"
+          ></tr>
+        </table>
+      </div>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions [align]="'center'">
+    <button mat-button [mat-dialog-close]="false">{{ t("close") }}</button>
+  </mat-dialog-actions>
+</div>

@@ -1,0 +1,10 @@
+{
+  "title": "{{member}} Expenses",
+  "close": "Close",
+  "registerDate": "Register Date",
+  "dueDate": "Due Date",
+  "value": "Value",
+  "expenseType": "Expense Type",
+  "actions": "Actions",
+  "remove": "Remove"
+}
