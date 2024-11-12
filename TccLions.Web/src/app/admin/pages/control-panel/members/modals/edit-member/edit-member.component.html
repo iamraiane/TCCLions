@@ -80,109 +80,16 @@
         <p class="text-lg relative top-2">{{ t("maritalStatus") }} *</p>
         <mat-form-field appearance="outline">
           <mat-select formControlName="maritalStatus" #inputEstadoCivil>
-            <mat-option [value]="0">Solteiro</mat-option>
-            <mat-option [value]="1">Casado</mat-option>
-            <mat-option [value]="2">Separado</mat-option>
-            <mat-option [value]="3">Divorciado</mat-option>
-            <mat-option [value]="4">Viúvo</mat-option>
+            <mat-option [value]="1">Solteiro</mat-option>
+            <mat-option [value]="2">Casado</mat-option>
+            <mat-option [value]="3">Separado</mat-option>
+            <mat-option [value]="4">Divorciado</mat-option>
+            <mat-option [value]="5">Viúvo</mat-option>
           </mat-select>
           <mat-error
             *ngIf="memberInfo.get('maritalStatus')?.hasError('required')"
           >
             {{ t("maritalStatusEmptyErrorMessage") }}
-          </mat-error>
-        </mat-form-field>
-      </div>
-
-      <!-- Input CEP -->
-      <div class="cepInputField">
-        <p class="text-lg relative top-2">CEP *</p>
-        <mat-form-field appearance="outline">
-          <input
-            matInput
-            placeholder="CEP"
-            formControlName="cep"
-            #inputCep
-            maxlength="9"
-          />
-          <mat-error *ngIf="memberInfo.get('cep')?.hasError('required')">
-            {{ t("emptyErrorMessage", { value: "CEP" }) }}
-          </mat-error>
-          <mat-error
-            *ngIf="
-              memberInfo.get('cep')?.hasError('maxlength') ||
-              memberInfo.get('cep')?.hasError('minlength')
-            "
-          >
-            {{ t("cepLengthErrorMessage") }}
-          </mat-error>
-        </mat-form-field>
-      </div>
-
-      <!-- Input Cidade -->
-      <div class="cidadeInputField">
-        <p class="text-lg relative top-2">{{ t("city") }} *</p>
-        <mat-form-field appearance="outline">
-          <input
-            matInput
-            [placeholder]="t('city')"
-            formControlName="city"
-            #inputCity
-            maxlength="255"
-          />
-          <mat-error *ngIf="memberInfo.get('city')?.hasError('required')">
-            {{ t("cityEmptyErrorMessage") }}
-          </mat-error>
-        </mat-form-field>
-      </div>
-
-      <!-- Input Bairro -->
-      <div class="bairroInputField">
-        <p class="text-lg relative top-2">{{ t("neighborhood") }} *</p>
-        <mat-form-field appearance="outline">
-          <input
-            matInput
-            [placeholder]="t('neighborhood')"
-            formControlName="neighborhood"
-            #inputNeighborhood
-            maxlength="255"
-          />
-          <mat-error
-            *ngIf="memberInfo.get('neighborhood')?.hasError('required')"
-          >
-            {{ t("neighborhoodEmptyErrorMessage") }}
-          </mat-error>
-        </mat-form-field>
-      </div>
-
-      <!-- Input Endereço -->
-      <div class="logradouro">
-        <p class="text-lg relative top-2">Logradouro *</p>
-        <mat-form-field appearance="outline">
-          <input
-            matInput
-            placeholder="Logradouro"
-            formControlName="logradouro"
-            #inputLogradouro
-            maxlength="255"
-          />
-          <mat-error *ngIf="memberInfo.get('logradouro')?.hasError('required')">
-            {{ t("emptyErrorMessage", { value: "Logradouro" }) }}
-          </mat-error>
-        </mat-form-field>
-      </div>
-      <div class="numero">
-        <p class="text-lg relative top-2">Numero *</p>
-        <mat-form-field appearance="outline">
-          <input
-            matInput
-            placeholder="Numero"
-            formControlName="numero"
-            #inputNumero
-            maxlength="8"
-          />
-          <mat-error *ngIf="memberInfo.get('numero')?.hasError('required')">
-            {{ t("emptyErrorMessage", { value: "Numero" }) }}
           </mat-error>
         </mat-form-field>
       </div>

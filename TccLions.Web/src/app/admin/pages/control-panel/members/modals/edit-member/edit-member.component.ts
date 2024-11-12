@@ -33,13 +33,8 @@ export class EditMemberComponent {
     this._service.getDetails(data.id).subscribe((member) => {
       this.memberInfo.controls['name'].setValue(member.nome);
       this.memberInfo.controls['cpf'].setValue(member.cpf);
-      this.memberInfo.controls['maritalStatus'].setValue(this.maritalStatus[member.estadoCivil]);
+      this.memberInfo.controls['maritalStatus'].setValue(this.maritalStatus[member.estadoCivil ?? ""]);
       this.memberInfo.controls['email'].setValue(member.email);
-      this.memberInfo.controls['cep'].setValue(member.cep);
-      this.memberInfo.controls['city'].setValue(member.cidade);
-      this.memberInfo.controls['neighborhood'].setValue(member.bairro);
-      this.memberInfo.controls['logradouro'].setValue(member.endereco.split(',')[0]);
-      this.memberInfo.controls['numero'].setValue(member.endereco.split(',')[1].trim());
     })
   }
 
@@ -48,11 +43,6 @@ export class EditMemberComponent {
     cpf: new FormControl<string>('', [Validators.required, Validators.maxLength(11), Validators.minLength(11)]),
     maritalStatus: new FormControl<string>('', [Validators.required]),
     email: new FormControl<string>('', [Validators.required, Validators.email, Validators.maxLength(255)]),
-    cep: new FormControl<string>('', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]),
-    city: new FormControl<string>('', [Validators.required, Validators.maxLength(255)]),
-    neighborhood: new FormControl<string>('', [Validators.required, Validators.maxLength(255)]),
-    logradouro: new FormControl<string>('', [Validators.required, Validators.maxLength(255)]),
-    numero: new FormControl<string>('', [Validators.required, Validators.maxLength(8)])
   })
 
   delete() {
@@ -65,12 +55,8 @@ export class EditMemberComponent {
     const membro: MemberDetails = {
       nome: this.memberInfo.get('name')?.value,
       cpf: this.memberInfo.get('cpf')?.value,
-      estadoCivil: this.memberInfo.get('maritalStatus')?.value,
+      estadoCivilId: this.memberInfo.get('maritalStatus')?.value,
       email: this.memberInfo.get('email')?.value,
-      cep: this.memberInfo.get('cep')?.value,
-      cidade: this.memberInfo.get('city')?.value,
-      bairro: this.memberInfo.get('neighborhood')?.value,
-      endereco: `${this.memberInfo.get('logradouro')?.value}, ${this.memberInfo.get('numero')?.value}`
     }
 
     this.dialogRef.close(membro)

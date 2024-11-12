@@ -4,13 +4,13 @@ import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { provideTranslocoScope, TranslocoModule } from '@jsverse/transloco';
 
 @Component({
-  selector: 'app-delete-despesa-modal',
+  selector: 'app-create-despesa-modal',
   standalone: true,
   imports: [MatDialogModule, MatButtonModule, TranslocoModule],
-  providers: [provideTranslocoScope({ scope: 'control-panel/expenses/delete-modal', alias: 'deelte-modal' })],
-  templateUrl: './delete-despesa-modal.component.html'
+  providers: [provideTranslocoScope({ scope: 'control-panel/expenses/create-modal', alias: 'modal' })],
+  templateUrl: './create-despesa-modal.component.html'
 })
-export class DeleteDespesaModalComponent {
+export class CreateDespesaModalComponent {
   nomeDoMembro: string = ''
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: string) {

@@ -78,10 +78,6 @@ public class MembrosController(IMediator mediator) : ControllerBase
         {
             Id = id,
             Nome = request.Nome,
-            Endereco = request.Endereco,
-            Bairro = request.Bairro,
-            Cidade = request.Cidade,
-            Cep = request.Cep,
             Email = request.Email,
             EstadoCivilId = request.EstadoCivilId,
             Cpf = request.Cpf

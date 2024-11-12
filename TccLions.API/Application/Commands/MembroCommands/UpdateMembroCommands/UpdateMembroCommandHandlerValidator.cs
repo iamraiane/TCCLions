@@ -26,30 +26,6 @@ namespace TccLions.API.Application.Commands.MembroCommands.UpdateMembroCommands
             .MaximumLength(255)
             .WithMessage("O atributo nome não pode ter mais que 255 caracteres.");
         
-            RuleFor(x => x.Endereco)
-            .NotEmpty()
-            .WithMessage("O atributo endereço não pode ser vazio")
-            .MaximumLength(255)
-            .WithMessage("O atributo endereço não pode ter mais que 255 caracteres");
-
-            RuleFor(x => x.Bairro)
-            .NotEmpty()
-            .WithMessage("O atributo bairro não pode ser vazio")
-            .MaximumLength(255)
-            .WithMessage("O atributo bairro não pode ter mais que 255 caracteres");
-
-            RuleFor(x => x.Cidade)
-            .NotEmpty()
-            .WithMessage("O atributo Cidade não pode ser vazia")
-            .MaximumLength(255)
-            .WithMessage("O atributo Cidade não pode ter mais que 255 caracteres");
-
-            RuleFor(x => x.Cep)
-            .NotEmpty()
-            .WithMessage("O atributo Cep não pode ser vazio")
-            .MaximumLength(9)
-            .WithMessage("O atributo Cep não pode ter mais que 9 caracteres");
-
            RuleFor(x => x.Email)
            .NotEmpty()
            .WithMessage("O atributo email não pode ser vazio")

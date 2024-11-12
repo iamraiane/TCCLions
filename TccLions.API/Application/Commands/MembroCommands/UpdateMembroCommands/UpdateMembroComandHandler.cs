@@ -20,6 +20,8 @@ namespace TccLions.API.Application.Commands.MembroCommands.UpdateMembroCommands
 
             membro.Update(request.Nome, request.Email, (EstadoCivilEnum)Enum.ToObject(typeof(EstadoCivilEnum), request.EstadoCivilId), request.Cpf);
             
+            _membroRepository.Update(membro);
+
             return await _membroRepository.SaveChangesAsync();
         }
     }

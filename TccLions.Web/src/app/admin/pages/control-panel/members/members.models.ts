@@ -8,12 +8,9 @@ export interface Member {
 export interface MemberDetails {
     nome: string;
     cpf: string;
-    estadoCivil: number;
+    estadoCivil?: string;
+    estadoCivilId?: number;
     email: string;
-    cep: string;
-    cidade: string;
-    bairro: string;
-    endereco: string;
 }
 
 export type CreateMember = {
