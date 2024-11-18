@@ -45,4 +45,12 @@ export class ComissionsService {
       )
     );
   }
+
+  edit(request: any, commissionId: string): Observable<string> {
+    return this._httpClient.put<string>(ComissionsEndpoints.endpoints["edit"](this.apiUrl, commissionId), request).pipe(
+      tap(
+        () => this.get('').subscribe(),
+      )
+    );
+  }
 }

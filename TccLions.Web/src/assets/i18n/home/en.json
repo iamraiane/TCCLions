@@ -1,0 +1,7 @@
+{
+  "title": "Last registered expenses",
+  "value": "Total Value",
+  "registerDate": "Register Date",
+  "dueDate": "Due Date",
+  "expenseType": "Expense Type"
+}

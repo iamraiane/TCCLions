@@ -63,11 +63,12 @@ export class ComissionsComponent implements OnInit {
     })
   }
 
-  openEditModal(commissionTypeDescription: string) {
+  openEditModal(commissionTypeDescription: string, id: string) {
     this._dialog.open(EditCommissionModalComponent, {
       width: '400px',
       data: {
-        commissionTypeId: this.commissionTypes.find(commissionType => commissionType.descricao === commissionTypeDescription)!.id
+        commissionTypeId: this.commissionTypes.find(commissionType => commissionType.descricao === commissionTypeDescription)!.id,
+        commissionId: id
       }
     })
   }

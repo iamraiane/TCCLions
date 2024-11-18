@@ -28,7 +28,7 @@ export class EditCommissionModalComponent implements OnInit {
     commissionTypeId: new FormControl<string>('', [Validators.required])
   });
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { commissionTypeId: string }, public memberService: MembersService, public commissionTypeService: CommissionTypesService, public commissionService: ComissionsService, public dialogRef: MatDialogRef<EditCommissionModalComponent>) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { commissionTypeId: string, commissionId: string }, public memberService: MembersService, public commissionTypeService: CommissionTypesService, public commissionService: ComissionsService, public dialogRef: MatDialogRef<EditCommissionModalComponent>) {
     this.memberService.get('', false, 1000000, 0).subscribe();
     this.commissionTypeService.getAll().subscribe();
   }
@@ -41,12 +41,11 @@ export class EditCommissionModalComponent implements OnInit {
   create() {
     if (this.commissionForm.invalid) return;
 
-    let createCommissionInfo: CreateCommission = {
-      membroId: this.commissionForm.get('memberId')!.value,
+    let createCommissionInfo: any = {
       tipoComissaoId: this.commissionForm.get('commissionTypeId')!.value
     }
 
-    this.commissionService.create(createCommissionInfo).subscribe({
+    this.commissionService.edit(createCommissionInfo, this.data.commissionId).subscribe({
       next: () => {
         this.dialogRef.close();
       }

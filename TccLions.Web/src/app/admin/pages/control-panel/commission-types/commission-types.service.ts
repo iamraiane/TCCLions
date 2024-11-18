@@ -29,9 +29,8 @@ export class CommissionTypesService {
   create(createCommissionType: CreateCommissionType): Observable<string> {
     return this._httpClient.post<string>(CommissionTypesEndpoints.endpoints['create'](this.apiUrl), createCommissionType).pipe(
       tap(
-        commissionTypeId => {
-          const currentCommissionTypes = this._commissionTypes.value;
-          this._commissionTypes.next([...currentCommissionTypes, { id: commissionTypeId, descricao: createCommissionType.descricao }]);
+        () => {
+          this.getAll().subscribe();
         }
       )
     );

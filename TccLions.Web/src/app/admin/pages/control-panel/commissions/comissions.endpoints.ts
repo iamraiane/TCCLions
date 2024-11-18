@@ -8,5 +8,6 @@ export namespace ComissionsEndpoints {
         get: (apiUrl: string) => `${apiUrl}${base}/comissao`,
         delete: (apiUrl: string, id: string) => `${apiUrl}${base}/comissao/${id}`,
         create: (apiUrl: string) => `${apiUrl}${base}/comissao`,
+        edit: (apiUrl: string, id: string) => `${apiUrl}${base}/comissao/${id}`,
     };
 }
