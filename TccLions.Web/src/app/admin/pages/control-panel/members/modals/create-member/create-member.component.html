@@ -99,8 +99,25 @@
             [placeholder]="t('password')"
             formControlName="password"
             #inputPassword
+            [type]="isPasswordVisible ? 'text' : 'password'"
             maxlength="255"
           />
+          <mat-icon
+            *ngIf="isPasswordVisible"
+            matSuffix
+            class="cursor-pointer"
+            (click)="togglePasswordVisible()"
+          >
+            visibility_off
+          </mat-icon>
+          <mat-icon
+            *ngIf="!isPasswordVisible"
+            matSuffix
+            class="cursor-pointer"
+            (click)="togglePasswordVisible()"
+          >
+            visibility
+          </mat-icon>
           <mat-error *ngIf="memberInfo.get('password')?.hasError('required')">
             {{ t("passwordEmptyErrorMessage") }}
           </mat-error>

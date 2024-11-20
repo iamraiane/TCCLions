@@ -21,6 +21,7 @@ import { ApplicationConstants } from '../../../../../../core/settings/applicatio
   templateUrl: './create-member.component.html'
 })
 export class CreateMemberComponent {
+  protected isPasswordVisible: boolean = false;
   readonly maritalStatuses = ApplicationConstants.maritalStatuses;
 
   readonly memberInfo: FormGroup = new FormGroup({
@@ -45,5 +46,9 @@ export class CreateMemberComponent {
     }
 
     this.dialogRef.close(membro)
+  }
+
+  togglePasswordVisible() {
+    this.isPasswordVisible = !this.isPasswordVisible;
   }
 }
