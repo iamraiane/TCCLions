@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using TCCLions.API.Application.Commands.DespesaCommands.CreateDespesa;
@@ -12,6 +13,7 @@ using TCCLions.API.Application.Queries.DespesasQueries.GetMembroDespesasById;
 namespace TCCLions.API.Controllers;
 
 [Route("api/v1/[controller]")]
+[Authorize]
 [ApiController]
 public class DespesasController(IMediator mediator) : ControllerBase
 {

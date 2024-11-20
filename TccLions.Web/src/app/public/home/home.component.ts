@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ExpensesService } from '../../admin/pages/control-panel/expenses/service/expenses.service';
 import { MemberExpenses } from '../../admin/pages/control-panel/expenses/expenses.models';
 import { provideTranslocoScope, TranslocoModule } from '@jsverse/transloco';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -17,8 +18,18 @@ export class HomeComponent implements OnInit {
   private despesaService = inject(ExpensesService)
   ultimasDespesasCadastradas: MemberExpenses[] = []
 
+  constructor(private router: Router) {
+
+  }
+
   ngOnInit(): void {
-    this.despesaService.get().subscribe();
+    this.despesaService.get().subscribe({
+      error: (err) => {
+        if (err.status === 401) {
+          this.router.navigate(['/login']);
+        }
+      }
+    });
 
     this.despesaService.expenses$.subscribe((data) => {
       const todasDespesas: MemberExpenses[] = data.flatMap(expense => expense.despesas);
