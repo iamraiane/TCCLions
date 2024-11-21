@@ -1,5 +1,6 @@
 {
   "title": "Last registered expenses",
+  "membersCount": "Total Registered Members",
   "value": "Total Value",
   "registerDate": "Register Date",
   "dueDate": "Due Date",

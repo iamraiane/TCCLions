@@ -2,18 +2,109 @@
   *transloco="let t; read: 'home'"
   class="flex items-center justify-center my-2 flex-col"
 >
-  <h1>Dashboard</h1>
-  <div class="border-2 p-4 rounded-xl">
-    <h2 class="text-center">{{ t("title") }}</h2>
-    <div class="flex flex-wrap gap-2 w-[50em]">
-      @for (despesa of ultimasDespesasCadastradas; track $index) {
-      <div class="border p-2 border-black rounded-lg w-[24em]">
-        <p>{{ t("value") }}: {{ despesa.valorTotal }}</p>
-        <p>{{ t("registerDate") }}: {{ despesa.dataRegistro }}</p>
-        <p>{{ t("dueDate") }}: {{ despesa.dataVencimento }}</p>
-        <p>{{ t("expenseType") }}: {{ despesa.tipoDeDespesa }}</p>
+  <div class="total-membros mt-12">
+    <div class="flex gap-2 flex-col">
+      <p>{{ t("membersCount") }}</p>
+      <span>{{ membersCount }}</span>
+    </div>
+    <div class="flex items-center">
+      <button
+        class="btn btn-primary"
+        mat-mini-fab
+        color="primary"
+        [routerLink]="['/control-panel/members']"
+      >
+        <mat-icon>arrow_right_alt</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="w-full flex mt-4">
+    <div
+      class="xl:col-span-2 border-2 flex flex-col flex-auto shadow-xl shadow-gray-400 overflow-y-auto rounded-2xl mt-1 mx-[23em] px-4 py-2 h-auto max-h-[50vh]"
+    >
+      <div class="overflow-y-auto">
+        <table
+          mat-table
+          [dataSource]="ultimasDespesasCadastradas"
+          class="mat-elevation-z8 demo-table"
+        >
+          <ng-container matColumnDef="tipoDeDespesa">
+            <th
+              class="text-left px-1 w-1/5 sticky top-0"
+              mat-header-cell
+              *matHeaderCellDef
+            >
+              {{ t("expenseType") }}
+            </th>
+            <td class="text-left px-1 w-2/5" mat-cell *matCellDef="let element">
+              {{ element.tipoDeDespesa }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="dataDeRegistro">
+            <th
+              class="text-left px-1 w-1/5 sticky top-0"
+              mat-header-cell
+              *matHeaderCellDef
+            >
+              {{ t("registerDate") }}
+            </th>
+            <td class="text-left px-1 w-1/5" mat-cell *matCellDef="let element">
+              {{ element.dataRegistro }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="dataDeVencimento">
+            <th
+              class="text-left px-1 w-1/5 sticky top-0"
+              mat-header-cell
+              *matHeaderCellDef
+            >
+              {{ t("dueDate") }}
+            </th>
+            <td class="text-left px-1 w-1/5" mat-cell *matCellDef="let element">
+              {{ element.dataVencimento }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="valorTotal">
+            <th
+              class="text-left px-1 w-1/5 sticky top-0"
+              mat-header-cell
+              *matHeaderCellDef
+            >
+              {{ t("value") }}
+            </th>
+            <td class="text-left px-1 w-1/5" mat-cell *matCellDef="let element">
+              R$ {{ element.valorTotal }}
+            </td>
+          </ng-container>
+
+          <tr
+            mat-header-row
+            *matHeaderRowDef="[
+              'tipoDeDespesa',
+              'dataDeRegistro',
+              'dataDeVencimento',
+              'valorTotal'
+            ]"
+            class="text-[12.5px]"
+          ></tr>
+          <tr
+            mat-row
+            class="text-[12.5px]"
+            *matRowDef="
+              let row;
+              columns: [
+                'tipoDeDespesa',
+                'dataDeRegistro',
+                'dataDeVencimento',
+                'valorTotal'
+              ]
+            "
+          ></tr>
+        </table>
       </div>
-      }
     </div>
   </div>
 </div>
